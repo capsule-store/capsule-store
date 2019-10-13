@@ -1,4 +1,4 @@
 *.swp
-.env
+.env.js
 node_modules/
 frontend/assets/index.js
