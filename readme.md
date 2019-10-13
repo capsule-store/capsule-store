@@ -1,2 +1,2 @@
 # VC Starter Pack
-Flex 1907 Grace Shopper
+Flex 1907 Grace Shopper project
