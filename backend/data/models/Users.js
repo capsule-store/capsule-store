@@ -1,8 +1,8 @@
 const connection = require("../connection");
-const { Sequelize } = conn;
+const { Sequelize } = connection;
 const { STRING, UUID, UUIDV4 } = Sequelize;
 
-const user = conn.define("user", {
+const User = conn.define("user", {
   id: {
     type: UUID,
     primaryKey: true,
@@ -30,11 +30,11 @@ const user = conn.define("user", {
       len: [1, 255]
     }
   },
-  password: {
-    type: STRING,
-    allowNull: false,
-    validate: {
-      len: [6, 255]
+  fullName:{
+    type: VIRTUAL,
+    get: function(){
+      var fullName = this.get('firstName') + ' ' +this.get('lastName');
+      return fullName;
     }
   }
 });
