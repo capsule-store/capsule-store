@@ -3,7 +3,7 @@ const Sequelize = require ('sequelize');
 const {UUID, UUIDV4} = Sequelize;
 
 const Order = conn.define('order', {
-  orderId:{
+  id:{
     primaryKey: true,
     type: UUID,
     defaultValue: UUIDV4,
