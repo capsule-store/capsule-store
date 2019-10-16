@@ -6,8 +6,7 @@ const Category = conn.define('category', {
   id:{
     primaryKey: true,
     type: UUID,
-    defaultValue: UUIDV4,
-    unique: true
+    defaultValue: UUIDV4
   },
 
   name: {

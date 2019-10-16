@@ -9,8 +9,7 @@ const Product = conn.define('product', {
   id: {
     primaryKey: true,
     type: UUID,
-    defaultValue: UUIDV4,
-    unique: true,
+    defaultValue: UUIDV4
   },
 
   name: {

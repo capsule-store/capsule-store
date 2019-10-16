@@ -6,8 +6,7 @@ const LineItem = conn.define('lineItem', {
   productId:{
     primaryKey: true,
     type: UUID,
-    defaultValue: UUIDV4,
-    unique: true
+    defaultValue: UUIDV4
   },
 
   quantity:{

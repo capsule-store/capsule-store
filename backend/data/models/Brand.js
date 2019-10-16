@@ -6,8 +6,7 @@ const Brand = conn.define('brand', {
   id:{
     primaryKey: true,
     type: UUID,
-    defaultValue: UUIDV4,
-    unique: true
+    defaultValue: UUIDV4
   },
 
   name: {

@@ -7,7 +7,6 @@ const Order = conn.define('order', {
     primaryKey: true,
     type: UUID,
     defaultValue: UUIDV4,
-    unique: true
   }
 });
 
