@@ -1,5 +1,5 @@
-const conn = require('./conn');
-const {Sequelize} = conn;
+const conn = require('../connection');
+const Sequelize = require ('sequelize');
 const {UUID, UUIDV4, STRING, DECIMAL} = Sequelize;
 
 const Product = conn.define('product', {
