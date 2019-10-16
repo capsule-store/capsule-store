@@ -22,12 +22,6 @@ const Product = conn.define('product', {
     },
   },
 
-  category: {
-    type: STRING,
-    allowNull: true,
-    unique: false,
-  },
-
   brand: {
     type: STRING,
     allowNull: false,
