@@ -1,26 +1,27 @@
-const connection = require("../connection");
+const connection = require('../connection');
+
 const { Sequelize } = connection;
 const { STRING, UUID, UUIDV4 } = Sequelize;
 
-const User = conn.define("user", {
+const User = conn.define('user', {
   id: {
     type: UUID,
     primaryKey: true,
-    defaultValue: UUIDV4
+    defaultValue: UUIDV4,
   },
   firstName: {
     type: STRING,
     allowNull: false,
     validate: {
-      len: [1, 255]
-    }
+      len: [1, 255],
+    },
   },
   lastName: {
     type: STRING,
     allowNull: false,
     validate: {
-      len: [1, 255]
-    }
+      len: [1, 255],
+    },
   },
   email: {
     type: STRING,
@@ -28,16 +29,16 @@ const User = conn.define("user", {
     unique: true,
     validate: {
       len: [1, 255],
-      isEmail: true
-    }
+      isEmail: true,
+    },
   },
-  fullName:{
+  fullName: {
     type: VIRTUAL,
-    get: function(){
-      var fullName = this.get('firstName') + ' ' +this.get('lastName');
+    get() {
+      const fullName = `${this.get('firstName')} ${this.get('lastName')}`;
       return fullName;
-    }
-  }
+    },
+  },
 });
 
 module.exports = User;

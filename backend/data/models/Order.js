@@ -1,13 +1,18 @@
+const Sequelize = require('sequelize');
 const conn = require('../connection');
-const Sequelize = require ('sequelize');
-const {UUID, UUIDV4} = Sequelize;
+
+const { BOOLEAN, UUID, UUIDV4 } = Sequelize;
 
 const Order = conn.define('order', {
-  id:{
+  id: {
     primaryKey: true,
     type: UUID,
     defaultValue: UUIDV4,
-  }
+  },
+  active: {
+    type: BOOLEAN,
+    defaultValue: true,
+  },
 });
 
 module.exports = Order;
