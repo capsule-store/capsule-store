@@ -2,7 +2,7 @@ const conn = require('./conn');
 const {Sequelize} = conn;
 const {UUID, UUIDV4, INTEGER} = Sequelize;
 
-const LineItem = conn.define('product', {
+const LineItem = conn.define('lineItem', {
   productId:{
     primaryKey: true,
     type: UUID,
