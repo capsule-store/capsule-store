@@ -27,7 +27,8 @@ const User = conn.define("user", {
     allowNull: false,
     unique: true,
     validate: {
-      len: [1, 255]
+      len: [1, 255],
+      isEmail: true
     }
   },
   fullName:{
