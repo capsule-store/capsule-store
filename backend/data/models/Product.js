@@ -1,66 +1,69 @@
+const Sequelize = require('sequelize');
 const conn = require('../connection');
-const Sequelize = require ('sequelize');
-const {UUID, UUIDV4, STRING, DECIMAL} = Sequelize;
+
+const {
+  UUID, UUIDV4, STRING, DECIMAL,
+} = Sequelize;
 
 const Product = conn.define('product', {
-  id:{
+  id: {
     primaryKey: true,
     type: UUID,
     defaultValue: UUIDV4,
-    unique: true
+    unique: true,
   },
 
-  name:{
+  name: {
     type: STRING,
     allowNull: false,
     unique: false,
     validate: {
-      notEmpty: true
-    }
+      notEmpty: true,
+    },
   },
 
-  category:{
+  category: {
     type: STRING,
     allowNull: true,
-    unique: false
+    unique: false,
   },
 
-  brand:{
+  brand: {
     type: STRING,
     allowNull: false,
     unique: false,
     validate: {
-      notEmpty: true
-    }
+      notEmpty: true,
+    },
   },
 
-  price:{
+  price: {
     type: DECIMAL,
     allowNull: false,
     unique: false,
     validate: {
       notEmpty: true,
-      min: 0.00
-    }
+      min: 0.0,
+    },
   },
 
-  image:{
+  image: {
     type: STRING,
     allowNull: false,
     unique: false,
     validate: {
-      isURL: true
-    }
+      isURL: true,
+    },
   },
 
-  description:{
+  description: {
     type: STRING,
     allowNull: false,
     unique: false,
     validate: {
-      notEmpty: true
-    }
-  }
+      notEmpty: true,
+    },
+  },
 });
 
 module.exports = Product;
