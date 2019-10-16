@@ -1,24 +1,24 @@
 const conn = require('../connection');
 const Sequelize = require ('sequelize');
-const {UUID, UUIDV4, INTEGER} = Sequelize;
+const {UUID, UUIDV4, STRING} = Sequelize;
 
-const LineItem = conn.define('lineItem', {
-  productId:{
+const Category = conn.define('category', {
+  id:{
     primaryKey: true,
     type: UUID,
     defaultValue: UUIDV4,
     unique: true
   },
 
-  quantity:{
-    type: INTEGER,
+  name: {
+    type: STRING,
     allowNull: false,
-    unique: false,
+    unique: true,
     validate: {
       notEmpty: true,
-      min: 0
-    }
+      len: [0,255]
+    },
   }
 });
 
-module.exports = LineItem;
+module.exports = Category;

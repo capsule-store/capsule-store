@@ -63,7 +63,7 @@ const Product = conn.define('product', {
     validate: {
       notEmpty: true,
     },
-  },
+  }
 });
 
 module.exports = Product;
