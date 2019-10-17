@@ -2,11 +2,13 @@
   "name": "sv_starter_pack",
   "version": "0.0.1",
   "description": "FullStack Flex 1907 Grace Shopper project",
-  "main": "frontend/assets/index.js",
+  "main": "./backend/server.js",
   "scripts": {
     "test": "DATABASE_URL=postgres://postgres@localhost/circle_test mocha --recursive './backend/tests/*.test.js'",
     "test:watch": "mocha --recursive --watch './backend/tests/*.test.js'",
-    "start:dev": "webpack --watch"
+    "webpack": "webpack --watch",
+    "start": "node ./backend/server.js ",
+    "start:dev": "npm run webpack & nodemon ./backend/server.js --ignore dist/ --ignore src/"
   },
   "author": "",
   "license": "ISC",
@@ -31,7 +33,10 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "passport": "^0.4.0",
+    "passport-google-oauth2": "^0.2.0",
     "pg": "^7.12.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
