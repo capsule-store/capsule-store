@@ -1,9 +1,11 @@
 const connection = require('../connection');
 
 const { Sequelize } = connection;
-const { STRING, UUID, UUIDV4 } = Sequelize;
+const {
+ STRING, UUID, UUIDV4, VIRTUAL 
+} = Sequelize;
 
-const User = conn.define('user', {
+const User = connection.define('user', {
   id: {
     type: UUID,
     primaryKey: true,
