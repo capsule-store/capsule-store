@@ -201,7 +201,8 @@ const syncAndSeed = async () => {
     },
   ];
 
-  await Promise.all(products.map((product) => Product.create(product)));
+  const createdProducts = await Promise.all(products.map((product) => Product.create(product)));
+  return { createdProducts };
 };
 
 module.exports = syncAndSeed;

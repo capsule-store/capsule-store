@@ -9,7 +9,7 @@ const Product = conn.define('product', {
   id: {
     primaryKey: true,
     type: UUID,
-    defaultValue: UUIDV4
+    defaultValue: UUIDV4,
   },
 
   name: {
@@ -56,7 +56,7 @@ const Product = conn.define('product', {
     validate: {
       notEmpty: true,
     },
-  }
+  },
 });
 
 module.exports = Product;
