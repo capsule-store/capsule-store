@@ -21,15 +21,6 @@ const Product = conn.define('product', {
     },
   },
 
-  brand: {
-    type: STRING,
-    allowNull: false,
-    unique: false,
-    validate: {
-      notEmpty: true,
-    },
-  },
-
   price: {
     type: DECIMAL,
     allowNull: false,
