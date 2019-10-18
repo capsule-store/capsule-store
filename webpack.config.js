@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './frontend/src/index.jsx',
+  entry: './frontend/src/index.js',
   output: {
     filename: 'index.js',
     path: path.join(__dirname, 'frontend/assets'),
