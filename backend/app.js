@@ -2,13 +2,11 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const db = require('./data');
-
-const {
-  Brand, Category, LineItem, Order, Product, User,
-} = require('./data').models;
-
+const { Brand, Category, LineItem, Order, Product, User} = require('./data').models;
 const app = express();
+
 app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -35,14 +33,6 @@ Object.keys(routes).forEach((key) => {
 const authGoogleSubRouter = require('./routes/auth-google');
 
 app.use('auth/google', authGoogleSubRouter);
-
-app.get("/", (req, res, next) => {
-    res.sendFile(path.join(__dirname, "../frontend/index.html"));
-  });
-
-// app.use((err, req, res, next) => {
-//   res.status(err.status || 500).send({error: err})
-// })
 
 app.use((req, res, next) => {
   const auth = req.headers.authorization;
