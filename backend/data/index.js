@@ -20,10 +20,8 @@ Product.belongsTo(Category);
 Product.hasMany(LineItem);
 LineItem.belongsTo(Product);
 
-// Conflict: currently Product has a brand property (STRING)
-// If we want to use the brand model, then we need to change that
-// Brand.hasMany(Product);
-// Product.belongsTo(Brand);
+Brand.hasMany(Product);
+Product.belongsTo(Brand);
 
 module.exports = {
   connection,

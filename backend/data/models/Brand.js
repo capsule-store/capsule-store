@@ -1,12 +1,13 @@
+const Sequelize = require('sequelize');
 const conn = require('../connection');
-const Sequelize = require ('sequelize');
-const {UUID, UUIDV4, STRING} = Sequelize;
+
+const { UUID, UUIDV4, STRING } = Sequelize;
 
 const Brand = conn.define('brand', {
-  id:{
+  id: {
     primaryKey: true,
     type: UUID,
-    defaultValue: UUIDV4
+    defaultValue: UUIDV4,
   },
 
   name: {
@@ -23,7 +24,7 @@ const Brand = conn.define('brand', {
     allowNull: false,
     unique: false,
     validate: {
-      isURL: true
+      isURL: true,
     },
   },
 
@@ -32,9 +33,9 @@ const Brand = conn.define('brand', {
     allowNull: false,
     unique: false,
     validate: {
-      notEmpty: true
+      notEmpty: true,
     },
-  }
+  },
 });
 
 module.exports = Brand;
