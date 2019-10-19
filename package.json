@@ -4,7 +4,7 @@
   "description": "FullStack Flex 1907 Grace Shopper project",
   "main": "frontend/assets/index.js",
   "scripts": {
-    "webpack" : "webpack --watch",
+    "webpack": "webpack --watch",
     "test": "DATABASE_URL=postgres://postgres@localhost/circle_test mocha --recursive './backend/tests/*.test.js'",
     "test:watch": "mocha --recursive --watch './backend/tests/*.test.js'",
     "start:dev": "nodemon backend/server.js --ignore frontend/assets/"
@@ -16,6 +16,7 @@
     "@babel/preset-react": "^7.6.3",
     "babel": "^6.23.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-styled-components": "^1.10.6",
     "chai": "^4.2.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
@@ -41,6 +42,7 @@
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^5.19.6"
+    "sequelize": "^5.19.6",
+    "styled-components": "^4.4.0"
   }
 }
