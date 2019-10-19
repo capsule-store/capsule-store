@@ -30,7 +30,7 @@ Object.keys(routes).forEach((key) => {
   });
 });
 
-app.use((err, res) => {
+app.use((err, req, err, res) => {
   res.status(err.status || 500).send({ message: err.message });
 });
 
