@@ -12,7 +12,7 @@ class ProductDetail extends Component {
   }
 
   render() {
-    return null
+    return null;
   }
 }
 
