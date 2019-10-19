@@ -2,13 +2,12 @@
   "name": "sv_starter_pack",
   "version": "0.0.1",
   "description": "FullStack Flex 1907 Grace Shopper project",
-  "main": "./backend/server.js",
+  "main": "frontend/assets/index.js",
   "scripts": {
+    "webpack" : "webpack --watch",
     "test": "DATABASE_URL=postgres://postgres@localhost/circle_test mocha --recursive './backend/tests/*.test.js'",
     "test:watch": "mocha --recursive --watch './backend/tests/*.test.js'",
-    "webpack": "webpack --watch",
-    "start": "node ./backend/server.js ",
-    "start:dev": "npm run webpack & nodemon ./backend/server.js --ignore dist/ --ignore src/"
+    "start:dev": "nodemon backend/server.js --ignore frontend/assets/"
   },
   "author": "",
   "license": "ISC",
@@ -27,23 +26,20 @@
     "mocha": "^6.2.1",
     "nodemon": "^1.19.4",
     "prettier": "^1.18.2",
+    "redux-logger": "^3.0.6",
     "supertest": "^4.0.2",
     "webpack": "^4.41.1",
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "passport": "^0.4.0",
-    "passport-google-oauth2": "^0.2.0",
     "pg": "^7.12.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.4",
-    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.19.6"
   }
