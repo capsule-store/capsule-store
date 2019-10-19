@@ -2,7 +2,12 @@ import React from 'react';
 
 const Cart = () => (
   <div>
-    <h1>Cart</h1>
+    <h2>Review Cart</h2>
+    <ul>
+      {lineItems.map((item) => (
+        <LineItem item={item} />
+      ))}
+    </ul>
   </div>
 );
 
