@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 import {
   SET_CATEGORIES,
   SET_PRODUCTS,
@@ -6,7 +6,10 @@ import {
   CREATE_ORDER,
   UPDATE_ORDER,
   DELETE_ORDER,
-} from './constants';
+  SET_AUTH,
+  DELETE_AUTH,
+  CREATE_USER
+} from "./constants";
 
 const categoriesReducer = (state = [], action) => {
   switch (action.type) {
@@ -33,21 +36,43 @@ const ordersReducer = (state = [], action) => {
     case CREATE_ORDER:
       return [...state, action.order];
     case UPDATE_ORDER:
-      return state.map((order) => {
+      return state.map(order => {
         if (order.id === action.order.id) {
           return action.order;
         }
         return order;
       });
     case DELETE_ORDER:
-      return state.filter((order) => order.id !== action.order.id);
+      return state.filter(order => order.id !== action.order.id);
     default:
       return state;
   }
 };
 
+const authReducer = (state = {}, action) => {
+  switch(action.type){
+      case SET_AUTH : 
+          return {...state, ... action.auth}
+      case DELETE_AUTH : 
+          return {... action.auth}
+      default:
+        return state;
+  }
+}
+
+const userReducer = (state = {}, action) => {
+  switch(action.type){
+      case CREATE_USER : 
+      // registered user will be added
+      default:
+        return state;
+  }
+}
+
 export default combineReducers({
   products: productsReducer,
   categories: categoriesReducer,
   orders: ordersReducer,
+  auth: authReducer,
+  user: userReducer
 });

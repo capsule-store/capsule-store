@@ -6,10 +6,12 @@ import { connect } from 'react-redux';
 const _Nav = ({loggedIn}) => {
     return (
         <div>
-            { loggedIn && <NavLink to = '/' exact>Home</NavLink>}
-            { loggedIn && <NavLink to = '/cart'>Cart</NavLink>}
+            <NavLink to = '/' exact>Home</NavLink>
+            <NavLink to = '/brand' >Brand</NavLink>
+            <NavLink to = '/category'>Category</NavLink>
+            <NavLink to = '/product'>Product</NavLink>
             { !loggedIn && <NavLink to = '/login'>Sign In</NavLink>}
-            { !loggedIn && <NavLink to = '/register'>Sign Up</NavLink>}
+            <NavLink to = '/cart'>Cart</NavLink>
         </div>
     )
 }

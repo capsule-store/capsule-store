@@ -47,17 +47,12 @@ class _Login extends Component{
     }
   }
   
-  const Login = connect(
-    ()=> {
-      return {
-  
-      };
-    },
-    (dispatch, { history })=> {
-      return {
-        attemptLogin: (username)=> dispatch(actions.attemptLogin(username, history))
-      }
+  const mapDispatchToProps = (dispatch, { history })=> {
+    return {
+      attemptLogin: (username)=> dispatch(actions.attemptLogin(username, history))
     }
-  )(_Login);
+  }
+
+  const Login = connect(null,mapDispatchToProps)(_Login);
 
   export default Login

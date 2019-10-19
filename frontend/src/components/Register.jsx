@@ -66,7 +66,7 @@ class _Register extends React.Component {
       return;
     }
 
-    const user = { firstName, lastName, email, password, role: 'customer'}
+    const user = { firstName, lastName, email, password, isAdmin: false}
     this.props
       .register(user)
       .then(() => this.props.history.push("/login"))

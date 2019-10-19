@@ -4,6 +4,7 @@ const path = require("path");
 const db = require('./data');
 const { Brand, Category, LineItem, Order, Product, User} = require('./data').models;
 const app = express();
+const authGoogleSubRouter = require('./routes/auth-google');
 
 app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
 
@@ -29,8 +30,6 @@ Object.keys(routes).forEach((key) => {
       .catch(next);
   });
 });
-
-const authGoogleSubRouter = require('./routes/auth-google');
 
 app.use('auth/google', authGoogleSubRouter);
 
