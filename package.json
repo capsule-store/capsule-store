@@ -25,6 +25,7 @@
     "mocha": "^6.2.1",
     "nodemon": "^1.19.4",
     "prettier": "^1.18.2",
+    "redux-logger": "^3.0.6",
     "supertest": "^4.0.2",
     "webpack": "^4.41.1",
     "webpack-cli": "^3.3.9"
