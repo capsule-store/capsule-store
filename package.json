@@ -7,7 +7,7 @@
     "webpack": "webpack --watch",
     "test": "DATABASE_URL=postgres://postgres@localhost/circle_test mocha --recursive './backend/tests/*.test.js'",
     "test:watch": "mocha --recursive --watch './backend/tests/*.test.js'",
-    "start:dev": "nodemon backend/server.js --ignore frontend/assets/"
+    "start:dev": "nodemon backend/server.js --ignore frontend/assets/ & npm run webpack"
   },
   "author": "",
   "license": "ISC",

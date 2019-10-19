@@ -12,6 +12,8 @@ class ProductDetail extends Component {
   }
 
   render() {
-
+    return null
   }
 }
+
+export default ProductDetail;
