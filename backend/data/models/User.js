@@ -1,28 +1,26 @@
 const connection = require('../connection');
 
 const { Sequelize } = connection;
-const {
- STRING, UUID, UUIDV4, VIRTUAL 
-} = Sequelize;
+const { STRING, UUID, UUIDV4, VIRTUAL, ENUM } = Sequelize;
 
 const User = connection.define('user', {
   id: {
     type: UUID,
     primaryKey: true,
-    defaultValue: UUIDV4,
+    defaultValue: UUIDV4
   },
   firstName: {
     type: STRING,
     allowNull: false,
     validate: {
-      len: [1, 255],
+      len: [1, 255]
     },
   },
   lastName: {
     type: STRING,
     allowNull: false,
     validate: {
-      len: [1, 255],
+      len: [1, 255]
     },
   },
   email: {
@@ -31,8 +29,15 @@ const User = connection.define('user', {
     unique: true,
     validate: {
       len: [1, 255],
-      isEmail: true,
+      isEmail: true
     },
+  },
+  password: {
+    type: STRING,
+    allowNull: false,
+    validate: {
+      len: [6, 255]
+    }
   },
   fullName: {
     type: VIRTUAL,
@@ -41,6 +46,10 @@ const User = connection.define('user', {
       return fullName;
     },
   },
+  isAdmin: {
+    type: BOOLEAN,
+    defaultValue: false,
+  }
 });
 
 module.exports = User;

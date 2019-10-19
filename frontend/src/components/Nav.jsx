@@ -2,18 +2,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const Nav = ({ products, cart, user }) => (
-  <nav>
-    <Link to="/">Home</Link>
-    <Link to="/cart">Cart</Link>
-    <Link to="/user">User</Link>
-  </nav>
-);
+/* Navigator */
+const _Nav = ({loggedIn}) => {
+    return (
+        <div>
+            <NavLink to = '/' exact>Home</NavLink>
+            <NavLink to = '/brand' >Brand</NavLink>
+            <NavLink to = '/category'>Category</NavLink>
+            <NavLink to = '/product'>Product</NavLink>
+            { !loggedIn && <NavLink to = '/login'>Sign In</NavLink>}
+            <NavLink to = '/cart'>Cart</NavLink>
+        </div>
+    )
+}
 
-const mapStateToProps = ({ products, cart, user }) => ({
-  products,
-  cart,
-  user,
-});
+const Nav = connect(
+    ({ auth })=> {
+      return {
+        loggedIn: !!auth.id
+      };
+    }
+)(_Nav);
 
-export default connect(mapStateToProps)(Nav);
+export default Nav

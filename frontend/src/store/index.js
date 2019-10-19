@@ -1,7 +1,13 @@
 import { createStore, applyMiddleware } from 'redux';
-import logger from "redux-logger"
 import thunk from 'redux-thunk';
-
+import * as actions from './actions';
+import logger from 'redux-logger';
 import combinedReducer from './reducers';
 
+
 export default createStore(combinedReducer, applyMiddleware(logger, thunk));
+export { actions };
+
+
+
+
