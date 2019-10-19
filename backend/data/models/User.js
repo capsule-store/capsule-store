@@ -1,9 +1,9 @@
 const connection = require('../connection');
 
 const { Sequelize } = connection;
-const { STRING, UUID, UUIDV4 } = Sequelize;
+const { STRING, UUID, UUIDV4, VIRTUAL, ENUM } = Sequelize;
 
-const User = conn.define('user', {
+const User = connection.define('user', {
   id: {
     type: UUID,
     primaryKey: true,
@@ -32,6 +32,13 @@ const User = conn.define('user', {
       isEmail: true,
     },
   },
+  password: {
+    type: STRING,
+    allowNull: false,
+    validate: {
+      len: [6, 255]
+    }
+  },
   fullName: {
     type: VIRTUAL,
     get() {
@@ -39,6 +46,10 @@ const User = conn.define('user', {
       return fullName;
     },
   },
+  role: {
+    type: ENUM,
+    values: ['admin', 'customer']
+  }
 });
 
 module.exports = User;
