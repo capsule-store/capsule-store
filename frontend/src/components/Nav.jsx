@@ -2,19 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const Nav = ({ products, categories, brands }) => (
+const Nav = ({ products, cart, user }) => (
   <nav>
     <Link to="/">Home</Link>
     <Link to="/cart">Cart</Link>
-    <Link to="/brands">Brand</Link>
-    <Link to="/products/:id?">Product</Link>
+    <Link to="/user">User</Link>
   </nav>
 );
 
-const mapStateToProps = ({ products, categories, brands }) => ({
+const mapStateToProps = ({ products, cart, user }) => ({
   products,
-  categories,
-  brands,
+  cart,
+  user,
 });
 
 export default connect(mapStateToProps)(Nav);
