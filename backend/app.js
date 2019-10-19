@@ -1,10 +1,17 @@
-const express = require("express");
-const app = express();
-const path = require("path");
-const db = require('./data');
-const { Brand, Category, LineItem, Order, Product, User} = require('./data').models;
-const app = express();
+const express = require('express');
+const dotenv = require('dotenv');
+const path = require('path');
+const jwt = require('jwt-simple');
+const bcrypt = require('bcrypt');
+
 const authGoogleSubRouter = require('./routes/auth-google');
+const db = require('./data');
+
+const app = express();
+const {
+  Brand, Category, LineItem, Order, Product, User,
+} = db;
+dotenv.config();
 
 app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
 
@@ -25,7 +32,8 @@ const routes = {
 
 Object.keys(routes).forEach((key) => {
   app.get(`/api/${routes[key]}`, (req, res, next) => {
-    db.models[key].findAll()
+    db.models[key]
+      .findAll()
       .then((items) => res.send(items))
       .catch(next);
   });
@@ -35,6 +43,7 @@ app.use('auth/google', authGoogleSubRouter);
 
 app.use((req, res, next) => {
   const auth = req.headers.authorization;
+  console.log('AUTH', auth);
 
   if (!auth) {
     return next();
@@ -43,14 +52,14 @@ app.use((req, res, next) => {
   const { id } = jwt.decode(auth, process.env.SECRET);
 
   User.findByPk(id)
-    .then(user => {
+    .then((user) => {
       req.user = user.dataValues;
       next();
     })
     .catch(next);
 });
 
-app.post("/api/sessions", async (req, res, next) => {
+app.post('/api/sessions', async (req, res, next) => {
   const { email, password } = req.body;
 
   User.findOne(
@@ -58,44 +67,41 @@ app.post("/api/sessions", async (req, res, next) => {
     {
       where: {
         email,
-        password
-      }
-    }
+        password,
+      },
+    },
   )
-    .then(user => {
+    .then((user) => {
       if (!user) {
         throw { status: 401 };
       }
       const token = jwt.encode({ id: user.id }, process.env.SECRET);
       return res.send({ token });
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
-app.get("/api/sessions", (req, res, next) => {
+app.get('/api/sessions', (req, res, next) => {
   if (req.user) {
     return res.send(req.user);
   }
   next({ status: 401 });
 });
 
-app.post("/signup", async (req, res, next) => {
+app.post('/signup', async (req, res, next) => {
   const user = await User.findOne({ where: { email: req.body.email } })
     .dataValues;
 
   if (!user) {
     const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-    
-    req.body.password = hashedPassword
+
+    req.body.password = hashedPassword;
 
     User.create(req.body)
-      .then(user => res.status(201).send(user))
+      .then((createdUser) => res.status(201).send(createdUser))
       .catch(next);
   }
-  
-
 });
 
-
-module.exports = app
+module.exports = app;
