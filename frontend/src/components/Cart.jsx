@@ -14,7 +14,10 @@ const Cart = ({ lineItems }) => (
     <div id="cartTotal">
       <div>Total</div>
       <div id="totalPrice">
-        {lineItems.reduce((total, item) => total + item.price, 0)}
+        {lineItems.reduce(
+          (total, item) => total + item.quantity * item.price,
+          0,
+        )}
       </div>
     </div>
   </div>
