@@ -22,11 +22,11 @@ const LineItem = conn.define('lineItem', {
   },
 });
 
-LineItem.getProductName = async function () {
+LineItem.prototype.getProductName = async function () {
   return (await Product.findOne({ where: { id: this.productId } })).name;
 };
 
-LineItem.getProductPrice = async function () {
+LineItem.prototype.getProductPrice = async function () {
   return (await Product.findOne({ where: { id: this.productId } })).price;
 };
 
