@@ -8,19 +8,28 @@ const Cart = ({ lineItems }) => (
     <h2>Review Cart</h2>
     <ul>
       {lineItems.map((item) => (
-        <LineItem item={item} />
+        <LineItem key={item.id} item={item} />
       ))}
     </ul>
+    <div id="cartTotal">
+      <div>Total</div>
+      <div id="totalPrice">
+        {lineItems.reduce((total, item) => total + item.price, 0)}
+      </div>
+    </div>
   </div>
 );
 
-const mapStateToProps = ({ lineItems }) => ({
-  lineItems,
-});
+export default Cart;
 
-const mapDispatchToProps = () => {};
+// Uncomment when ready to connect to redux store
+// const mapStateToProps = ({ lineItems }) => ({
+//   lineItems,
+// });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Cart);
+// const mapDispatchToProps = () => {};
+
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps,
+// )(Cart);
