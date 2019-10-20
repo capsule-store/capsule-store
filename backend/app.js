@@ -4,8 +4,14 @@ const path = require('path');
 const jwt = require('jwt-simple');
 const bcrypt = require('bcrypt');
 
-const authGoogleSubRouter = require('./routes/auth-google');
 const db = require('./data');
+
+// Routes
+const authGoogleSubRouter = require('./routes/auth-google');
+const brandsSubRouter = require('./routes/brands');
+const categoriesSubRouter = require('./routes/categories');
+const productsSubRouter = require('./routes/products');
+const usersSubRouter = require('./routes/users');
 
 const app = express();
 const {
@@ -30,6 +36,8 @@ const routes = {
   User: 'users',
 };
 
+// Basic routes are auto-generated here
+// For the rest, use subrouters
 Object.keys(routes).forEach((key) => {
   app.get(`/api/${routes[key]}`, (req, res, next) => {
     db.models[key]
@@ -39,12 +47,14 @@ Object.keys(routes).forEach((key) => {
   });
 });
 
-app.use('auth/google', authGoogleSubRouter);
+app.use('/auth/google', authGoogleSubRouter);
+app.use('/api/brands', brandsSubRouter);
+app.use('/api/categories', categoriesSubRouter);
+app.use('/api/products', productsSubRouter);
+app.use('/api/users', usersSubRouter);
 
 app.use((req, res, next) => {
   const auth = req.headers.authorization;
-  console.log('AUTH', auth);
-
   if (!auth) {
     return next();
   }

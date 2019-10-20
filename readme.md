@@ -47,13 +47,12 @@ GET /api/users/:id
 GET /api/users/:id/orders
 ```
 
-`GET` a user's cart, separated for convenience. On the backend, this is probably going to be very similar to the endpoint above, but with a `where` clause to find the incomplete order
-```
-GET /api/users/:id/cart
-```
-
-`GET` a user's specific order
+`GET` all line items of a user's specific order
 ```
 GET /api/users/:id/orders/:orderId
 ```
 
+`GET` all line items of a user's cart. A cart is an active order
+```
+GET /api/users/:id/cart
+```
