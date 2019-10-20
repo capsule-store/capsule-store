@@ -1,10 +1,6 @@
 const Sequelize = require('sequelize');
-const customEnv = require('../../.env');
+const dotenv = require('dotenv');
 
-try {
-  Object.assign(process.env, customEnv);
-} catch (ex) {
-  console.log(ex);
-}
+dotenv.config();
 
 module.exports = new Sequelize(process.env.DATABASE_URL, { logging: false });
