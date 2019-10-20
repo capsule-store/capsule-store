@@ -3,11 +3,16 @@ import { connect } from 'react-redux';
 import {
   HashRouter, Route, Switch, Redirect,
 } from 'react-router-dom';
+
+import { actions } from '../store';
+import { testLineItems } from '../testData';
+
+// Components
 import Login from './Login';
 import Home from './Home';
 import Register from './Register';
 import Nav from './Nav';
-import { actions } from '../store';
+import Cart from './Cart';
 
 /* App */
 class _App extends Component {
@@ -24,20 +29,12 @@ class _App extends Component {
         <HashRouter>
           <Nav />
           <Switch>
-            <Route to="/" component={Home} exact>
-              Home
-            </Route>
-            {/* need to add more route & component
-            <Route to="/brand">Brand</Route>
-            <Route to="/category">Category</Route>
-            <Route to="/product">Product</Route>
-            <Route to="/cart">Cart</Route> */}
-            {!loggedIn && (
-              <Route to="/login" component={Login}>
-                Sign In
-              </Route>
-            )}
-            <Redirect to="/" />
+            <Route exact path="/" component={Home} />
+            <Route
+              path="/cart"
+              render={() => <Cart lineItems={testLineItems} />}
+            />
+            <Route path="/login" component={Login} />
           </Switch>
         </HashRouter>
       </div>
