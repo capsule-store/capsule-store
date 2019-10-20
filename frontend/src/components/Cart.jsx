@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Cart = () => (
+import LineItem from './LineItem';
+
+const Cart = ({ lineItems }) => (
   <div>
     <h2>Review Cart</h2>
     <ul>
@@ -11,4 +14,13 @@ const Cart = () => (
   </div>
 );
 
-export default Cart;
+const mapStateToProps = ({ lineItems }) => ({
+  lineItems,
+});
+
+const mapDispatchToProps = () => {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Cart);

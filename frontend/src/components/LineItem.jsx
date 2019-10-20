@@ -1,11 +1,11 @@
 import React from 'react';
 
-const LineItem = () => (
-  <div>
-    <p>product name</p>
-    <p>x 1</p>
-    <p>$100</p>
-  </div>
+const LineItem = ({ item }) => (
+  <li>
+    <p>{item.name}</p>
+    <p>{item.quantity}</p>
+    <p>{item.price}</p>
+  </li>
 );
 
 export default LineItem;
