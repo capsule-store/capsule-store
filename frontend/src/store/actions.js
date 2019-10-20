@@ -9,6 +9,7 @@ import {
   CREATE_ORDER,
   UPDATE_ORDER,
   DELETE_ORDER,
+  SET_LINEITEMS,
 } from './constants';
 
 const setAuth = (auth) => ({
@@ -63,24 +64,32 @@ const fetchProducts = () => async (dispatch) => {
   dispatch({ type: SET_PRODUCTS, products });
 };
 
-const fetchOrders = () => async (dispatch) => {
-  const orders = (await axios.get('/api/orders')).data;
+const fetchOrders = (userId) => async (dispatch) => {
+  const orders = (await axios.get(`/api/users/${userId}/orders`)).data;
   dispatch({ type: SET_ORDERS, orders });
 };
 
-const createOrder = (order) => async (dispatch) => {
-  const created = (await axios.post('/api/orders', { order })).data;
+const createOrder = (userId, order) => async (dispatch) => {
+  const created = (await axios.post(`/api/users/${userId}/orders`, { order }))
+    .data;
   dispatch({ type: CREATE_ORDER, order: created });
 };
 
-const updateOrder = (order) => async (dispatch) => {
-  const updated = (await axios.put(`/api/orders/${order.id}`, { order })).data;
+const updateOrder = (userId, order) => async (dispatch) => {
+  const updated = (await axios.put(`/api/users/${userId}/orders/${order.id}`, {
+    order,
+  })).data;
   dispatch({ type: UPDATE_ORDER, order: updated });
 };
 
-const deleteOrder = (order) => async (dispatch) => {
-  await axios.delete(`/api/orders/${order.id}`);
+const deleteOrder = (userId, order) => async (dispatch) => {
+  await axios.delete(`/api/users/${userId}/orders/${order.id}`);
   dispatch({ type: DELETE_ORDER, order });
+};
+
+const fetchLineItems = (userId) => async (dispatch) => {
+  const { lineItems } = (await axios.get(`/api/users/${userId}/cart/`)).data;
+  dispatch({ type: SET_LINEITEMS, lineItems });
 };
 
 export {
@@ -90,6 +99,7 @@ export {
   createOrder,
   updateOrder,
   deleteOrder,
+  fetchLineItems,
   attemptLogin,
   attemptSessionLogin,
   logout,

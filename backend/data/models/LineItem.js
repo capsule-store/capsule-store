@@ -1,8 +1,6 @@
 const Sequelize = require('sequelize');
 const conn = require('../connection');
-
 const Product = require('./Product');
-
 const { UUID, UUIDV4, INTEGER } = Sequelize;
 
 const LineItem = conn.define('lineItem', {
@@ -14,7 +12,7 @@ const LineItem = conn.define('lineItem', {
   quantity: {
     type: INTEGER,
     allowNull: false,
-    unique: false,
+    defaultValue: 1,
     validate: {
       notEmpty: true,
       min: 0,
