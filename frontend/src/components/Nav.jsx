@@ -9,15 +9,16 @@ const _Nav = ({ loggedIn }) => (
       Home
     </NavLink>
     <NavLink to="/brand">Brand</NavLink>
-    <NavLink to="/category">Category</NavLink>
-    <NavLink to="/product">Product</NavLink>
+    <NavLink to="/products">Products</NavLink>
     {!loggedIn && <NavLink to="/login">Sign In</NavLink>}
     <NavLink to="/cart">Cart</NavLink>
   </div>
 );
 
-const Nav = connect(({ auth }) => ({
+const mapStateToProps = ({ auth }) => ({
   loggedIn: !!auth.id,
-}))(_Nav);
+});
+
+const Nav = connect(mapStateToProps)(_Nav);
 
 export default Nav;
