@@ -44,9 +44,10 @@ const attemptLogin = (credentials, history) => async (dispatch) => {
   history.push('/');
 };
 
-const logout = () => async (dispatch) => {
+const logout = (history) => async (dispatch) => {
   window.localStorage.removeItem('token');
   dispatch(deleteAuth());
+  history.push('/');
 };
 
 const register = (newUser) => async (dispatch) => {
