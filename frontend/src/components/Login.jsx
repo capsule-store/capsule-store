@@ -2,6 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from '../store';
 
+/* Input Validation */
+function validate(email, password) {
+  const errors = [];
+  if ( email.trim().length * password.trim().length === 0){
+    errors.push("Please enter your email & password")
+  }
+
+  if (password.length < 6 ) {
+    errors.push("Password should be at least 6 characters long");
+  }
+
+  return errors;
+}
+
 /* Login */
 class _Login extends Component {
   constructor() {
@@ -17,7 +31,15 @@ class _Login extends Component {
 
   attemptLogin(ev) {
     ev.preventDefault();
+
     const credentials = { ...this.state };
+    const error = validate(credentials.email, credentials.password);
+
+    if(error.length>0){
+      this.setState({error});
+      return;
+    }
+
     delete credentials.error;
     this.props
       .attemptLogin(credentials)
@@ -33,10 +55,10 @@ class _Login extends Component {
     const { onChange, attemptLogin } = this;
     return (
       <form>
-        {error && <div className="error">{error}</div>}
+        {error && error.map((_error, idx) => <div className="error" key= {idx} >{_error}</div> )}
         <div>
           <label>Email</label>
-          <input name="email" onChange={onChange} />
+          <input name="email" onChange={onChange} required/>
         </div>
         <div>
           <label>Password</label>
@@ -44,9 +66,11 @@ class _Login extends Component {
             type="password"
             name="password"
             onChange={onChange}
+            required
           />
         </div>
-        <button onClick={attemptLogin}>Login</button>
+        <button onClick={attemptLogin}>Log in</button>
+        <a href="/auth/google">Log in with Google</a>
         <div>
           <a href="#">Forgot password</a>
         </div>
