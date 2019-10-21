@@ -36,7 +36,7 @@ class _Login extends Component {
         {error && <div className="error">{error}</div>}
         <div>
           <label>Email</label>
-          <input name="email" onChange={onChange} />
+          <input name="email" onChange={onChange} required/>
         </div>
         <div>
           <label>Password</label>
@@ -44,6 +44,7 @@ class _Login extends Component {
             type="password"
             name="password"
             onChange={onChange}
+            required
           />
         </div>
         <button onClick={attemptLogin}>Login</button>
