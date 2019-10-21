@@ -1,5 +1,7 @@
 const express = require('express');
-const { User, Order, LineItem } = require('../data/models');
+const {
+  User, Order, LineItem, Product,
+} = require('../data/models');
 
 const router = express.Router();
 
@@ -27,8 +29,21 @@ router.get('/:id/orders/:orderId', (req, res, next) => {
 router.get('/:id/cart', (req, res, next) => {
   // Returns all line items in cart (active order)
   Order.findOne({ where: { userId: req.params.id, active: true } })
-    .then((cart) => {
-      LineItem.findAll({ where: { orderId: cart.id } }).then((items) => res.send(items));
+    .then(async (cart) => {
+      const items = await LineItem.findAll({ where: { orderId: cart.id } });
+
+      // Add product name and price to line items for easy access in frontend
+      // Figure out a better way of doing this
+      const updatedItems = [];
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i].get();
+        const { name, price } = await Product.findOne({
+          where: { id: item.productId },
+        });
+        updatedItems.push({ ...item, name, price });
+      }
+
+      res.send(updatedItems);
     })
     .catch(next);
 });
