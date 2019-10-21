@@ -7,7 +7,6 @@ import {
 
 // Local imports
 import { actions } from '../store';
-import { testLineItems } from '../testData';
 
 // Components
 import Home from './Home';
@@ -35,10 +34,7 @@ class _App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/products" component={Products} />
-            <Route
-              path="/cart"
-              render={() => <Cart lineItems={testLineItems} />}
-            />
+            <Route path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
           </Switch>
         </HashRouter>
@@ -55,9 +51,11 @@ const mapStateToProps = ({ auth }) => ({
 const mapDispatchToProps = (dispatch) => ({
   attemptSessionLogin: () => dispatch(actions.attemptSessionLogin()),
   loadStoreData: () => {
-    // fetch all necessary store data (not related to user)
     dispatch(actions.fetchProducts());
     dispatch(actions.fetchCategories());
+ 
+    // Only works if a userId is passed in manually to fetchCart()
+    dispatch(actions.fetchCart());
   },
 });
 
