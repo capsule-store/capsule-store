@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 const path = require('path');
 const jwt = require('jwt-simple');
 const bcrypt = require('bcrypt');
-
 const db = require('./data');
 
 // Routes
@@ -14,9 +13,7 @@ const productsSubRouter = require('./routes/products');
 const usersSubRouter = require('./routes/users');
 
 const app = express();
-const {
-  Brand, Category, LineItem, Order, Product, User,
-} = db;
+const {User} = db.models;
 dotenv.config();
 
 app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));

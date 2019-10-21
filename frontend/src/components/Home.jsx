@@ -6,22 +6,20 @@ import Categories from './Categories';
 
 /* Home */
 const _Home = ({ auth, logout }) => {
-  const { fullName } = auth;
   return (
     <div>
+      {
+        (auth.id)? (<button onClick={logout}>Logout</button>) : ''
+      }
       <Categories />
-      Home - Welcome
-      {' '}
-      {fullName}
-      <button onClick={logout}>Logout</button>
     </div>
   );
 };
 
 const mapStateToProps = ({ auth }) => ({ auth });
 
-const mapDispatchToProps = ({ dispatch }) => ({
-  logout: () => dispatch(actions.logout()),
+const mapDispatchToProps = (dispatch, {history}) => ({
+  logout: () => dispatch(actions.logout(history)),
 });
 
 const Home = connect(

@@ -36,14 +36,13 @@ class _Login extends Component {
         {error && <div className="error">{error}</div>}
         <div>
           <label>Email</label>
-          <input name="email" value={email} onChange={onChange} />
+          <input name="email" onChange={onChange} />
         </div>
         <div>
           <label>Password</label>
           <input
             type="password"
             name="password"
-            value={password}
             onChange={onChange}
           />
         </div>
