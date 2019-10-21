@@ -1,5 +1,5 @@
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const dotenv = require('dotenv').config();
 
 const {GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET} = process.env;
