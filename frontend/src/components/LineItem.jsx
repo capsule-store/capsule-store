@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { actions } from '../store';
 
 const LineItem = ({ item, updateQuantity, removeLineItem }) => (
