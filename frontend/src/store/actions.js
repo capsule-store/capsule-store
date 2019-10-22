@@ -10,6 +10,7 @@ import {
   UPDATE_ORDER,
   DELETE_ORDER,
   SET_CART,
+  UPDATE_LINEITEM,
 } from './constants';
 
 const setAuth = (auth) => ({
@@ -93,6 +94,14 @@ const fetchCart = (userId) => async (dispatch) => {
   dispatch({ type: SET_CART, cart });
 };
 
+const updateLineItem = (userId, itemId, quantity) => async (dispatch) => {
+  const updated = await axios.put(
+    `/api/users/${userId}/cart/${itemId}`,
+    quantity,
+  ).data;
+  dispatch({ type: UPDATE_LINEITEM, updated });
+};
+
 export {
   fetchCategories,
   fetchProducts,
@@ -101,6 +110,7 @@ export {
   updateOrder,
   deleteOrder,
   fetchCart,
+  updateLineItem,
   attemptLogin,
   attemptSessionLogin,
   logout,

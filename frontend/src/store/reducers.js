@@ -7,6 +7,7 @@ import {
   UPDATE_ORDER,
   DELETE_ORDER,
   SET_CART,
+  UPDATE_LINEITEM,
   SET_AUTH,
   DELETE_AUTH,
   CREATE_USER,
@@ -54,6 +55,8 @@ const cartReducer = (state = [], action) => {
   switch (action.type) {
     case SET_CART:
       return action.cart;
+    case UPDATE_LINEITEM:
+      return state.map((item) => (item.id === action.updated.id ? action.updated : item));
     default:
       return state;
   }
