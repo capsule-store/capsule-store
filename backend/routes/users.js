@@ -53,8 +53,11 @@ router.get('/:id/cart', (req, res, next) => {
 
 router.post('/:id/cart/', (req, res, next) => {
   // Remember to check token if loggedInUser.id === req.params.id
-  LineItem.create(req.body)
-    .then((item) => res.send(item))
+  // Create new lineItem and place in cart (active order)
+  Order.findOne({ where: { userId: req.params.id, active: true } })
+    .then((order) => {
+      LineItem.create({ ...req.body, orderId: order.id }).then((item) => res.send(item));
+    })
     .catch(next);
 });
 
