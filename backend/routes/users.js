@@ -12,12 +12,14 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.get('/:id/orders', (req, res, next) => {
+  // Remember to check token if loggedInUser.id === req.params.id
   Order.findAll({ where: { userId: req.params.id } })
     .then((orders) => res.send(orders))
     .catch(next);
 });
 
 router.get('/:id/orders/:orderId', (req, res, next) => {
+  // Remember to check token if loggedInUser.id === req.params.id
   // Returns all line items related to order
   Order.findOne({ where: { userId: req.params.id, id: req.params.orderId } })
     .then((order) => {
@@ -27,6 +29,7 @@ router.get('/:id/orders/:orderId', (req, res, next) => {
 });
 
 router.get('/:id/cart', (req, res, next) => {
+  // Remember to check token if loggedInUser.id === req.params.id
   // Returns all line items in cart (active order)
   Order.findOne({ where: { userId: req.params.id, active: true } })
     .then(async (cart) => {
@@ -45,6 +48,28 @@ router.get('/:id/cart', (req, res, next) => {
 
       res.send(updatedItems);
     })
+    .catch(next);
+});
+
+router.post('/:id/cart/', (req, res, next) => {
+  // Remember to check token if loggedInUser.id === req.params.id
+  LineItem.create(req.body)
+    .then((item) => res.send(item))
+    .catch(next);
+});
+
+router.put('/:id/cart/:itemId', async (req, res, next) => {
+  // Remember to check token if loggedInUser.id === req.params.id
+  LineItem.findOne({ where: { id: req.params.id } })
+    .then((item) => item.update({ quantity: req.body }))
+    .then((item) => res.send(item))
+    .catch(next);
+});
+
+router.delete('/:id/cart/:itemId', (req, res, next) => {
+  LineItem.findOne({ where: { id: req.params.id } })
+    .then((item) => item.destroy())
+    .then(() => res.sendStatus(204))
     .catch(next);
 });
 
