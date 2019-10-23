@@ -3,6 +3,7 @@ import {
   SET_AUTH,
   DELETE_AUTH,
   CREATE_USER,
+  SET_BRANDS,
   SET_CATEGORIES,
   SET_PRODUCTS,
   SET_ORDERS,
@@ -55,6 +56,11 @@ const register = (newUser) => async (dispatch) => {
   dispatch(createUser(user));
 };
 
+const fetchBrands = () => async (dispatch) => {
+  const brands = (await axios.get('/api/brands')).data;
+  dispatch({ type: SET_BRANDS, brands });
+};
+
 const fetchCategories = () => async (dispatch) => {
   const categories = (await axios.get('/api/categories')).data;
   dispatch({ type: SET_CATEGORIES, categories });
@@ -94,6 +100,7 @@ const fetchLineItems = (userId) => async (dispatch) => {
 };
 
 export {
+  fetchBrands,
   fetchCategories,
   fetchProducts,
   fetchOrders,

@@ -16,7 +16,8 @@ import Products from './Products';
 import Cart from './Cart';
 import Login from './Login';
 import Register from './Register';
-
+import Brands from './Brands';
+import Categories from './Categories';
 /* App */
 class _App extends Component {
   componentDidMount() {
@@ -41,6 +42,7 @@ class _App extends Component {
             />
             <Route path="/login" component={Login} />
           </Switch>
+          <Brands />
         </HashRouter>
       </div>
     );
@@ -58,6 +60,7 @@ const mapDispatchToProps = (dispatch) => ({
     // fetch all necessary store data (not related to user)
     dispatch(actions.fetchProducts());
     dispatch(actions.fetchCategories());
+    dispatch(actions.fetchBrands());
   },
 });
 

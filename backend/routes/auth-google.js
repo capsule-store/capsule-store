@@ -12,9 +12,11 @@ router.get(
 
 // call back route for google oauth2
 router.get('/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
+  passport.authenticate('google', { 
+    failureRedirect: '/login' 
+  }), (req, res) => {
+    console.log(req)
+    res.redirect(`/`)
   }
 );
 
