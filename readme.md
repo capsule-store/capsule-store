@@ -52,7 +52,25 @@ GET /api/users/:id/orders
 GET /api/users/:id/orders/:orderId
 ```
 
-`GET` all line items of a user's cart. A cart is an active order
+#### Cart
+`GET` all line items of a user's cart. A cart is an active order. User ID is passed as a header:`token` from `localStorage`.
 ```
-GET /api/users/:id/cart
+GET /api/cart
 ```
+
+`POST`
+```
+POST /api/cart
+```
+
+`PUT` line item (`id`). Quantity is passed in as `req.body`
+```
+PUT /api/cart/:id
+```
+
+`DELETE` line item (`id`)
+```
+DELETE /api/cart/:id
+```
+
+
