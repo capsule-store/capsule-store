@@ -33,7 +33,8 @@ class _App extends Component {
           <Nav />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/products" component={Products} />
+            <Route exact path="/products" component={Products} />
+            <Route path="/products/:id" render={() => <ProductDetail />} />
             <Route path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
           </Switch>
@@ -53,7 +54,7 @@ const mapDispatchToProps = (dispatch) => ({
   loadStoreData: () => {
     dispatch(actions.fetchProducts());
     dispatch(actions.fetchCategories());
- 
+
     // Only works if a userId is passed in manually to fetchCart()
     dispatch(actions.fetchCart());
   },
