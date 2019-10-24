@@ -8,7 +8,6 @@ const _Nav = ({ loggedIn }) => (
     <NavLink to="/" exact>
       Home
     </NavLink>
-    <NavLink to="/brand">Brand</NavLink>
     <NavLink to="/products">Products</NavLink>
     {!loggedIn && <NavLink to="/login">Sign In</NavLink>}
     <NavLink to="/cart">Cart</NavLink>

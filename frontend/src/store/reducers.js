@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import {
+  SET_BRANDS,
   SET_CATEGORIES,
   SET_PRODUCTS,
   SET_ORDERS,
@@ -86,6 +87,15 @@ const userReducer = (state = {}, action) => {
   }
 };
 
+const brandReducer = (state = [], action) => {
+  switch (action.type) {
+    case SET_BRANDS:
+      return action.brands;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   products: productsReducer,
   categories: categoriesReducer,
@@ -93,4 +103,5 @@ export default combineReducers({
   cart: cartReducer,
   auth: authReducer,
   user: userReducer,
+  brands: brandReducer,
 });
