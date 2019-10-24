@@ -32,7 +32,7 @@ const LineItem = ({ item, updateQuantity, removeLineItem }) => (
   </li>
 );
 
-const mapDispatchToProps = ({ dispatch }) => ({
+const mapDispatchToProps = (dispatch) => ({
   updateQuantity: (id, quantity) => {
     dispatch(actions.updateLineItem(id, quantity));
   },

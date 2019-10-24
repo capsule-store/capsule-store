@@ -55,8 +55,6 @@ const mapDispatchToProps = (dispatch) => ({
   loadStoreData: () => {
     dispatch(actions.fetchProducts());
     dispatch(actions.fetchCategories());
-
-    // Only works if a userId is passed in manually to fetchCart()
     dispatch(actions.fetchCart());
   },
 });
