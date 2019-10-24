@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { actions } from '../store';
 
 const LineItem = ({ item, updateQuantity, removeLineItem }) => (
@@ -36,7 +37,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(actions.updateLineItem(id, quantity));
   },
   removeLineItem: (id) => {
-    dispatch(actions.deleteLineItem(id));
+    dispatch(actions.removeLineItem(id));
   },
 });
 

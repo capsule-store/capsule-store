@@ -12,6 +12,7 @@ import { actions } from '../store';
 import Home from './Home';
 import Nav from './Nav';
 import Products from './Products';
+import ProductDetail from './ProductDetail';
 import Cart from './Cart';
 import Login from './Login';
 import Register from './Register';
@@ -33,7 +34,8 @@ class _App extends Component {
           <Nav />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/products" component={Products} />
+            <Route exact path="/products" component={Products} />
+            <Route path="/products/:id" component={ProductDetail} />
             <Route path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
           </Switch>
@@ -53,8 +55,6 @@ const mapDispatchToProps = (dispatch) => ({
   loadStoreData: () => {
     dispatch(actions.fetchProducts());
     dispatch(actions.fetchCategories());
- 
-    // Only works if a userId is passed in manually to fetchCart()
     dispatch(actions.fetchCart());
   },
 });
