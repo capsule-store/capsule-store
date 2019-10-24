@@ -11,6 +11,7 @@ const ProductDetail = ({ products, match: { params } }) => {
       <h3 className="brand">{product.brand}</h3>
       <ProductPurchase id={product.id} />
       <img alt={product.name} src={product.image} />
+      <p className="description">{product.description}</p>
     </div>
   );
 };
