@@ -13,7 +13,7 @@ const productsSubRouter = require('./routes/products');
 const usersSubRouter = require('./routes/users');
 
 const app = express();
-const {User} = db.models;
+const { User } = db.models;
 dotenv.config();
 
 app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));

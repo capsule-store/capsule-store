@@ -6,7 +6,8 @@ import {
   CREATE_ORDER,
   UPDATE_ORDER,
   DELETE_ORDER,
-  SET_LINEITEMS,
+  SET_CART,
+  UPDATE_LINEITEM,
   SET_AUTH,
   DELETE_AUTH,
   CREATE_USER,
@@ -50,10 +51,12 @@ const ordersReducer = (state = [], action) => {
   }
 };
 
-const lineItemsReducer = (state = [], action) => {
+const cartReducer = (state = [], action) => {
   switch (action.type) {
-    case SET_LINEITEMS:
-      return action.lineItems;
+    case SET_CART:
+      return action.cart;
+    case UPDATE_LINEITEM:
+      return state.map((item) => (item.id === action.updated.id ? action.updated : item));
     default:
       return state;
   }
@@ -84,7 +87,7 @@ export default combineReducers({
   products: productsReducer,
   categories: categoriesReducer,
   orders: ordersReducer,
-  lineItems: lineItemsReducer,
+  cart: cartReducer,
   auth: authReducer,
   user: userReducer,
 });
