@@ -59,7 +59,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(actions.fetchCategories());
     dispatch(actions.fetchBrands());
     dispatch(actions.fetchCart());
-    master;
   },
 });
 
