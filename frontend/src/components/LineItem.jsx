@@ -3,34 +3,46 @@ import { connect } from 'react-redux';
 
 import { actions } from '../store';
 
-const LineItem = ({ item, updateQuantity, removeLineItem }) => (
-  <li className="lineItem">
-    <div className="itemName">{item.name}</div>
+const LineItem = ({
+  products, item, updateQuantity, removeLineItem,
+}) => {
+  const { name, price } = products.find(
+    (product) => product.id === item.productId,
+  );
 
-    <button
-      type="button"
-      onClick={() => updateQuantity(item.id, item.quantity - 1)}
-    >
-      -
-    </button>
+  return (
+    <li className="lineItem">
+      <div className="itemName">{name}</div>
 
-    <div className="itemQuantity">{item.quantity}</div>
+      <button
+        type="button"
+        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+      >
+        -
+      </button>
 
-    <button
-      type="button"
-      onClick={() => updateQuantity(item.id, item.quantity + 1)}
-    >
-      +
-    </button>
+      <div className="itemQuantity">{item.quantity}</div>
 
-    <div className="itemPrice">{item.price}</div>
-    <div className="itemSubTotal">{item.quantity * item.price}</div>
+      <button
+        type="button"
+        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+      >
+        +
+      </button>
 
-    <button type="button" onClick={() => removeLineItem(item.id)}>
-      Remove
-    </button>
-  </li>
-);
+      <div className="itemPrice">{price}</div>
+      <div className="itemSubTotal">{item.quantity * price}</div>
+
+      <button type="button" onClick={() => removeLineItem(item.id)}>
+        Remove
+      </button>
+    </li>
+  );
+};
+
+const mapStateToProps = ({ products }) => ({
+  products,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   updateQuantity: (id, quantity) => {
@@ -42,6 +54,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(LineItem);
