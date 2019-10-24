@@ -11,6 +11,7 @@ import {
   UPDATE_ORDER,
   DELETE_ORDER,
   SET_CART,
+  ADD_LINEITEM,
   UPDATE_LINEITEM,
   DELETE_LINEITEM,
 } from './constants';
@@ -107,10 +108,19 @@ const updateLineItem = (id, quantity) => async (dispatch) => {
   dispatch({ type: UPDATE_LINEITEM, updated });
 };
 
+const addLineItem = (id, quantity) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  const created = await axios.post('/api/cart/', {
+    id,
+    quantity,
+    headers: { token },
+  });
+  dispatch({ type: ADD_LINEITEM, created });
+};
+
 const deleteLineItem = (id) => async (dispatch) => {
   await axios.delete(`/api/cart/${id}`);
   dispatch({ type: DELETE_LINEITEM, id });
- 
 };
 
 export {
@@ -122,6 +132,7 @@ export {
   updateOrder,
   deleteOrder,
   fetchCart,
+  addLineItem,
   updateLineItem,
   deleteLineItem,
   attemptLogin,
