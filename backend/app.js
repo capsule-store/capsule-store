@@ -11,9 +11,10 @@ const brandsSubRouter = require('./routes/brands');
 const categoriesSubRouter = require('./routes/categories');
 const productsSubRouter = require('./routes/products');
 const usersSubRouter = require('./routes/users');
+const cartSubRouter = require('./routes/cart');
 
 const app = express();
-const {User} = db.models;
+const { User } = db.models;
 dotenv.config();
 
 app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
@@ -49,6 +50,7 @@ app.use('/api/brands', brandsSubRouter);
 app.use('/api/categories', categoriesSubRouter);
 app.use('/api/products', productsSubRouter);
 app.use('/api/users', usersSubRouter);
+app.use('/api/cart', cartSubRouter);
 
 app.use((req, res, next) => {
   const auth = req.headers.authorization;
@@ -57,10 +59,11 @@ app.use((req, res, next) => {
   }
 
   const { id } = jwt.decode(auth, process.env.SECRET);
-
   User.findByPk(id)
     .then((user) => {
-      req.user = user.dataValues;
+      if (user) {
+        req.user = user.dataValues;
+      }
       next();
     })
     .catch(next);

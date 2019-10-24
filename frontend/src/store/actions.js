@@ -10,7 +10,9 @@ import {
   CREATE_ORDER,
   UPDATE_ORDER,
   DELETE_ORDER,
-  SET_LINEITEMS,
+  SET_CART,
+  UPDATE_LINEITEM,
+  DELETE_LINEITEM,
 } from './constants';
 
 const setAuth = (auth) => ({
@@ -94,9 +96,21 @@ const deleteOrder = (userId, order) => async (dispatch) => {
   dispatch({ type: DELETE_ORDER, order });
 };
 
-const fetchLineItems = (userId) => async (dispatch) => {
-  const { lineItems } = (await axios.get(`/api/users/${userId}/cart/`)).data;
-  dispatch({ type: SET_LINEITEMS, lineItems });
+const fetchCart = () => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  const cart = (await axios.get('/api/cart/', { headers: { token } })).data;
+  dispatch({ type: SET_CART, cart });
+};
+
+const updateLineItem = (id, quantity) => async (dispatch) => {
+  const updated = (await axios.put(`/api/cart/${id}`, { quantity })).data;
+  dispatch({ type: UPDATE_LINEITEM, updated });
+};
+
+const deleteLineItem = (id) => async (dispatch) => {
+  await axios.delete(`/api/cart/${id}`);
+  dispatch({ type: DELETE_LINEITEM, id });
+ 
 };
 
 export {
@@ -107,7 +121,9 @@ export {
   createOrder,
   updateOrder,
   deleteOrder,
-  fetchLineItems,
+  fetchCart,
+  updateLineItem,
+  deleteLineItem,
   attemptLogin,
   attemptSessionLogin,
   logout,

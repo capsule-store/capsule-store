@@ -7,12 +7,12 @@ import {
 
 // Local imports
 import { actions } from '../store';
-import { testLineItems } from '../testData';
 
 // Components
 import Home from './Home';
 import Nav from './Nav';
 import Products from './Products';
+import ProductDetail from './ProductDetail';
 import Cart from './Cart';
 import Login from './Login';
 import Register from './Register';
@@ -35,11 +35,9 @@ class _App extends Component {
           <Nav />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/products" component={Products} />
-            <Route
-              path="/cart"
-              render={() => <Cart lineItems={testLineItems} />}
-            />
+            <Route exact path="/products" component={Products} />
+            <Route path="/products/:id" component={ProductDetail} />
+            <Route path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
           </Switch>
           <Brands />
@@ -57,10 +55,13 @@ const mapStateToProps = ({ auth }) => ({
 const mapDispatchToProps = (dispatch) => ({
   attemptSessionLogin: () => dispatch(actions.attemptSessionLogin()),
   loadStoreData: () => {
-    // fetch all necessary store data (not related to user)
     dispatch(actions.fetchProducts());
     dispatch(actions.fetchCategories());
+add-state-brands
     dispatch(actions.fetchBrands());
+
+    dispatch(actions.fetchCart());
+master
   },
 });
 
