@@ -21,18 +21,17 @@ class ProductPurchase extends Component {
         quantity: state.quantity + 1,
       }));
     } else if (action === 'decrease') {
-      this.setState((state) => ({
-        quantity: state.quantity - 1,
-      }));
+      this.setState((state) => {
+        if (state.quantity > 1) {
+          return { quantity: state.quantity - 1 };
+        }
+      });
     }
   }
 
   handleBuy() {
     const { quantity } = this.state;
-    const {
-      id,
-      buyProduct,
-    } = this.props;
+    const { id, buyProduct } = this.props;
 
     buyProduct(id, quantity);
   }
