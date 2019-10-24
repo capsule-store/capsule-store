@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { actions } from '../store';
 
-class ProductDetail extends Component {
+class ProductPurchase extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +30,7 @@ class ProductDetail extends Component {
   handleBuy() {
     const { quantity } = this.state;
     const {
-      product: { id },
+      id,
       buyProduct,
     } = this.props;
 
@@ -75,4 +75,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   null,
   mapDispatchToProps,
-)(ProductDetail);
+)(ProductPurchase);

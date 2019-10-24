@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { actions } from '../store';
 
 import ProductPurchase from './ProductPurchase';
 
@@ -11,7 +10,7 @@ const ProductDetail = ({ products }) => {
       <h2 className="name">{product.name}</h2>
       <h3 className="brand">{product.brand}</h3>
       <ProductPurchase id={product.id} />
-      <img src={product.image} />
+      <img alt={product.name} src={product.image} />
     </div>
   );
 };
