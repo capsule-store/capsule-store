@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import ProductPurchase from './ProductPurchase';
 
-const ProductDetail = ({ products }) => {
+const ProductDetail = ({ products, match: { params } }) => {
   const product = products.find((prod) => prod.id === params.id);
   return (
     <div className="product-detail">
