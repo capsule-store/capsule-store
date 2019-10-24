@@ -12,6 +12,7 @@ import { actions } from '../store';
 import Home from './Home';
 import Nav from './Nav';
 import Products from './Products';
+import ProductDetail from './ProductDetail';
 import Cart from './Cart';
 import Login from './Login';
 import Register from './Register';
@@ -34,7 +35,7 @@ class _App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/products" component={Products} />
-            <Route path="/products/:id" render={() => <ProductDetail />} />
+            <Route path="/products/:id" component={ProductDetail} />
             <Route path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
           </Switch>
