@@ -1,18 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import ProductCard from './ProductCard';
+
 const Products = ({ products }) => (
   <div>
     <h2>Products</h2>
     <ul>
-      {// In the end we should use <ProductCard/> components
-      products.map((product) => (
+      {products.map((product) => (
         <li key={product.id}>
-          <div>{product.name}</div>
-          <div>{product.price}</div>
+          <ProductCard product={product} />
         </li>
-      ))
-}
+      ))}
     </ul>
   </div>
 );
