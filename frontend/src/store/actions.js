@@ -110,11 +110,11 @@ const updateLineItem = (id, quantity) => async (dispatch) => {
 
 const addLineItem = (id, quantity) => async (dispatch) => {
   const token = localStorage.getItem('token');
-  const created = await axios.post('/api/cart/', {
-    id,
-    quantity,
-    headers: { token },
-  });
+  const created = (await axios.post(
+    '/api/cart/',
+    { id, quantity },
+    { headers: { token } },
+  )).data;
   dispatch({ type: ADD_LINEITEM, created });
 };
 
