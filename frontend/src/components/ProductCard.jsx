@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => (
-  <div className="product-card">
+  <Link to={`/products/${product.id}`} className="product-card">
     <div className="info">
       <h3 className="name">{product.name}</h3>
       <p className="category">{product.category}</p>
@@ -13,7 +14,7 @@ const ProductCard = ({ product }) => (
       src={product.image}
       alt={`image of ${product.name}`}
     />
-  </div>
+  </Link>
 );
 
 export default ProductCard;
