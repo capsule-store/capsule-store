@@ -57,11 +57,8 @@ const mapDispatchToProps = (dispatch) => ({
   loadStoreData: () => {
     dispatch(actions.fetchProducts());
     dispatch(actions.fetchCategories());
-add-state-brands
     dispatch(actions.fetchBrands());
-
     dispatch(actions.fetchCart());
-master
   },
 });
 
