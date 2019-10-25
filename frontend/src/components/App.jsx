@@ -30,7 +30,6 @@ class _App extends Component {
     const { loggedIn } = this.props;
     return (
       <div>
-        <h1>sv-starter-pack</h1>
         <HashRouter>
           <Nav />
           <Switch>
@@ -57,11 +56,8 @@ const mapDispatchToProps = (dispatch) => ({
   loadStoreData: () => {
     dispatch(actions.fetchProducts());
     dispatch(actions.fetchCategories());
-add-state-brands
     dispatch(actions.fetchBrands());
-
     dispatch(actions.fetchCart());
-master
   },
 });
 
