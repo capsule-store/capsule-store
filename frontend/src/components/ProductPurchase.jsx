@@ -31,9 +31,17 @@ class ProductPurchase extends Component {
 
   handleBuy() {
     const { quantity } = this.state;
-    const { id, buyProduct } = this.props;
+    const {
+      id, cart, buyProduct, updateLineItem,
+    } = this.props;
 
-    buyProduct(id, quantity);
+    // If we already have the item in the cart, just update quantity
+    const found = cart.find((item) => item.productId === id);
+    if (found) {
+      updateLineItem(found.id, found.quantity + quantity);
+    } else {
+      buyProduct(id, quantity);
+    }
   }
 
   render() {
@@ -65,13 +73,20 @@ class ProductPurchase extends Component {
   }
 }
 
+const mapStateToProps = ({ cart }) => ({
+  cart,
+});
+
 const mapDispatchToProps = (dispatch) => ({
+  updateLineItem: (id, quantity) => {
+    dispatch(actions.updateLineItem(id, quantity));
+  },
   buyProduct: (id, quantity) => {
     dispatch(actions.addLineItem(id, quantity));
   },
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(ProductPurchase);
