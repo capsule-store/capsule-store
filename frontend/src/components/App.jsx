@@ -18,7 +18,9 @@ import Login from './Login';
 import Logout from './Logout'
 import Register from './Register';
 import Brands from './Brands';
+import BrandDetail from './BrandDetail';
 import Categories from './Categories';
+
 /* App */
 class _App extends Component {
   componentDidMount() {
@@ -41,6 +43,7 @@ class _App extends Component {
             <Route path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
+            <Route path="/brands/:id" component={BrandDetail} />
           </Switch>
           <Brands />
         </HashRouter>
