@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import LineItem from './LineItem';
 
-const Cart = ({ cart }) => (
+const Cart = ({ cart, products }) => (
   <div>
     <h2>Review Cart</h2>
     <ul>
@@ -14,15 +14,21 @@ const Cart = ({ cart }) => (
     <div id="cartTotal">
       <div>Total</div>
       <div id="totalPrice">
-        {cart.reduce((total, item) => total + item.quantity * item.price, 0)}
+        {cart.reduce((total, item) => {
+          const { price } = products.find(
+            (product) => product.id === item.productId,
+          );
+          return total + parseInt(item.quantity) * parseFloat(price);
+        }, 0)}
       </div>
     </div>
   </div>
 );
 
 // Uncomment when ready to connect to redux store
-const mapStateToProps = ({ cart }) => ({
+const mapStateToProps = ({ cart, products }) => ({
   cart,
+  products,
 });
 
 const mapDispatchToProps = () => {};
