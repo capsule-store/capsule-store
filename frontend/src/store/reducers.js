@@ -59,18 +59,7 @@ const cartReducer = (state = [], action) => {
     case SET_CART:
       return action.cart;
     case ADD_LINEITEM:
-      const found = state.find((item) => item.id === action.created.id);
-
-      if (found) {
-        return state.map((item) => {
-          if (item.id === action.created.id) {
-            item.quantity += action.created.quantity;
-          }
-          return item;
-        });
-      }
       return [...state, action.created];
-
     case UPDATE_LINEITEM:
       return state.map((item) => (item.id === action.updated.id ? action.updated : item));
     case DELETE_LINEITEM:
