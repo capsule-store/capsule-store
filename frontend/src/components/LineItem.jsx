@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { actions } from '../store';
 
 const LineItem = ({
-  products, item, updateQuantity, removeLineItem,
+  products, item, updateQuantity, deleteLineItem,
 }) => {
   const { name, price } = products.find(
     (product) => product.id === item.productId,
@@ -33,7 +33,7 @@ const LineItem = ({
       <div className="itemPrice">{price}</div>
       <div className="itemSubTotal">{item.quantity * price}</div>
 
-      <button type="button" onClick={() => removeLineItem(item.id)}>
+      <button type="button" onClick={() => deleteLineItem(item.id)}>
         Remove
       </button>
     </li>
@@ -48,8 +48,8 @@ const mapDispatchToProps = (dispatch) => ({
   updateQuantity: (id, quantity) => {
     dispatch(actions.updateLineItem(id, quantity));
   },
-  removeLineItem: (id) => {
-    dispatch(actions.removeLineItem(id));
+  deleteLineItem: (id) => {
+    dispatch(actions.deleteLineItem(id));
   },
 });
 
