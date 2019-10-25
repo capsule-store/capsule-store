@@ -114,5 +114,9 @@ app.post('/signup', async (req, res, next) => {
   }
 });
 
+app.get('/logout', (req, res) => {
+  res.redirect('/')
+})
+
 
 module.exports = app;
