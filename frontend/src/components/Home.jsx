@@ -10,12 +10,11 @@ const _Home = ({ auth, logout }) => {
     <div>
       <Categories />
     </div>
-  );
-};
+);
 
 const mapStateToProps = ({ auth }) => ({ auth });
 
-const mapDispatchToProps = (dispatch, {history}) => ({
+const mapDispatchToProps = (dispatch, { history }) => ({
   logout: () => dispatch(actions.logout(history)),
 });
 
