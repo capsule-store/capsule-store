@@ -97,9 +97,12 @@ const deleteOrder = (userId, order) => async (dispatch) => {
   dispatch({ type: DELETE_ORDER, order });
 };
 
-const fetchCart = () => async (dispatch) => {
-  const token = localStorage.getItem('token');
-  const cart = (await axios.get('/api/cart/', { headers: { token } })).data;
+const fetchCart = (loggedIn) => async (dispatch) => {
+  let cart = [];
+  if (loggedIn) {
+    const token = localStorage.getItem('token');
+    cart = (await axios.get('/api/cart/', { headers: { token } })).data;
+  }
   dispatch({ type: SET_CART, cart });
 };
 

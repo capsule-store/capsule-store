@@ -37,6 +37,7 @@ router.put('/:id', async (req, res, next) => {
     .then((item) => {
       const { quantity } = req.body;
       item.update({ quantity });
+      return item
     })
     .then((item) => res.send(item))
     .catch(next);

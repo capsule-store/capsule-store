@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import ProductPurchase from './ProductPurchase';
 
 const ProductDetail = ({ products, match: { params } }) => {
+  if (!products.length) {
+    return null;
+  }
+
   const product = products.find((prod) => prod.id === params.id);
   return (
     <div className="product-detail">
