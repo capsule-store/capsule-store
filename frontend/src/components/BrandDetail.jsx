@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import ProductCard from './ProductCard';
 
 const BrandDetail = ({ brands, products, match: { params } }) => {
-  const { id } = params;
-  const brand = brands.find((b) => b.id === id);
+  if (!brands.length || !products.length) return null;
+
+  const brand = brands.find((b) => b.id === params.id);
   const brandProducts = products.filter(
     (product) => product.brandId === brand.id,
   );
