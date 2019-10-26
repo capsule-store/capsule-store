@@ -10,7 +10,6 @@ class _Logout extends Component {
 
   componentWillMount(){
     this.props.logout()
-    this.props.history.push("/")
   }
 
   render(){
