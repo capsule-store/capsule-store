@@ -110,7 +110,6 @@ const updateLineItem = (id, quantity) => async (dispatch) => {
 const deleteLineItem = (id) => async (dispatch) => {
   await axios.delete(`/api/cart/${id}`);
   dispatch({ type: DELETE_LINEITEM, id });
- 
 };
 
 export {

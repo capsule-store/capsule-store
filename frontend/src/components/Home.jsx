@@ -9,9 +9,6 @@ const _Home = ({ auth, logout }) => {
   return (
     <div>
       <Categories />
-      {
-        (auth.id)? (<button onClick={logout}>Logout</button>) : ''
-      }
     </div>
   );
 };
