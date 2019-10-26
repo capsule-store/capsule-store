@@ -36,7 +36,6 @@ const syncAndSeed = async () => {
     doordash,
     everlane,
     google,
-    lacroix,
     moleskine,
     rains,
     soylent,
@@ -50,76 +49,70 @@ const syncAndSeed = async () => {
       {
         name: 'Allbirds',
         image:
-          'https://assets.redantler.com/assets/images/work/allbirds/Allbirds.Logo.Black.RGB.png?mtime=20170915140515&lossless=true&w=650',
+          'https://user-images.githubusercontent.com/4413445/67622310-5a89d800-f7e7-11e9-9ef3-7ae6c583c269.png',
         description:
           'Allbirds is an American company which uses a direct-to-consumer approach and is aimed at designing environmentally friendly footwear.',
       },
       {
         name: 'Apple',
-        image: 'https://image.flaticon.com/icons/png/512/23/23656.png',
+        image: 'https://user-images.githubusercontent.com/4413445/67622311-5a89d800-f7e7-11e9-80c3-ad65748b45b6.png',
         description:
           'Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services.',
       },
       {
         name: 'Boosted',
         image:
-          'https://a16z.com/wp-content/uploads/2016/01/logo_boosted-boards.png',
+          'https://user-images.githubusercontent.com/4413445/67622312-5a89d800-f7e7-11e9-938d-0f80444e3e6a.png',
         description:
           'Boosted is an American manufacturer of electric skateboards and electric scooters based in Mountain View, California.',
       },
       {
         name: 'Doordash',
         image:
-          'https://cdn.doordash.com/static/img/doordash-logo-red@2x.png?dd-nonce',
+          'https://user-images.githubusercontent.com/4413445/67622313-5a89d800-f7e7-11e9-81df-62f6e77b3add.png',
         description:
           'DoorDash Inc. is a San Francisco–based on-demand prepared food delivery service founded in 2013 by Stanford students Andy Fang, Stanley Tang, Tony Xu and Evan Moore.',
       },
       {
         name: 'Everlane',
         image:
-          'https://findlogovector.com/wp-content/uploads/2018/11/everlane-logo-vector.png',
+          'https://user-images.githubusercontent.com/4413445/67622314-5a89d800-f7e7-11e9-9162-4b9190978f70.png',
         description:
           'Everlane is an American clothing retailer that sells primarily online. ',
       },
       {
         name: 'Google',
         image:
-          'https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg',
+          'https://user-images.githubusercontent.com/4413445/67622315-5a89d800-f7e7-11e9-8794-5f6249be74a1.png',
         description:
           'Google is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware.',
       },
-      {
-        name: 'La Croix',
-        image:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/La_croix_%28logo%29.svg/1200px-La_croix_%28logo%29.svg.png',
-        description:
-          'LaCroix Sparkling water is a Healthy Beverage Choice. It is a naturally essenced, 0 Calorie, 0 Sweetener, 0 Sodium beverage with nothing artificial.',
-      },
+
       {
         name: 'Moleskine',
         image:
-          'https://www.williampenn.net/pub/media/catalog/category/moleskine.png',
+          'https://user-images.githubusercontent.com/4413445/67622316-5a89d800-f7e7-11e9-81e3-0e8fc3d9670e.png',
         description:
           'Moleskine is an Italian manufacturer, papermaker and product designer founded in 1997 by Francesco Franceschi, based in Milan, Italy.',
       },
       {
         name: 'Rains',
         image:
-          'https://media.manofakind.se/media/pimcore/pim-264070-55348-brand-rains-logo.jpg',
+          'https://user-images.githubusercontent.com/4413445/67622317-5a89d800-f7e7-11e9-89f5-75faea33bc65.png',
         description:
           'Rains is a contemporary rainwear lifestyle brand creating waterproof designs for the global citizen. ',
       },
       {
         name: 'Soylent',
         image:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Soylent.svg/1200px-Soylent.svg.png',
+          'https://user-images.githubusercontent.com/4413445/67622318-5a89d800-f7e7-11e9-8ee7-b2ed180ef614.png',
         description:
           'Soylent is a brand of meal replacement products made by Rosa Foods.',
       },
       {
         name: 'Uber',
         image:
-          'https://images.ctfassets.net/37l920h5or7f/5veFGObZjqmQY8qKu6auAW/abe271ddb25ae87d1212a4da798d3229/asset-030.jpg?fm=jpg&q=70&w=1600',
+          'https://user-images.githubusercontent.com/4413445/67622321-5b226e80-f7e7-11e9-9b19-d711b17ee192.png',
         description:
           'Uber Technologies, Inc. is an American multinational ridesharing company offering services that include peer-to-peer ridesharing, ride service hailing, food delivery, and a bicycle-sharing system.',
       },
@@ -133,21 +126,21 @@ const syncAndSeed = async () => {
       {
         name: 'Vivora',
         image:
-          'https://www.vivora.net/wp-content/uploads/2017/07/Screen-Shot-2017-07-21-at-2.08.38-PM.png',
+          'https://user-images.githubusercontent.com/4413445/67622322-5b226e80-f7e7-11e9-885b-68f09c091211.png',
         description:
           'Our products are here to bring you simple, stylish, and active furniture that helps you stay healthy, concentrated, and fashionable.',
       },
       {
         name: 'Stiga',
         image:
-          'https://m.media-amazon.com/images/S/abs-image-upload-na/1/AmazonStores/ATVPDKIKX0DER/b22f70a869077f4d3eeeff6883ae9dcf.w750.h750._CR0%2C0%2C750%2C750_SX750_.jpg',
+          'https://user-images.githubusercontent.com/4413445/67622319-5b226e80-f7e7-11e9-9e83-11ba34cca5de.png',
         description:
           'STIGA Sports AB, a global company with partners in over 100 countries, has been a world leader in the sport of table tennis for over 60 years. ',
       },
       {
         name: 'Tesla',
         image:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Tesla_Motors.svg/793px-Tesla_Motors.svg.png',
+          'https://user-images.githubusercontent.com/4413445/67622320-5b226e80-f7e7-11e9-9746-b378084d2689.png',
         description:
           "Tesla is accelerating the world's transition to sustainable energy with electric cars, solar panels and integrated renewable energy solutions for homes.",
       },
@@ -162,7 +155,6 @@ const syncAndSeed = async () => {
     notebook,
     pixel4,
     crewTee,
-    laCroix8Pack,
     hoodie,
     doordashCard,
     modelS,
@@ -242,16 +234,6 @@ const syncAndSeed = async () => {
           'https://res.cloudinary.com/everlane/image/upload/c_fill,dpr_1.0,f_auto,h_1200,q_85,w_1200/v1/i/34b295fd_5b53.jpg',
         brandId: everlane.id,
         categoryId: outfit.id,
-      },
-      {
-        name: 'La Croix 8-pack',
-        price: 4.22,
-        description:
-          'LaCroix Sparkling Water is a refreshing and healthy beverage that can be enjoyed in any setting.',
-        image:
-          'https://m.media-amazon.com/images/S/aplus-media/vc/9280c32f-9413-44df-bea2-15a1428cbffe._CR0,0,1000,1000_PT0_SX300__.png',
-        brandId: lacroix.id,
-        categoryId: foodDrinks.id,
       },
       {
         name: 'Heavyweight Cashmere Hoodie',
@@ -411,7 +393,6 @@ const syncAndSeed = async () => {
   await Promise.all(
     [
       { productId: upliftDesk.id, quantity: 1 },
-      { productId: laCroix8Pack.id, quantity: 5 },
       { productId: hoodie.id, quantity: 2 },
       { productId: doordashCard.id, quantity: 3 },
       { productId: boostedRev.id, quantity: 1 },
