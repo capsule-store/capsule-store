@@ -23,7 +23,7 @@ import Categories from './Categories';
 class _App extends Component {
   componentDidUpdate() {
     const { loadCart, loggedIn } = this.props;
-    loadCart();
+    loadCart(loggedIn);
   }
 
   componentDidMount() {
@@ -36,10 +36,7 @@ class _App extends Component {
 
     attemptSessionLogin().catch((ex) => console.log(ex));
     loadStoreData();
-
-    if (loggedIn) {
-      loadCart();
-    }
+    loadCart(loggedIn);
   }
 
   render() {
@@ -74,8 +71,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(actions.fetchCategories());
     dispatch(actions.fetchBrands());
   },
-  loadCart: () => {
-    dispatch(actions.fetchCart());
+  loadCart: (loggedIn) => {
+    dispatch(actions.fetchCart(loggedIn));
   },
 });
 
