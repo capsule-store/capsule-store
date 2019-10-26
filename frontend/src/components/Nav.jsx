@@ -62,6 +62,7 @@ const Search = styled(Icon)`
 const Cart = styled(Icon)`
   background-image: url(../assets/images/icon/cart.svg);
   display: flex;
+  background-repeat: no-repeat;
   justify-content: space-between;
   padding: 2rem;
 `;

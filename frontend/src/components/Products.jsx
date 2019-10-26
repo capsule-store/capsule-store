@@ -1,11 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import styled from 'styled-components';
 import ProductCard from './ProductCard';
 
+const ProductList = styled.div`
+max-width: 760px;
+`;
+
+
 const Products = ({ products }) => (
-  <div>
-    <h2>Products</h2>
+  <ProductList>
+    <h2>2019 Winter</h2>
     <ul>
       {products.map((product) => (
         <li key={product.id}>
@@ -13,7 +18,7 @@ const Products = ({ products }) => (
         </li>
       ))}
     </ul>
-  </div>
+  </ProductList>
 );
 
 const mapStateToProps = ({ products }) => ({ products });
