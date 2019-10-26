@@ -8,9 +8,6 @@ import Categories from './Categories';
 const _Home = ({ auth, logout }) => {
   return (
     <div>
-      {
-        (auth.id)? (<button onClick={logout}>Logout</button>) : ''
-      }
       <Categories />
     </div>
   );
