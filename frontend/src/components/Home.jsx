@@ -5,11 +5,10 @@ import { actions } from '../store';
 import Categories from './Categories';
 
 /* Home */
-const _Home = ({ auth, logout }) => {
-  return (
-    <div>
-      <Categories />
-    </div>
+const _Home = ({ auth, logout }) => (
+  <div>
+    <Categories />
+  </div>
 );
 
 const mapStateToProps = ({ auth }) => ({ auth });
