@@ -6,6 +6,7 @@ export default createGlobalStyle`
     font-family: titling-gothic-fb, sans-serif;
     grid-template-columns: 40px, auto, 40px, auto, 40px, auto, 40px;
     max-width: 100%;
+    overflow-x: hidden;
   };
 
   body, div, nav, img, ul, li, h1, h2, h3, h4, h5, h6 {
