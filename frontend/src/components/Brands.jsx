@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 
 const Div = styled.div`
@@ -13,7 +14,10 @@ const Brands = ({ brands }) => (
       <ul>
         {brands.map((brand) => (
           <li key={brand.id}>
-          <img src={`${brand.image}`} alt={brand.name} />
+          <Link to={`/brands/${brand.id}`}>
+            <img src={`${brand.image}`} alt={brand.name} />
+          </Link>
+
         </li>
         ))}
       </ul>
