@@ -15,20 +15,37 @@ import Products from './Products';
 import ProductDetail from './ProductDetail';
 import Cart from './Cart';
 import Login from './Login';
-import Logout from './Logout'
+import Logout from './Logout';
 import Register from './Register';
 import Brands from './Brands';
 import Categories from './Categories';
-/* App */
+
 class _App extends Component {
+  componentDidUpdate() {
+    const { loadCart, loggedIn } = this.props;
+
+    if (loggedIn) {
+      loadCart();
+    }
+  }
+
   componentDidMount() {
-    const { attemptSessionLogin, loadStoreData } = this.props;
+    const {
+      loggedIn,
+      attemptSessionLogin,
+      loadStoreData,
+      loadCart,
+    } = this.props;
+
     attemptSessionLogin().catch((ex) => console.log(ex));
     loadStoreData();
+
+    if (loggedIn) {
+      loadCart();
+    }
   }
 
   render() {
-    const { loggedIn } = this.props;
     return (
       <div>
         <HashRouter>
@@ -59,6 +76,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(actions.fetchProducts());
     dispatch(actions.fetchCategories());
     dispatch(actions.fetchBrands());
+  },
+  loadCart: () => {
     dispatch(actions.fetchCart());
   },
 });
