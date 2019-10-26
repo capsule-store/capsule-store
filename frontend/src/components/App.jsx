@@ -23,10 +23,7 @@ import Categories from './Categories';
 class _App extends Component {
   componentDidUpdate() {
     const { loadCart, loggedIn } = this.props;
-
-    if (loggedIn) {
-      loadCart();
-    }
+    loadCart();
   }
 
   componentDidMount() {
