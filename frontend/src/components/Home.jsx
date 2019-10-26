@@ -5,17 +5,15 @@ import { actions } from '../store';
 import Categories from './Categories';
 
 /* Home */
-const _Home = ({ auth, logout }) => {
-  return (
-    <div>
-      <Categories />
-    </div>
-  );
-};
+const _Home = ({ auth, logout }) => (
+  <div>
+    <Categories />
+  </div>
+);
 
 const mapStateToProps = ({ auth }) => ({ auth });
 
-const mapDispatchToProps = (dispatch, {history}) => ({
+const mapDispatchToProps = (dispatch, { history }) => ({
   logout: () => dispatch(actions.logout(history)),
 });
 

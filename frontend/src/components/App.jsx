@@ -33,7 +33,6 @@ class _App extends Component {
     const { loggedIn } = this.props;
     return (
       <div>
-        <h1>sv-starter-pack</h1>
         <HashRouter>
           <Nav />
           <Switch>
