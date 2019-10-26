@@ -11,6 +11,7 @@ import {
   UPDATE_ORDER,
   DELETE_ORDER,
   SET_CART,
+  ADD_LINEITEM,
   UPDATE_LINEITEM,
   DELETE_LINEITEM,
 } from './constants';
@@ -96,9 +97,12 @@ const deleteOrder = (userId, order) => async (dispatch) => {
   dispatch({ type: DELETE_ORDER, order });
 };
 
-const fetchCart = () => async (dispatch) => {
-  const token = localStorage.getItem('token');
-  const cart = (await axios.get('/api/cart/', { headers: { token } })).data;
+const fetchCart = (loggedIn) => async (dispatch) => {
+  let cart = [];
+  if (loggedIn) {
+    const token = localStorage.getItem('token');
+    cart = (await axios.get('/api/cart/', { headers: { token } })).data;
+  }
   dispatch({ type: SET_CART, cart });
 };
 
@@ -107,10 +111,19 @@ const updateLineItem = (id, quantity) => async (dispatch) => {
   dispatch({ type: UPDATE_LINEITEM, updated });
 };
 
+const addLineItem = (productId, quantity) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  const created = (await axios.post(
+    '/api/cart/',
+    { productId, quantity },
+    { headers: { token } },
+  )).data;
+  dispatch({ type: ADD_LINEITEM, created });
+};
+
 const deleteLineItem = (id) => async (dispatch) => {
   await axios.delete(`/api/cart/${id}`);
   dispatch({ type: DELETE_LINEITEM, id });
- 
 };
 
 export {
@@ -122,6 +135,7 @@ export {
   updateOrder,
   deleteOrder,
   fetchCart,
+  addLineItem,
   updateLineItem,
   deleteLineItem,
   attemptLogin,

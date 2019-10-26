@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
 const jwt = require('jwt-simple');
@@ -14,12 +15,21 @@ const usersSubRouter = require('./routes/users');
 const cartSubRouter = require('./routes/cart');
 
 const app = express();
+
 const { User } = db.models;
 dotenv.config();
 
 app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
 
 app.use(express.json());
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 600000}, // 10 mins
+  cart: {},
+}));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
@@ -113,6 +123,5 @@ app.post('/signup', async (req, res, next) => {
       .catch(next);
   }
 });
-
 
 module.exports = app;

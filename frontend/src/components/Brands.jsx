@@ -44,7 +44,6 @@ width: 100%;
 object-fit: cover;
 `;
 
-// console.log('STYLE LI:', styledLi);
 const Brands = ({ brands }) => (
   <Section>
     <Title>

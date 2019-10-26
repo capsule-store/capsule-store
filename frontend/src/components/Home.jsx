@@ -7,11 +7,8 @@ import Categories from './Categories';
 /* Home */
 const _Home = ({ auth, logout }) => (
   <div>
-      {
-        (auth.id) ? (<button onClick={logout}>Logout</button>) : ''
-      }
-      <Categories />
-    </div>
+    <Categories />
+  </div>
 );
 
 const mapStateToProps = ({ auth }) => ({ auth });

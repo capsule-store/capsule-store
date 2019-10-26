@@ -16,18 +16,7 @@ router.get('/', (req, res, next) => {
       }
 
       const items = await LineItem.findAll({ where: { orderId: cart.id } });
-      // Add product name and price to line items for easy access in frontend
-      // Figure out a better way of doing this
-      const updatedItems = [];
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i].get();
-        const { name, price } = await Product.findOne({
-          where: { id: item.productId },
-        });
-        updatedItems.push({ ...item, name, price });
-      }
-
-      return res.send(updatedItems);
+      return res.send(items);
     })
     .catch(next);
 });
@@ -48,6 +37,7 @@ router.put('/:id', async (req, res, next) => {
     .then((item) => {
       const { quantity } = req.body;
       item.update({ quantity });
+      return item
     })
     .then((item) => res.send(item))
     .catch(next);
