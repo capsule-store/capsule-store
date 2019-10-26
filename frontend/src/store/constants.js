@@ -15,11 +15,11 @@ const DELETE_ORDER = 'DELETE_ORDER';
 
 // Cart / Line Items (cart is a colletion of line items)
 const SET_CART = 'SET_CART';
-const CREATE_LINEITEM = 'CREATE_LINEITEM';
+const ADD_LINEITEM = 'ADD_LINEITEM';
 const UPDATE_LINEITEM = 'UPDATE_LINEITEM';
 const DELETE_LINEITEM = 'DELETE_LINEITEM';
 
-// Brands 
+// Brands
 const SET_BRANDS = 'SET_BRANDS';
 
 export {
@@ -34,7 +34,7 @@ export {
   UPDATE_ORDER,
   DELETE_ORDER,
   SET_CART,
-  CREATE_LINEITEM,
+  ADD_LINEITEM,
   UPDATE_LINEITEM,
   DELETE_LINEITEM,
 };

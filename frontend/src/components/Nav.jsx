@@ -74,7 +74,7 @@ const _Nav = ({ loggedIn }) => (
 
     <Right>
       {/* <Promo>FREE SHIPPING –– on all orders over $50*</Promo> */}
-      <User>{!loggedIn && <NavLink to="/login">Sign In</NavLink>}</User>
+      <User>{(loggedIn)? "/logout" : "/login"}>{(loggedIn)? 'Sign out' : 'Sign in'}</User>
       <NavLink to="/cart"><Cart /></NavLink>
     </Right>
   </StyledNav>

@@ -5,11 +5,9 @@ import { actions } from '../store';
 import Categories from './Categories';
 
 /* Home */
-const _Home = ({ auth, logout }) => (
-  <div>
-      {
-        (auth.id) ? (<button onClick={logout}>Logout</button>) : ''
-      }
+const _Home = ({ auth, logout }) => {
+  return (
+    <div>
       <Categories />
     </div>
 );
