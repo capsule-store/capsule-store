@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled, { ThemeProvider } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Section = styled.div`
 width: 100%;
@@ -53,9 +54,11 @@ const Brands = ({ brands }) => (
     </Title>
     <BrandList>
       {brands.map((brand) => (
-        <Brand key={brand.id}>
-          <Logo src={brand.image} />
-        </Brand>
+        <Link to={`/brands/${brand.id}`}>
+          <Brand key={brand.id}>
+            <Logo src={brand.image} />
+          </Brand>
+        </Link>
       ))}
     </BrandList>
   </Section>
