@@ -73,8 +73,10 @@ export default createGlobalStyle`
     color: #000;
   };
 
-  a:link {
-    color: #000;
+  .active{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin:  2rem 0;
   }
 
 `;
