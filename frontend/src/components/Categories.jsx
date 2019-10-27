@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const CategoryList = styled.ul`
 padding: 40px;
+min-width: 280px;
 `;
 
 const Category = styled.li`

@@ -3,22 +3,26 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ProductCard from './ProductCard';
 
-const ProductList = styled.div`
-max-width: 760px;
+
+const Container = styled.div`
+flex-grow:2;
 `;
 
+const ProductList = styled.div`
+width: 100%;
+display: flex;
+flex-wrap: wrap;
+`;
 
 const Products = ({ products }) => (
-  <ProductList>
-    <h2>2019 Winter</h2>
-    <ul>
+  <Container>
+    <h1>2019 Winter</h1>
+    <ProductList>
       {products.map((product) => (
-        <li key={product.id}>
-          <ProductCard product={product} />
-        </li>
+        <ProductCard key={product.id} product={product} />
       ))}
-    </ul>
-  </ProductList>
+    </ProductList>
+  </Container>
 );
 
 const mapStateToProps = ({ products }) => ({ products });

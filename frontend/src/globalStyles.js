@@ -23,9 +23,9 @@ export default createGlobalStyle`
     height: 2rem;
   };
 
-  img{
+  /* img{
     display: cover;
-  };
+  }; */
 
   h1{
     font-size: 5rem;
@@ -68,16 +68,10 @@ export default createGlobalStyle`
     min-height: 1.5rem;
     display: inline;
     color: #000;
+    text-decoration: none;
   };
 
   a:visited {
     color: #000;
   };
-
-  .active{
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin:  2rem 0;
-  }
-
 `;
