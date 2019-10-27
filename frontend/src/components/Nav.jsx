@@ -88,6 +88,11 @@ const _Nav = ({ loggedIn }) => (
         <NavLink to={loggedIn ? '/logout' : '/login'}>
           {loggedIn ? 'Sign out' : 'Sign in'}
         </NavLink>
+      {
+        loggedIn? '' : <NavLink to= '/signup'>Sign Up
+      </NavLink>
+      }
+        
       </User>
       <NavLink to="/cart">
         <Cart />

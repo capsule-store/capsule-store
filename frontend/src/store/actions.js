@@ -54,9 +54,16 @@ const logout = (history) => async (dispatch) => {
   history.push('/');
 };
 
-const register = (newUser) => async (dispatch) => {
-  const user = (await axios.post('/signup', newUser)).data;
-  dispatch(createUser(user));
+const register = (newUser, history) => async (dispatch) => {
+
+  try {
+    const user = (await axios.post('/signup', newUser)).data;
+    dispatch(createUser(user));
+    history.push('/login');
+  } 
+  catch (ex) {
+    throw { message: "Email already exist"};
+  }
 };
 
 const fetchBrands = () => async (dispatch) => {
