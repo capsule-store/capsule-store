@@ -129,7 +129,8 @@ const deleteLineItem = (id) => async (dispatch) => {
 
 const closeCart = () => async (dispatch) => {
   const token = localStorage.getItem('token');
-  const cart = await axios.post('/api/cart/close', { headers: { token } });
+  const cart = (await axios.post('/api/cart/close', {}, { headers: { token } }))
+    .data;
   dispatch({ type: CLOSE_CART, cart });
 };
 
