@@ -23,13 +23,15 @@ app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
 
 app.use(express.json());
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 600000}, // 10 mins
-  cart: {},
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 600000 }, // 10 mins
+    cart: {},
+  }),
+);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
@@ -82,18 +84,18 @@ app.use((req, res, next) => {
 app.post('/api/sessions', async (req, res, next) => {
   const { email, password } = req.body;
 
-  User.findOne(
-    { raw: true },
-    {
-      where: {
-        email,
-        password,
-      },
+  User.findOne({
+    where: {
+      email,
+      password,
     },
-  )
+  })
     .then((user) => {
       if (!user) {
-        throw { status: 401 };
+        throw {
+          status: 401,
+          message: "Password is incorrect or user doesn't exist",
+        };
       }
       const token = jwt.encode({ id: user.id }, process.env.SECRET);
       return res.send({ token });
@@ -105,7 +107,7 @@ app.get('/api/sessions', (req, res, next) => {
   if (req.user) {
     return res.send(req.user);
   }
-  next({ status: 401 });
+  next({ status: 401, message: 'Not logged in' });
 });
 
 app.post('/signup', async (req, res, next) => {
@@ -113,14 +115,23 @@ app.post('/signup', async (req, res, next) => {
     .dataValues;
 
   if (!user) {
-    const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS);
+    const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     req.body.password = hashedPassword;
-
     User.create(req.body)
-      .then((createdUser) => res.status(201).send(createdUser))
+      .then((createdUser) => {
+        res.status(201).send(createdUser.dataValues);
+      })
       .catch(next);
+  }
+});
+
+app.use((err, req, res, next) => {
+  if (err) {
+    res
+      .status(err.status || 500)
+      .send({ message: err.errors[0].message || err.message });
   }
 });
 

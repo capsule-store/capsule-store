@@ -14,6 +14,7 @@ import {
   ADD_LINEITEM,
   UPDATE_LINEITEM,
   DELETE_LINEITEM,
+  CLOSE_CART,
 } from './constants';
 
 const setAuth = (auth) => ({
@@ -54,9 +55,10 @@ const logout = (history) => async (dispatch) => {
   history.push('/');
 };
 
-const register = (newUser) => async (dispatch) => {
+const register = (newUser, history) => async (dispatch) => {
   const user = (await axios.post('/signup', newUser)).data;
   dispatch(createUser(user));
+  history.push('/login');
 };
 
 const fetchBrands = () => async (dispatch) => {
@@ -126,6 +128,13 @@ const deleteLineItem = (id) => async (dispatch) => {
   dispatch({ type: DELETE_LINEITEM, id });
 };
 
+const closeCart = () => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  const cart = (await axios.post('/api/cart/close', {}, { headers: { token } }))
+    .data;
+  dispatch({ type: CLOSE_CART, cart });
+};
+
 export {
   fetchBrands,
   fetchCategories,
@@ -138,6 +147,7 @@ export {
   addLineItem,
   updateLineItem,
   deleteLineItem,
+  closeCart,
   attemptLogin,
   attemptSessionLogin,
   logout,

@@ -1,26 +1,22 @@
-import React from "react";
-import { connect } from "react-redux";
-import { actions } from "../store";
+import React from 'react';
+import { connect } from 'react-redux';
+import { actions } from '../store';
 
 /* Register */
 
 /* Input Validation */
 function validate(firstName, lastName, password, rePassword) {
   const errors = [];
-  if ( firstName.trim().length * lastName.trim().length * streetAddress1.trim().length * city.trim().length === 0){
-    errors.push("None of the fields should be empty.")
+  if (firstName.trim().length * lastName.trim().length === 0) {
+    errors.push('None of the fields should be empty.');
   }
 
-  if ( password !== rePassword ) {
-    errors.push("Password should match");
+  if (password !== rePassword) {
+    errors.push('Password should match');
   }
 
   if (password.length < 6 || rePassword.length < 6) {
-    errors.push("Password should be at least 6 characters long");
-  }
-
-  if(!ckbox_terms) {
-    errors.push("You must agree to the terms.")
+    errors.push('Password should be at least 6 characters long');
   }
 
   return errors;
@@ -31,12 +27,12 @@ class _Register extends React.Component {
   constructor() {
     super();
     this.state = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      rePassword: "",
-      error: ""
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      rePassword: '',
+      error: [],
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,40 +40,54 @@ class _Register extends React.Component {
   }
 
   handleChange(ev) {
-
-    const value = ev.target.value;
-
+    const { value } = ev.target;
     this.setState({
-      [ev.target.id]: value
+      [ev.target.id]: value,
     });
-    
   }
 
   handleSubmit(ev) {
     ev.preventDefault();
-    this.setState({error: ""});
+    this.setState({ error: [] });
 
-    const {firstName, lastName, email, password, rePassword } = this.state;
+    const {
+      firstName, lastName, email, password, rePassword,
+    } = this.state;
 
     const error = validate(firstName, lastName, password, rePassword);
 
-    if(error.length>0){
-      this.setState({error});
+    if (error.length > 0) {
+      this.setState({ error });
       return;
     }
 
-    const user = { firstName, lastName, email, password, isAdmin: false}
+    const user = {
+      firstName,
+      lastName,
+      email,
+      password,
+      isAdmin: false,
+    };
+
     this.props
       .register(user)
-      .then(() => this.props.history.push("/login"))
-      .catch(ex => {
-        console.log(ex.response)
-        // this.setState({ error: [ex.response.data.message]});
+      .then(() => console.log('successful'))
+      .catch((err) => {
+        // error for duplicated email will be catched here
+        error.push(err.response.data.message);
+        this.setState({ error });
       });
   }
 
   render() {
-    const {firstName,lastName, email, password, rePassword,error} = this.state;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      rePassword,
+      error,
+    } = this.state;
 
     return (
       <div className="form-group">
@@ -107,7 +117,7 @@ class _Register extends React.Component {
             <input
               type="email"
               id="email"
-              onChange={ev => this.handleChange(ev)}
+              onChange={(ev) => this.handleChange(ev)}
               placeholder="Enter Email Address"
               required
             />
@@ -117,8 +127,7 @@ class _Register extends React.Component {
             <input
               type="password"
               id="password"
-              onChange={ev => this.handleChange(ev)
-              }
+              onChange={(ev) => this.handleChange(ev)}
               placeholder="Enter Your Password"
               required
             />
@@ -128,12 +137,17 @@ class _Register extends React.Component {
             <input
               type="password"
               id="rePassword"
-              onChange={ev => this.handleChange(ev)}
+              onChange={(ev) => this.handleChange(ev)}
               placeholder="Re-Enter Your Password"
               required
             />
           </div>
-          {error && error.map((_error, idx) => <div className="error" key= {idx} >{_error}</div> )}
+          {error
+            && error.map((_error, idx) => (
+              <div className="error" key={idx}>
+                {_error}
+              </div>
+            ))}
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -141,15 +155,14 @@ class _Register extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    register: user => dispatch(actions.register(user))
-  };
-};
+const mapStateToProps = ({ history }) => ({ history });
+const mapDispatchToProps = (dispatch, { history }) => ({
+  register: (user) => dispatch(actions.register(user, history)),
+});
 
 const Register = connect(
-  null,
-  mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(_Register);
 
 export default Register;

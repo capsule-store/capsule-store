@@ -63,6 +63,7 @@ class _App extends Component {
             <Route path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
+            <Route path="/signup" component={Register} />
             <Route path="/brands/:id" component={BrandDetail} />
           </Switch>
           <Brands />

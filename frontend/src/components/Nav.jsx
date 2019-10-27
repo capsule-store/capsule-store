@@ -93,6 +93,11 @@ const _Nav = ({ loggedIn }) => (
           {/* {loggedIn ? 'Sign out' : 'Sign in'} */}
           Sign In
         </NavLink>
+      {
+        loggedIn? '' : <NavLink to= '/signup'>Sign Up
+      </NavLink>
+      }
+        
       </User>
       <NavLink to="/cart">
         <Cart />
