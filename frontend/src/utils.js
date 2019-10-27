@@ -5,3 +5,5 @@ const padPrice = (price) => {
   }
   return `${price}.00`;
 };
+
+export { padPrice };
