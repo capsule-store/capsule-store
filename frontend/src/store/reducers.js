@@ -14,6 +14,7 @@ import {
   SET_AUTH,
   DELETE_AUTH,
   CREATE_USER,
+  CATCH_ERROR,
 } from './constants';
 
 const categoriesReducer = (state = [], action) => {

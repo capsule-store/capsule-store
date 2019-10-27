@@ -113,15 +113,23 @@ app.post('/signup', async (req, res, next) => {
     .dataValues;
 
   if (!user) {
-    const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS);
+    const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     req.body.password = hashedPassword;
-
     User.create(req.body)
-      .then((createdUser) => res.status(201).send(createdUser))
-      .catch(next);
+      .then((createdUser) => res.status(201).send(createdUser.dataValues))
+      .catch((err) => {
+        next(err);
+      });
   }
 });
+
+app.use((err, req, res, next) => {
+  if (err) {
+    res.status(500).send({ message: err.errors[0].message });
+  };
+});
+
 
 module.exports = app;
