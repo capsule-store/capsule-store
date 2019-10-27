@@ -56,6 +56,7 @@ router.post('/close', (req, res, next) => {
   const { id } = jwt.decode(req.headers.token, process.env.SECRET);
   Order.findOne({ where: { userId: id, active: true } })
     .then((order) => order.update({ active: false }))
+    .then((order) => res.send([]))
     .catch(next);
 });
 
