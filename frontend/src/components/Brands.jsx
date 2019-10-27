@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled, { ThemeProvider } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const Section = styled.div`
+const Container = styled.div`
 grid-area: 3/1/4/4;
 `;
 
@@ -49,7 +49,7 @@ object-fit: cover;
 `;
 
 const Brands = ({ brands }) => (
-  <Section>
+  <Container>
     <Title>
       <Hr />
       <h6>All Brands</h6>
@@ -64,7 +64,7 @@ const Brands = ({ brands }) => (
         </Link>
       ))}
     </BrandList>
-  </Section>
+  </Container>
 );
 
 const mapStateToProps = ({ brands }) => ({ brands });
