@@ -1,32 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+
 import { actions } from '../store';
+import { padPrice } from '../utils';
 
 const Container = styled.div`
-width: 100%;
-height: 144px;
-display: grid;
-grid-template-columns: 48px 48px auto 48px;
-grid-template-rows: 1fr 1fr 1fr;
+  width: 100%;
+  height: 144px;
+  display: grid;
+  grid-template-columns: 48px 48px auto 48px;
+  grid-template-rows: 1fr 1fr 1fr;
 `;
 
 const TotalPrice = styled.h3`
-grid-area:1/1/2/5;
-text-align: center;
-align-self: stretch;
-border-bottom: 1px solid #000;
+  grid-area: 1/1/2/5;
+  text-align: center;
+  align-self: stretch;
+  border-bottom: 1px solid #000;
 `;
 const QuantityLabel = styled.div`
-grid-area:2/1/3/2;
-justify-content: stretch;
-text-align: center;
-display: block;
-font-size: 10px;
-text-transform: uppercase;
-letter-spacing: 3px;
-line-height: 48px;
-border-right: 1px solid #000;
+  grid-area: 2/1/3/2;
+  justify-content: stretch;
+  text-align: center;
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 48px;
+  border-right: 1px solid #000;
 `;
 
 // need help
@@ -53,25 +55,23 @@ $:disabled{
 `;
 
 const MinusBtn = styled(Btn)`
-grid-area:2/2/3/3;
-background-color: #fff;
+  grid-area: 2/2/3/3;
+  background-color: #fff;
 `;
 const Quantity = styled.p`
-grid-area:2/3/3/4;
-justify-content: stretch;
-text-align: center;
+  grid-area: 2/3/3/4;
+  justify-content: stretch;
+  text-align: center;
 `;
 const PlusBtn = styled(Btn)`
-grid-area:2/4/3/5;
-background-color: #fff;
-
+  grid-area: 2/4/3/5;
+  background-color: #fff;
 `;
 const AddBtn = styled(Btn)`
-grid-area:3/1/4/5;
-border-top: 2px solid #000;
-background-color:#EEFFAC;
+  grid-area: 3/1/4/5;
+  border-top: 2px solid #000;
+  background-color: #eeffac;
 `;
-
 
 class ProductPurchase extends Component {
   constructor(props) {
@@ -119,11 +119,17 @@ class ProductPurchase extends Component {
     const { product } = this.props;
     return (
       <Container>
-        <TotalPrice><h4>{`$${product.price * quantity}`}</h4></TotalPrice>
+        <TotalPrice>
+          <h4>{`$${padPrice(product.price) * quantity}`}</h4>
+        </TotalPrice>
         <QuantityLabel>QTY</QuantityLabel>
-        <MinusBtn onClick={this.decrement}><h4>–</h4></MinusBtn>
+        <MinusBtn onClick={this.decrement}>
+          <h4>–</h4>
+        </MinusBtn>
         <Quantity>{quantity}</Quantity>
-        <PlusBtn onClick={this.increment}><h4>+</h4></PlusBtn>
+        <PlusBtn onClick={this.increment}>
+          <h4>+</h4>
+        </PlusBtn>
         <AddBtn onClick={this.handleBuy}>ADD TO BAG</AddBtn>
       </Container>
     );

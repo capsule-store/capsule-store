@@ -131,7 +131,7 @@ app.use((err, req, res, next) => {
   if (err) {
     res
       .status(err.status || 500)
-      .send({ message: err.errors[0].message || err.message });
+      .send({ message: err.message });
   }
 });
 

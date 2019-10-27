@@ -18,10 +18,10 @@ const Left = styled.div`
 `;
 
 const Right = styled.div`
-  flex-grow: auto;
-  display: flex;
-  align-self: flex-end;
-  background-color: yellow;
+  // flex-grow: auto;
+  // display: flex;
+  // align-self: flex-end;
+  // background-color: yellow;
 `;
 
 const Home = styled.h3`
@@ -93,11 +93,7 @@ const _Nav = ({ loggedIn }) => (
           {/* {loggedIn ? 'Sign out' : 'Sign in'} */}
           Sign In
         </NavLink>
-      {
-        loggedIn? '' : <NavLink to= '/signup'>Sign Up
-      </NavLink>
-      }
-        
+        {loggedIn ? '' : <NavLink to="/signup">Sign Up</NavLink>}
       </User>
       <NavLink to="/cart">
         <Cart />
