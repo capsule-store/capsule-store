@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jwt-simple');
 
-const { Order, LineItem, Product } = require('../data/models');
+const { Order, LineItem } = require('../data/models');
 
 const router = express.Router();
 router.use(express.json());
@@ -25,19 +25,21 @@ router.post('/', (req, res, next) => {
   // Create new lineItem and place in cart (active order)
   const { id } = jwt.decode(req.headers.token, process.env.SECRET);
   Order.findOne({ where: { userId: id, active: true } })
-    .then((order) => {
+    .then(async (order) => {
+      if (!order) {
+        order = await Order.create({ userId: id });
+      }
       LineItem.create({ ...req.body, orderId: order.id }).then((item) => res.send(item));
     })
     .catch(next);
 });
 
 router.put('/:id', async (req, res, next) => {
-  // Remember to check token if loggedInUser.id === req.params.id
   LineItem.findOne({ where: { id: req.params.id } })
     .then((item) => {
       const { quantity } = req.body;
       item.update({ quantity });
-      return item
+      return item;
     })
     .then((item) => res.send(item))
     .catch(next);
@@ -47,6 +49,13 @@ router.delete('/:id', (req, res, next) => {
   LineItem.findOne({ where: { id: req.params.id } })
     .then((item) => item.destroy())
     .then(() => res.sendStatus(204))
+    .catch(next);
+});
+
+router.post('/close', (req, res, next) => {
+  const { id } = jwt.decode(req.headers.token, process.env.SECRET);
+  Order.findOne({ where: { userId: id, active: true } })
+    .then((order) => order.update({ active: false }))
     .catch(next);
 });
 
