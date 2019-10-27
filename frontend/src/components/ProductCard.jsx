@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { padPrice } from '../utils';
+
 const Container = styled.div`
   width: 360px;
   height: 504px;
-  
+
   margin: 2rem;
   overflow: hidden;
   display: block;
@@ -25,31 +27,30 @@ const Info = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
   opacity: 0;
   transition: all 0.3s ease-in-out;
-  &:hover{
+  &:hover {
     opacity: 1;
   }
 `;
 
 const Category = styled.p`
-grid-area: 2/2/3/3;
-align-self: top;
+  grid-area: 2/2/3/3;
+  align-self: top;
 `;
 const ProductName = styled.h2`
-grid-area: 3/2/4/5;
-text-align: center;
-place-self: center stretch;
-text-decoration: underline;
+  grid-area: 3/2/4/5;
+  text-align: center;
+  place-self: center stretch;
+  text-decoration: underline;
 `;
 const Brand = styled.p`
-grid-area: 4/2/5/3;
-align-self: end;
+  grid-area: 4/2/5/3;
+  align-self: end;
 `;
 const Price = styled.p`
-grid-area: 4/4/5/5;
-justify-self: end;
-align-self: end;
+  grid-area: 4/4/5/5;
+  justify-self: end;
+  align-self: end;
 `;
-
 
 const ProductImg = styled.img`
   position: relative;
@@ -62,7 +63,6 @@ const ProductImg = styled.img`
   display: block;
 `;
 
-
 const ProductCard = ({ product, brands, categories }) => {
   if (!brands.length || !categories.length) return null;
   const brand = brands.find((b) => b.id === product.brandId).name;
@@ -71,15 +71,12 @@ const ProductCard = ({ product, brands, categories }) => {
   return (
     <Link to={`/products/${product.id}`}>
       <Container>
-        <ProductImg
-          src={product.image}
-          alt={`image of ${product.name}`}
-        />
+        <ProductImg src={product.image} alt={`image of ${product.name}`} />
         <Info>
           <Category>{category}</Category>
           <ProductName>{product.name}</ProductName>
           <Brand>{brand}</Brand>
-          <Price>{`$ ${product.price}`}</Price>
+          <Price>{`$ ${padPrice(product.price)}`}</Price>
         </Info>
       </Container>
     </Link>
