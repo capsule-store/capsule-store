@@ -11,6 +11,7 @@ import {
   ADD_LINEITEM,
   UPDATE_LINEITEM,
   DELETE_LINEITEM,
+  CLOSE_CART,
   SET_AUTH,
   DELETE_AUTH,
   CREATE_USER,
@@ -65,6 +66,8 @@ const cartReducer = (state = [], action) => {
       return state.map((item) => (item.id === action.updated.id ? action.updated : item));
     case DELETE_LINEITEM:
       return state.filter((item) => item.id !== action.id);
+    case CLOSE_CART:
+      return action.cart;
     default:
       return state;
   }

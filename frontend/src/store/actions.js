@@ -14,6 +14,7 @@ import {
   ADD_LINEITEM,
   UPDATE_LINEITEM,
   DELETE_LINEITEM,
+  CLOSE_CART,
 } from './constants';
 
 const setAuth = (auth) => ({
@@ -133,6 +134,13 @@ const deleteLineItem = (id) => async (dispatch) => {
   dispatch({ type: DELETE_LINEITEM, id });
 };
 
+const closeCart = () => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  const cart = (await axios.post('/api/cart/close', {}, { headers: { token } }))
+    .data;
+  dispatch({ type: CLOSE_CART, cart });
+};
+
 export {
   fetchBrands,
   fetchCategories,
@@ -145,6 +153,7 @@ export {
   addLineItem,
   updateLineItem,
   deleteLineItem,
+  closeCart,
   attemptLogin,
   attemptSessionLogin,
   logout,
