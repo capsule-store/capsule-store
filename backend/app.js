@@ -123,16 +123,13 @@ app.post('/signup', async (req, res, next) => {
       .then((createdUser) => {
         res.status(201).send(createdUser.dataValues);
       })
-      .catch((err) => {
-        err.message = 'Email already exists';
-        next(err);
-      });
+      .catch(next);
   }
 });
 
 app.use((err, req, res, next) => {
   if (err) {
-    res.status(err.status || 500).send({ message: err.message });
+    res.status(err.status || 500).send({ message: err.errors[0].message });
   }
 });
 
