@@ -8,8 +8,11 @@ import Products from './Products';
 
 
 const Main = styled.div`
-max-width: 1440px;
-display: flex;
+grid-area: 2/1/3/4;
+justify-self: stretch;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows: 80px auto;
 overflow-x: hidden;
 `;
 

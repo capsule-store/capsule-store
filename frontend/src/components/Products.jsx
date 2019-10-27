@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ProductCard from './ProductCard';
 
-
 const Container = styled.div`
-flex-grow:2;
+grid-area: 2/2/3/4;
 `;
 
 const ProductList = styled.div`

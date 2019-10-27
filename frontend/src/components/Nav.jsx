@@ -5,6 +5,7 @@ import styled, { ThemeProvider } from 'styled-components';
 
 /* Navigator */
 const StyledNav = styled.div`
+  grid-area: 1/1/2/4;
   display: flex;
   justify-content: space-between;
   padding: 2rem;
@@ -20,6 +21,7 @@ const Right = styled.div`
   flex-grow: auto;
   display: flex;
   align-self: flex-end;
+  background-color: yellow;
 `;
 
 const Home = styled.h3`
@@ -41,6 +43,8 @@ const User = styled.div`
   display: block;
   margin: 0 2rem;
   color: #000;
+  vertical-align: center;
+  background-color: red;
 `;
 
 const Promo = styled.div`
@@ -54,16 +58,16 @@ const Promo = styled.div`
 
 const Product = styled(Icon)`
   background-image: url(../assets/images/icon/menu.svg);
+  background-repeat: no-repeat;
 `;
 const Search = styled(Icon)`
   background-image: url(../assets/images/icon/search.svg);
+  background-repeat: no-repeat;
   margin: 0 2rem;
 `;
 const Cart = styled(Icon)`
   background-image: url(../assets/images/icon/cart.svg);
-  display: flex;
   background-repeat: no-repeat;
-  justify-content: space-between;
   padding: 2rem;
 `;
 
@@ -86,7 +90,8 @@ const _Nav = ({ loggedIn }) => (
       {/* <Promo>FREE SHIPPING –– on all orders over $50*</Promo> */}
       <User>
         <NavLink to={loggedIn ? '/logout' : '/login'}>
-          {loggedIn ? 'Sign out' : 'Sign in'}
+          {/* {loggedIn ? 'Sign out' : 'Sign in'} */}
+          Sign In
         </NavLink>
       {
         loggedIn? '' : <NavLink to= '/signup'>Sign Up

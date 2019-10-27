@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import styled, { ThemeProvider } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const Section = styled.div`
-  width: 100%;
+const Container = styled.div`
+grid-area: 3/1/4/4;
 `;
 
 const Title = styled.div`
@@ -30,13 +30,17 @@ const BrandList = styled.div`
 `;
 
 const Brand = styled.div`
-  display: inline-block;
-  width: 240px;
-  height: 128px;
-  filter: grayscale(100%);
-  margin: 6rem 0;
-  transform: rotate(90deg) translateY(112px);
-  transform-origin: right top;
+display:inline-block;
+width: 240px; 
+height: 128px;
+filter: grayscale(100%);
+margin: 6rem 0;
+transform: rotate(90deg)  translateY(112px);
+transform-origin: right top;
+transition: all 0.3 ease;
+&:hover{
+filter: none;
+}
 `;
 
 const Logo = styled.img`
@@ -45,7 +49,7 @@ const Logo = styled.img`
 `;
 
 const Brands = ({ brands }) => (
-  <Section>
+  <Container>
     <Title>
       <Hr />
       <h6>All Brands</h6>
@@ -60,9 +64,8 @@ const Brands = ({ brands }) => (
         </Brand>
       ))}
     </BrandList>
-  </Section>
+  </Container>
 );
 
 const mapStateToProps = ({ brands }) => ({ brands });
-
 export default connect(mapStateToProps)(Brands);

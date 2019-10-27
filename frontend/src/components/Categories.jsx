@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 const CategoryList = styled.ul`
+grid-area: 2/1/3/2;
 padding: 40px;
 min-width: 280px;
 `;

@@ -58,6 +58,10 @@ export default createGlobalStyle`
     letter-spacing: 3px;
   };
 
+  p{
+    font-weight: 400;
+  }
+
   hr{
     color: #000;
     flex-grow: 2;
