@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 
 // Local imports
+import styled from 'styled-components';
 import { actions } from '../store';
 
 // Components
@@ -21,9 +22,19 @@ import Brands from './Brands';
 import BrandDetail from './BrandDetail';
 import Categories from './Categories';
 
+const Main = styled.div`
+width: 100%;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows: 100px auto 480px;
+overflow-x: hidden;
+`;
+
+
 class _App extends Component {
   componentDidUpdate() {
-    const { loadCart, loggedIn } = this.props;
+    const { loadCart, loggedIn, loadStoreData } = this.props;
+    loadStoreData();
     loadCart(loggedIn);
   }
 
@@ -42,7 +53,7 @@ class _App extends Component {
 
   render() {
     return (
-      <div>
+      <Main>
         <HashRouter>
           <Nav />
           <Switch>
@@ -56,7 +67,7 @@ class _App extends Component {
           </Switch>
           <Brands />
         </HashRouter>
-      </div>
+      </Main>
     );
   }
 }
