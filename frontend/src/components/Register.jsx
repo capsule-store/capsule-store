@@ -50,9 +50,11 @@ class _Register extends React.Component {
     ev.preventDefault();
     this.setState({ error: [] });
 
-    const { firstName, lastName, email, password, rePassword } = this.state;
+    const {
+      firstName, lastName, email, password, rePassword,
+    } = this.state;
 
-    let error = validate(firstName, lastName, password, rePassword);
+    const error = validate(firstName, lastName, password, rePassword);
 
     if (error.length > 0) {
       this.setState({ error });
@@ -72,7 +74,7 @@ class _Register extends React.Component {
       .then(() => console.log('successful'))
       .catch((err) => {
         // error for duplicated email will be catched here
-        error.push(err.message);
+        error.push(err.response.data.message);
         this.setState({ error });
       });
   }
@@ -153,7 +155,7 @@ class _Register extends React.Component {
   }
 }
 
-const mapStateToProps = ({ history }) => ({ history});
+const mapStateToProps = ({ history }) => ({ history });
 const mapDispatchToProps = (dispatch, { history }) => ({
   register: (user) => dispatch(actions.register(user, history)),
 });
