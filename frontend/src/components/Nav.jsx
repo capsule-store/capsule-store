@@ -89,14 +89,13 @@ padding: 0 1rem;
 
 `;
 
-const Nav = ({ loggedIn, cart }) =>
-// consolo.log('USER INFO:', loggedIn)
-{
+const Nav = ({ loggedIn, cart }) => {
   let itemCount = 0;
   if (cart) {
     itemCount = cart.reduce((t, item) => t + item.quantity, 0);
     console.log('ITEMCOUNT:', itemCount);
   }
+
   return (
     <StyledNav>
       <Left>
