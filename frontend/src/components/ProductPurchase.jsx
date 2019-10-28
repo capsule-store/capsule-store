@@ -103,15 +103,15 @@ class ProductPurchase extends Component {
   handleBuy() {
     const { quantity } = this.state;
     const {
-      id, cart, buyProduct, updateLineItem,
+      cart, product, buyProduct, updateLineItem,
     } = this.props;
+
     // If we already have the item in the cart, just update quantity
-    console.log('CART:', cart);
-    const found = cart.find((item) => item.productId === id);
+    const found = cart.find((item) => item.productId === product.id);
     if (found) {
       updateLineItem(found.id, found.quantity + quantity);
     } else {
-      buyProduct(id, quantity);
+      buyProduct(product.id, quantity);
     }
     this.setState({ quantity: 1 });
   }
@@ -121,17 +121,11 @@ class ProductPurchase extends Component {
     const { product } = this.props;
     return (
       <Container>
-        <TotalPrice>
-          {`$${(product.price) * quantity}`}
-        </TotalPrice>
+        <TotalPrice>{`$${product.price * quantity}`}</TotalPrice>
         <QuantityLabel>QTY</QuantityLabel>
-        <MinusBtn onClick={this.decrement}>
-        –
-        </MinusBtn>
+        <MinusBtn onClick={this.decrement}>–</MinusBtn>
         <Quantity>{quantity}</Quantity>
-        <PlusBtn onClick={this.increment}>
-        +
-        </PlusBtn>
+        <PlusBtn onClick={this.increment}>+</PlusBtn>
         <AddBtn onClick={this.handleBuy}>ADD TO BAG</AddBtn>
       </Container>
     );
