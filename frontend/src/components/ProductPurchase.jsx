@@ -93,11 +93,10 @@ class ProductPurchase extends Component {
 
   decrement() {
     const { quantity } = this.state;
-    if (quantity > 1) {
-      this.setState({ quantity: quantity - 1 });
-    } else {
-      this.setState({ quantity: 1 });
+    if (quantity === 1) {
+      return;
     }
+    this.setState({ quantity: quantity - 1 });
   }
 
   handleBuy() {
@@ -121,7 +120,7 @@ class ProductPurchase extends Component {
     const { product } = this.props;
     return (
       <Container>
-        <TotalPrice>{`$${product.price * quantity}`}</TotalPrice>
+        <TotalPrice>{`$${padPrice(product.price * quantity)}`}</TotalPrice>
         <QuantityLabel>QTY</QuantityLabel>
         <MinusBtn onClick={this.decrement}>–</MinusBtn>
         <Quantity>{quantity}</Quantity>
