@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { actions } from '../store';
+import { padPrice } from '../utils';
 
 const LineItem = ({
   products, item, updateQuantity, deleteLineItem,
@@ -31,7 +32,11 @@ const LineItem = ({
       </button>
 
       <div className="itemPrice">{price}</div>
-      <div className="itemSubTotal">{item.quantity * price}</div>
+      <div className="itemSubTotal">
+        {`$${padPrice(
+          item.quantity * price,
+        )}`}
+      </div>
 
       <button type="button" onClick={() => deleteLineItem(item.id)}>
         Remove

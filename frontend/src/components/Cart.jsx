@@ -1,14 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { padPrice } from '../utils';
+
 import Checkout from './Checkout';
 import LineItem from './LineItem';
 
 const Cart = ({ cart, products, loggedIn }) => {
-  const total = cart.reduce((t, item) => {
-    const { price } = products.find((product) => product.id === item.productId);
-    return t + parseInt(item.quantity) * parseFloat(price);
-  }, 0);
+  const total = padPrice(
+    cart.reduce((t, item) => {
+      const { price } = products.find((product) => product.id === item.productId);
+      return t + parseInt(item.quantity, 10) * parseFloat(price);
+    }, 0),
+  );
 
   return (
     <div>
@@ -20,7 +24,7 @@ const Cart = ({ cart, products, loggedIn }) => {
       </ul>
       <div id="cartTotal">
         <div>Total</div>
-        <div id="totalPrice">{total}</div>
+        <div id="totalPrice">{`$${total}`}</div>
       </div>
       {loggedIn ? (
         // Stripe Checkout takes amount in cents
