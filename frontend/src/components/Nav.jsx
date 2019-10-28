@@ -8,24 +8,26 @@ const StyledNav = styled.div`
   grid-area: 1/1/2/4;
   display: flex;
   justify-content: space-between;
-  padding: 2rem;
+  align-items: center;
 `;
 
 const Left = styled.div`
+  width: 320px;
   flex-grow: auto;
   display: flex;
-  align-self: flex-start;
+  justify-content: flex-start;
 `;
 
 const Right = styled.div`
-  // flex-grow: auto;
-  // display: flex;
-  // align-self: flex-end;
-  // background-color: yellow;
+  width: 320px;
+  flex-grow: auto;
+  flex-wrap:nowrap;
+  justify-content: flex-end;
+  display: flex;
+
 `;
 
 const Home = styled.h3`
-  display: inline-block;
   height: 1.5rem;
   margin: 0;
   flex-grow: 1;
@@ -40,21 +42,20 @@ const Icon = styled.div`
 `;
 
 const User = styled.div`
-  display: block;
   margin: 0 2rem;
   color: #000;
   vertical-align: center;
-  background-color: red;
+  height: 1.5rem;
 `;
 
-const Promo = styled.div`
-  font-size: 0.8rem;
-  font-weight: 400;
-  height: 1.5rem;
-  line-height: 1.5rem;
-  display: block;
-  margin: 0 2rem;
-`;
+// const Promo = styled.div`
+//   font-size: 0.8rem;
+//   font-weight: 400;
+//   height: 1.5rem;
+//   line-height: 1.5rem;
+//   display: block;
+//   margin: 0 2rem;
+// `;
 
 const Product = styled(Icon)`
   background-image: url(../assets/images/icon/menu.svg);
@@ -66,12 +67,31 @@ const Search = styled(Icon)`
   margin: 0 2rem;
 `;
 const Cart = styled(Icon)`
-  background-image: url(../assets/images/icon/cart.svg);
-  background-repeat: no-repeat;
-  padding: 2rem;
+  width: 4rem;
+  display:flex;
 `;
 
-const _Nav = ({ loggedIn }) => (
+const CartIcon = styled(Icon)`
+  width: 3rem;
+  background-image: url(../assets/images/icon/cart.svg);
+  background-repeat: no-repeat;
+`;
+
+const ItemCount = styled.h5`
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+`;
+
+const Btn = styled.p`
+display: inline;
+padding: 0 1rem;
+
+`;
+
+const _Nav = ({ loggedIn, cart }) => (
+  // console.log('CART:', cart)
+  // consolo.log('USER INFO:', loggedIn)
   <StyledNav>
     <Left>
       <NavLink to="/products">
@@ -87,23 +107,25 @@ const _Nav = ({ loggedIn }) => (
     </NavLink>
 
     <Right>
-      {/* <Promo>FREE SHIPPING –– on all orders over $50*</Promo> */}
       <User>
+        {loggedIn ? '' : <NavLink to="/signup"><Btn>Sign Up</Btn></NavLink>}
         <NavLink to={loggedIn ? '/logout' : '/login'}>
-          {/* {loggedIn ? 'Sign out' : 'Sign in'} */}
-          Sign In
+          {loggedIn ? <Btn>Sign Out</Btn> : <Btn>Sign In</Btn>}
         </NavLink>
-        {loggedIn ? '' : <NavLink to="/signup">Sign Up</NavLink>}
       </User>
       <NavLink to="/cart">
-        <Cart />
+        <Cart>
+          <CartIcon />
+          <ItemCount>0</ItemCount>
+        </Cart>
       </NavLink>
     </Right>
   </StyledNav>
 );
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({ auth, cart }) => ({
   loggedIn: !!auth.id,
+  cart,
 });
 
 const Nav = connect(mapStateToProps)(_Nav);

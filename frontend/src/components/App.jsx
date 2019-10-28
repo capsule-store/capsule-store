@@ -23,11 +23,14 @@ import BrandDetail from './BrandDetail';
 import Categories from './Categories';
 
 const Main = styled.div`
-width: 100%;
+width:100hv;
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
-grid-template-rows: 100px auto 480px;
+grid-template-rows: 3rem auto 480px;
 overflow-x: hidden;
+grid-column-gap: 40px;
+grid-row-gap: 40px;
+margin: 40px;
 `;
 
 
