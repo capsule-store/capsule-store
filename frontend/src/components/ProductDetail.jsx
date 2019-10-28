@@ -41,7 +41,6 @@ const ProductDetail = ({ products, brands, match: { params } }) => {
   }
   const product = products.find((_product) => _product.id === params.id);
   const brand = brands.find((_brand) => _brand.id === product.brandId).name;
-  console.log('BRAND:', brand);
   return (
     <Container>
       <Title>
