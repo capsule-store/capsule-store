@@ -129,7 +129,7 @@ app.post('/signup', async (req, res, next) => {
 
 app.use((err, req, res, next) => {
   let message = "Something's not right";
-  if (err.errors[0].message) {
+  if (err.errors) {
     message = err.errors[0].message;
   } else if (err.message) {
     message = err.message;
