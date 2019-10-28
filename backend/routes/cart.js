@@ -1,5 +1,8 @@
+require('dotenv').config();
+
 const express = require('express');
 const jwt = require('jwt-simple');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const { Order, LineItem } = require('../data/models');
 
@@ -52,11 +55,22 @@ router.delete('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/close', (req, res, next) => {
+router.post('/close', async (req, res, next) => {
   const { id } = jwt.decode(req.headers.token, process.env.SECRET);
+  const { amount, currency, stripeTokenId } = req.body;
+
   Order.findOne({ where: { userId: id, active: true } })
+    .then(async (order) => {
+      await stripe.charges.create({
+        amount: Math.round(amount),
+        currency,
+        description: 'SV Starter Pack',
+        source: stripeTokenId,
+      });
+      return order;
+    })
     .then((order) => order.update({ active: false }))
-    .then((order) => res.send([]))
+    .then(() => res.send([]))
     .catch(next);
 });
 
