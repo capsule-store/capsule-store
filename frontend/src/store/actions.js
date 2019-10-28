@@ -128,10 +128,13 @@ const deleteLineItem = (id) => async (dispatch) => {
   dispatch({ type: DELETE_LINEITEM, id });
 };
 
-const closeCart = () => async (dispatch) => {
+const closeCart = (stripeToken, addresses) => async (dispatch) => {
   const token = localStorage.getItem('token');
-  const cart = (await axios.post('/api/cart/close', {}, { headers: { token } }))
-    .data;
+  const cart = (await axios.post(
+    '/api/cart/close',
+    { stripeToken },
+    { headers: { token } },
+  )).data;
   dispatch({ type: CLOSE_CART, cart });
 };
 

@@ -10,11 +10,9 @@ class Checkout extends Component {
     this.onToken = this.onToken.bind(this);
   }
 
-  onToken(token, addresses) {
-    console.log('TOKEN', token);
-    console.log('ADDRESSES', addresses);
+  onToken(token) {
     const { closeCart } = this.props;
-    closeCart();
+    closeCart(token);
   }
 
   render() {
@@ -41,8 +39,8 @@ class Checkout extends Component {
 const mapStateToProps = ({ auth }) => ({ email: auth.email });
 
 const mapDispatchToProps = (dispatch) => ({
-  closeCart: () => {
-    dispatch(actions.closeCart());
+  closeCart: (stripeToken) => {
+    dispatch(actions.closeCart(stripeToken));
   },
 });
 
