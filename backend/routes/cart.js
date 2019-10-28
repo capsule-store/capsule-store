@@ -55,7 +55,7 @@ router.delete('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/close', async (req, res, next) => {
+router.post('/close', (req, res, next) => {
   const { id } = jwt.decode(req.headers.token, process.env.SECRET);
   const { amount, currency, stripeTokenId } = req.body;
 

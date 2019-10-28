@@ -7,21 +7,21 @@ import { actions } from '../store';
 class Checkout extends Component {
   constructor() {
     super();
+    this.currency = 'USD';
     this.onToken = this.onToken.bind(this);
   }
 
   onToken(token) {
-    const { closeCart } = this.props;
-    closeCart(token);
+    const { amount, closeCart } = this.props;
+    closeCart(amount, this.currency, token.id);
   }
 
   render() {
     const { email, amount } = this.props;
-    console.log('AMOUNT', amount);
     return (
       <StripeCheckout
         amount={amount}
-        currency="USD"
+        currency={this.currency}
         email={email}
         billingAddress
         shippingAddress
@@ -39,8 +39,8 @@ class Checkout extends Component {
 const mapStateToProps = ({ auth }) => ({ email: auth.email });
 
 const mapDispatchToProps = (dispatch) => ({
-  closeCart: (stripeToken) => {
-    dispatch(actions.closeCart(stripeToken));
+  closeCart: (amount, currency, stripeTokenId) => {
+    dispatch(actions.closeCart(amount, currency, stripeTokenId));
   },
 });
 
