@@ -10,10 +10,10 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.delete('/:id', (req, res, next) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   Product.findByPk(id)
     .then(product => product.destroy())
-    .thne(() => res.sendStatus(204))
+    .then(() => res.sendStatus(204))
     .catch(next);
 });
 

@@ -37,33 +37,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
-const routes = {
-  Brand: 'brands',
-  Category: 'categories',
-  LineItem: 'lineitems',
-  Order: 'orders',
-  Product: 'products',
-  User: 'users',
-};
-
-// Basic routes are auto-generated here
-// For the rest, use subrouters
-Object.keys(routes).forEach((key) => {
-  app.get(`/api/${routes[key]}`, (req, res, next) => {
-    db.models[key]
-      .findAll()
-      .then((items) => res.send(items))
-      .catch(next);
-  });
-});
-
-app.use('/auth/google', authGoogleSubRouter);
-app.use('/api/brands', brandsSubRouter);
-app.use('/api/categories', categoriesSubRouter);
-app.use('/api/products', productsSubRouter);
-app.use('/api/users', usersSubRouter);
-app.use('/api/cart', cartSubRouter);
-
 app.use((req, res, next) => {
   const auth = req.headers.authorization;
   if (!auth) {
@@ -127,6 +100,33 @@ app.post('/signup', async (req, res, next) => {
       .catch(next);
   }
 });
+
+const routes = {
+  Brand: 'brands',
+  Category: 'categories',
+  LineItem: 'lineitems',
+  Order: 'orders',
+  Product: 'products',
+  User: 'users',
+};
+
+// Basic routes are auto-generated here
+// For the rest, use subrouters
+Object.keys(routes).forEach((key) => {
+  app.get(`/api/${routes[key]}`, (req, res, next) => {
+    db.models[key]
+      .findAll()
+      .then((items) => res.send(items))
+      .catch(next);
+  });
+});
+
+app.use('/auth/google', authGoogleSubRouter);
+app.use('/api/brands', brandsSubRouter);
+app.use('/api/categories', categoriesSubRouter);
+app.use('/api/products', productsSubRouter);
+app.use('/api/users', usersSubRouter);
+app.use('/api/cart', cartSubRouter);
 
 app.use((err, req, res, next) => {
   let message = "Something's not right";

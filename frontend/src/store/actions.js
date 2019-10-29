@@ -6,7 +6,7 @@ import {
   SET_BRANDS,
   SET_CATEGORIES,
   SET_PRODUCTS,
-  DELETE_PRODUCTS,
+  DELETE_PRODUCT,
   SET_ORDERS,
   CREATE_ORDER,
   UPDATE_ORDER,
@@ -90,9 +90,9 @@ const fetchProducts = () => async (dispatch) => {
   dispatch({ type: SET_PRODUCTS, products });
 };
 
-const deleteProducts = (product) => async (dispatch) => {
+const deleteProduct = (product) => async (dispatch) => {
   await axios.delete(`/api/products/${product.id}`);
-  dispatch({ type: DELETE_PRODUCTS, product });
+  dispatch({ type: DELETE_PRODUCT, product });
 };
 
 const fetchOrders = (userId) => async (dispatch) => {
@@ -158,7 +158,7 @@ export {
   fetchBrands,
   fetchCategories,
   fetchProducts,
-  deleteProducts,
+  deleteProduct,
   fetchOrders,
   createOrder,
   updateOrder,

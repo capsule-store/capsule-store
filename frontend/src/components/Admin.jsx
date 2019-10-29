@@ -29,12 +29,13 @@ const HeaderCol = styled.th`
 
 const Products = ({ products }) => (
   <Container>
+    {/* <CreateNewProduct></CreateNewProduct> */}
     <ProductTable>
       <HeaderRow>
-        <HeaderCol>Product Name</HeaderCol>
-        <HeaderCol>Product Category</HeaderCol>
-        <HeaderCol>Product Brand</HeaderCol>
-        <HeaderCol>Delete</HeaderCol>
+        <HeaderCol>PRODUCT NAME</HeaderCol>
+        <HeaderCol>CATEGORY</HeaderCol>
+        <HeaderCol>BRAND</HeaderCol>
+        <HeaderCol>DELETE</HeaderCol>
       </HeaderRow>
       {products.map((product) => (
         <ProductTableRow key={product.id} product={product} />
