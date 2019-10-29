@@ -24,7 +24,7 @@ npm run webpack
 ```
 
 ## API Endpoints
-Endpoints we should make available.
+Available endpoints.
 
 #### Brands
 `GET` all brands
