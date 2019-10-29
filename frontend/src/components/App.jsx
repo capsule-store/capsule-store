@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  HashRouter, Route, Switch, Redirect,
+ HashRouter, Route, Switch, Redirect 
 } from 'react-router-dom';
 
 // Local imports
@@ -22,18 +22,18 @@ import Brands from './Brands';
 import BrandDetail from './BrandDetail';
 import Categories from './Categories';
 import Admin from './Admin';
+import CreateProduct from './CreateProduct';
 
 const Main = styled.div`
-width:100hv;
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-grid-template-rows: 3rem auto 480px;
-overflow-x: hidden;
-grid-column-gap: 40px;
-grid-row-gap: 40px;
-margin: 40px;
+  width: 100hv;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 3rem auto 480px;
+  overflow-x: hidden;
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+  margin: 40px;
 `;
-
 
 class _App extends Component {
   componentDidUpdate() {
@@ -69,7 +69,8 @@ class _App extends Component {
             <Route path="/logout" component={Logout} />
             <Route path="/signup" component={Register} />
             <Route path="/brands/:id" component={BrandDetail} />
-            <Route path="/admin" component={Admin} />
+            <Route exact path="/admin" component={Admin} />
+            <Route path="/admin/create-product" component={CreateProduct} />
           </Switch>
           <Brands />
         </HashRouter>

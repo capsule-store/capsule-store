@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import ProductTableRow from './ProductTableRow';
 
 const Container = styled.div`
   grid-area: 2/1/3/4;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 `;
@@ -27,9 +29,23 @@ const HeaderCol = styled.th`
   padding: 2px;
 `;
 
+const CreateNewProduct = styled.button`
+  color: white;
+  width:200px;
+  border: 1px solid green;
+  background-color: green;
+  border-radius: 20px;
+  align-self: right;
+  padding: 8px;
+  margin: 10px;
+  &:hover{
+    cursor: pointer;
+  };
+`;
+
 const Products = ({ products }) => (
   <Container>
-    {/* <CreateNewProduct></CreateNewProduct> */}
+    <Link to="/admin/create-product"><CreateNewProduct> CREATE NEW PRODUCT</CreateNewProduct></Link>
     <ProductTable>
       <HeaderRow>
         <HeaderCol>PRODUCT NAME</HeaderCol>
