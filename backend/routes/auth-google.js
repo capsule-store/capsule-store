@@ -1,23 +1,49 @@
 const express = require('express');
-const passport = require('passport');
-const router = express.Router();
-require('../config/google-passport').passport
+const { google } = require('googleapis');
+const dotenv = require('dotenv').config();
+const axios = require('axios');
 
-router.get(
-  '/',
-  passport.authenticate('google', {
-    scope: ['profile'],
-  }),
+const router = express.Router();
+router.use(express.json());
+const {
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+  GOOGLE_CALLBACK_URL,
+} = process.env;
+
+const oauth2Client = new google.auth.OAuth2(
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+  GOOGLE_CALLBACK_URL,
 );
+
+// generate a url that asks permissions for profile scopes
+const scopes = ['profile', 'email'];
+
+const url = oauth2Client.generateAuthUrl({
+  access_type: 'offline', // 'online' (default) or 'offline' (gets refresh_token)
+  scope: scopes,
+});
+
+router.get('/', (req, res) => {
+  res.redirect(url);
+});
 
 // call back route for google oauth2
-router.get('/callback', 
-  passport.authenticate('google', { 
-    failureRedirect: '/login' 
-  }), (req, res) => {
-    console.log(req)
-    res.redirect(`/`)
-  }
-);
+router.get('/callback', async (req, res) => {
+  const { code } = req.query;
+  console.log('code',code)
+  const token = await oauth2Client.getToken(code, (err, token) => {
+    /*
+    console.log('access token:', token);
+    const {access_token} = token
+    axios.post(`https://www.googleapis.com/gmail/v1/users/${token.id_token}/profile`)
+      .then(response => response.data)
+      .then(user => res.send(user)) 
+      */
+
+  });
+
+});
 
 module.exports = router;

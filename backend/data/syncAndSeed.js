@@ -358,13 +358,6 @@ const syncAndSeed = async () => {
         password: 'breadAndButter',
         isAdmin: true,
       },
-      {
-        firstName: 'Stella',
-        lastName: 'Kim',
-        email: 'test@gmail.com',
-        password: 123456,
-        isAdmin: true,
-      },
     ].map((user) => User.create(user)),
   );
 

@@ -53,20 +53,24 @@ app.use((req, res, next) => {
     .catch(next);
 });
 
-app.post('/api/sessions', async (req, res, next) => {
+app.post('/api/sessions', (req, res, next) => {
   const { email, password } = req.body;
 
   User.findOne({
     where: {
       email,
-      password,
     },
   })
-    .then((user) => {
+    .then(async (user) => {
       if (!user) {
         throw {
           status: 401,
-          message: "Password is incorrect or user doesn't exist",
+          message: 'Email or Password is incorrect',
+        };
+      } else if (!(await user.validPassword(password))) {
+        throw {
+          status: 401,
+          message: 'Password is incorrect',
         };
       }
       const { isAdmin } = user;
@@ -88,10 +92,6 @@ app.post('/signup', async (req, res, next) => {
     .dataValues;
 
   if (!user) {
-    const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
-    req.body.password = hashedPassword;
     User.create(req.body)
       .then((createdUser) => {
         res.status(201).send(createdUser.dataValues);
