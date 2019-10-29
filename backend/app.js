@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const dotenv = require('dotenv');
+const dotenv = require('dotenv').config();
 const path = require('path');
 const jwt = require('jwt-simple');
 const bcrypt = require('bcrypt');
@@ -17,7 +17,6 @@ const cartSubRouter = require('./routes/cart');
 const app = express();
 
 const { User } = db.models;
-dotenv.config();
 
 app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
 
@@ -70,7 +69,7 @@ app.post('/api/sessions', async (req, res, next) => {
           message: "Password is incorrect or user doesn't exist",
         };
       }
-      const {isAdmin} = user;
+      const { isAdmin } = user;
       const token = jwt.encode({ id: user.id }, process.env.SECRET);
       return res.send({ token, isAdmin });
     })

@@ -22,8 +22,6 @@ class _CreateProduct extends React.Component {
 
   handleChange(ev) {
     const { name, value } = ev.target;
-    console.log('name:', name)
-    console.log('value:', value)
     this.setState({
       [name]: value,
     });

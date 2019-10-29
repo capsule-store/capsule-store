@@ -20,7 +20,6 @@ router.delete('/:id', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const { product } = req.body;
-  console.log(req.body)
   Product.create(product)
     .then(newProduct => res.status(201).send(newProduct))
     .catch(next);
