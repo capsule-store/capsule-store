@@ -37,7 +37,7 @@ router.post('/', (req, res, next) => {
     .catch(next);
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', (req, res, next) => {
   LineItem.findOne({ where: { id: req.params.id } })
     .then((item) => {
       const { quantity } = req.body;
