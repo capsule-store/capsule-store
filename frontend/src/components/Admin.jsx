@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import ProductTableRow from './ProductTableRow';
+import AdminProduct from './AdminProduct';
 
 const Container = styled.div`
   grid-area: 2/1/3/4;
@@ -54,7 +54,7 @@ const Products = ({ products }) => (
         <HeaderCol>DELETE</HeaderCol>
       </HeaderRow>
       {products.map((product) => (
-        <ProductTableRow key={product.id} product={product} />
+        <AdminProduct key={product.id} product={product} />
       ))}
     </ProductTable>
   </Container>

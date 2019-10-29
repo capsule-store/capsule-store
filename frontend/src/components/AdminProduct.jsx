@@ -49,7 +49,7 @@ const DeleteIcon = styled(Icon)`
   background-repeat: no-repeat;
 `;
 
-const ProductTableRow = ({ product, brands, categories, deleteProduct }) => {
+const AdminProduct = ({ product, brands, categories, deleteProduct }) => {
   if (!brands.length || !categories.length) return null;
   const brand = brands.find((_brand) => _brand.id === product.brandId).name;
   const category = categories.find(
@@ -78,4 +78,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ProductTableRow);
+)(AdminProduct);

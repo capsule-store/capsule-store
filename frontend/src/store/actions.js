@@ -94,7 +94,7 @@ const deleteProduct = (product) => async (dispatch) => {
 const createProduct = (product, history) => async (dispatch) => {
   await axios.post('/api/products', {product});
   dispatch({ type: CREATE_PRODUCT, product });
-  history.push('./admin');
+  history.push('/admin');
 };
 
 const fetchOrders = (userId) => async (dispatch) => {
