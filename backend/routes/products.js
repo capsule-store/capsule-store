@@ -9,4 +9,12 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
+router.delete('/:id', (req, res, next) => {
+  const { id } = req.params.id;
+  Product.findByPk(id)
+    .then(product => product.destroy())
+    .thne(() => res.sendStatus(204))
+    .catch(next);
+});
+
 module.exports = router;

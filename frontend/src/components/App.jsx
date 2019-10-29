@@ -21,6 +21,7 @@ import Register from './Register';
 import Brands from './Brands';
 import BrandDetail from './BrandDetail';
 import Categories from './Categories';
+import Admin from './Admin';
 
 const Main = styled.div`
 width:100hv;
@@ -68,6 +69,7 @@ class _App extends Component {
             <Route path="/logout" component={Logout} />
             <Route path="/signup" component={Register} />
             <Route path="/brands/:id" component={BrandDetail} />
+            <Route path="/admin" component={Admin} />
           </Switch>
           <Brands />
         </HashRouter>

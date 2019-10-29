@@ -97,8 +97,9 @@ app.post('/api/sessions', async (req, res, next) => {
           message: "Password is incorrect or user doesn't exist",
         };
       }
+      const {isAdmin} = user;
       const token = jwt.encode({ id: user.id }, process.env.SECRET);
-      return res.send({ token });
+      return res.send({ token, isAdmin });
     })
     .catch((err) => next(err));
 });

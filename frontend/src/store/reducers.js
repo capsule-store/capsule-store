@@ -15,7 +15,7 @@ import {
   SET_AUTH,
   DELETE_AUTH,
   CREATE_USER,
-  CATCH_ERROR,
+  DELETE_PRODUCTS,
 } from './constants';
 
 const categoriesReducer = (state = [], action) => {
@@ -31,6 +31,8 @@ const productsReducer = (state = [], action) => {
   switch (action.type) {
     case SET_PRODUCTS:
       return action.products;
+    case DELETE_PRODUCTS:
+      return state.filter((product) => product.id !== action.product.id);
     default:
       return state;
   }
