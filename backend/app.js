@@ -1,9 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-const dotenv = require('dotenv').config();
 const path = require('path');
 const jwt = require('jwt-simple');
-const bcrypt = require('bcrypt');
 const db = require('./data');
 
 // Routes
@@ -46,7 +45,7 @@ app.use((req, res, next) => {
   User.findByPk(id)
     .then((user) => {
       if (user) {
-        req.user = user.dataValues;
+        req.user = user.get();
       }
       next();
     })
@@ -82,9 +81,14 @@ app.post('/api/sessions', (req, res, next) => {
 
 app.get('/api/sessions', (req, res, next) => {
   if (req.user) {
-    return res.send(req.user);
+    const {
+      firstName, lastName, email, isAdmin,
+    } = req.user;
+    return res.send({
+      firstName, lastName, email, isAdmin,
+    });
   }
-  next({ status: 401, message: 'Not logged in' });
+  return next({ status: 401, message: 'Not logged in' });
 });
 
 app.post('/signup', async (req, res, next) => {
