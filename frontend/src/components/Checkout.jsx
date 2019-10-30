@@ -7,8 +7,9 @@ import { actions } from '../store';
 import Button from './Button';
 
 const CheckoutBtn = styled(Button)`
-background-color: blue;
-color: #fff;
+  width: 100%;
+  background-color: blue;
+  color: #fff;
 `;
 
 class Checkout extends Component {
@@ -35,10 +36,10 @@ class Checkout extends Component {
         stripeKey="pk_test_TTnXF5mfNRig5XOw9rmZeeKG00rULHeKEB"
         token={this.onToken}
       >
-        <button type="button" id="checkout-button">
+        <CheckoutBtn type="button" id="checkout-button">
           Checkout with Stripe
-        </StripeCheckout>
-      </CheckoutBtn>
+        </CheckoutBtn>
+      </StripeCheckout>
     );
   }
 }
