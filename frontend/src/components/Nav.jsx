@@ -83,7 +83,7 @@ padding: 0 1rem;
 
 `;
 
-const Nav = ({ loggedIn, cart }) => {
+const Nav = ({ loggedIn, isAdmin, cart }) => {
   let itemCount = 0;
   if (cart) {
     itemCount = cart.reduce((t, item) => t + item.quantity, 0);
@@ -106,6 +106,7 @@ const Nav = ({ loggedIn, cart }) => {
 
       <Right>
         <User>
+          {isAdmin ? <NavLink to="/admin"><Btn>Admin</Btn></NavLink> : ''}
           {loggedIn ? '' : <NavLink to="/signup"><Btn>Sign Up</Btn></NavLink>}
           <NavLink to={loggedIn ? '/logout' : '/login'}>
             {loggedIn ? <Btn>Sign Out</Btn> : <Btn>Sign In</Btn>}
@@ -124,6 +125,7 @@ const Nav = ({ loggedIn, cart }) => {
 
 const mapStateToProps = ({ auth, cart }) => ({
   loggedIn: !!auth.id,
+  isAdmin: auth.isAdmin,
   cart,
 });
 
