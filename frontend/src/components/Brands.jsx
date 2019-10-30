@@ -17,7 +17,7 @@ const Hr = styled.div`
   height: 1px;
   flex-grow: 2;
   background-color: #000;
-  margin: 12px 2rem;
+  margin: 12px 0;
 `;
 
 const BrandList = styled.div`
