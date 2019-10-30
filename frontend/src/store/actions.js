@@ -92,7 +92,7 @@ const deleteProduct = (product) => async (dispatch) => {
 };
 
 const createProduct = (product, history) => async (dispatch) => {
-  await axios.post('/api/products', {product});
+  await axios.post('/api/products', { product });
   dispatch({ type: CREATE_PRODUCT, product });
   history.push('/admin');
 };

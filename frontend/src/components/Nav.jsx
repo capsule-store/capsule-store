@@ -87,7 +87,6 @@ const Nav = ({ loggedIn, cart }) => {
   let itemCount = 0;
   if (cart) {
     itemCount = cart.reduce((t, item) => t + item.quantity, 0);
-    console.log('ITEMCOUNT:', itemCount);
   }
 
   return (
