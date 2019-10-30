@@ -82,10 +82,10 @@ app.post('/api/sessions', (req, res, next) => {
 app.get('/api/sessions', (req, res, next) => {
   if (req.user) {
     const {
-      firstName, lastName, email, isAdmin,
+      id, firstName, lastName, email, isAdmin,
     } = req.user;
     return res.send({
-      firstName, lastName, email, isAdmin,
+      id, firstName, lastName, email, isAdmin,
     });
   }
   return next({ status: 401, message: 'Not logged in' });
