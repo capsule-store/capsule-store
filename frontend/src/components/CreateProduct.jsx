@@ -31,27 +31,34 @@ class _CreateProduct extends React.Component {
     ev.preventDefault();
     this.setState({ error: '' });
 
-    const {name, price, description, brandId, categoryId} = this.state;
-
-    if(name.length * price.length * description.length * brandId.length * categoryId.length === 0) {
-      this.setState({ error: 'Please fill out all the information to create new product' });
+    const { name, price, description, brandId, categoryId } = this.state;
+    const { createProduct } = this.props;
+    
+    if (
+      name.length
+        * price.length
+        * description.length
+        * brandId.length
+        * categoryId.length
+      === 0
+    ) {
+      this.setState({
+        error: 'Please fill out all the information to create new product',
+      });
       return;
     }
-    const product = {name, price, description, brandId, categoryId}
+
+    const product = {name, price, description, brandId, categoryId };
     
-    this.props
-      .createProduct(product)
-      .then(() => console.log(product))
+    createProduct(product)
       .catch((err) => {
         this.setState({ error: err.response.data.message });
       });
   }
 
   render() {
-    const {
- name, price, description, brandId, categoryId, error 
-} = this.state;
-const {categories, brands} = this.props;
+    const { error } = this.state;
+    const { categories, brands } = this.props;
 
     return (
       <div className="form-group">
@@ -88,20 +95,24 @@ const {categories, brands} = this.props;
           </div>
           <div>
             <label>Select Brand</label>
-            <select name="brandId"
-              onChange={(ev) => this.handleChange(ev)}
-            >
+            <select name="brandId" onChange={(ev) => this.handleChange(ev)}>
               <option>-----select Brand-----</option>
-              {brands.map(brand => <option key={brand.id} value={brand.id}>{brand.name}</option>)}
+              {brands.map((brand) => (
+                <option key={brand.id} value={brand.id}>
+                  {brand.name}
+                </option>
+              ))}
             </select>
           </div>
           <div>
             <label>Select Category</label>
-            <select name="categoryId"
-              onChange={(ev) => this.handleChange(ev)}
-            >
+            <select name="categoryId" onChange={(ev) => this.handleChange(ev)}>
               <option>-----select Brand-----</option>
-              {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
             </select>
           </div>
           {error}

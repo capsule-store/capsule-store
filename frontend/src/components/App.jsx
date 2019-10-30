@@ -20,8 +20,7 @@ import Logout from './Logout';
 import Register from './Register';
 import Brands from './Brands';
 import BrandDetail from './BrandDetail';
-import Categories from './Categories';
-import Admin from './Admin';
+import AdminProducts from './AdminProducts';
 import CreateProduct from './CreateProduct';
 
 const Main = styled.div`
@@ -69,7 +68,7 @@ class _App extends Component {
             <Route path="/logout" component={Logout} />
             <Route path="/signup" component={Register} />
             <Route path="/brands/:id" component={BrandDetail} />
-            <Route exact path="/admin" component={Admin} />
+            <Route exact path="/admin" component={AdminProducts} />
             <Route path="/admin/create-product" component={CreateProduct} />
           </Switch>
           <Brands />

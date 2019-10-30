@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import AdminProduct from './AdminProduct';
+import AdminProductRow from './AdminProductRow';
 
 const Container = styled.div`
   grid-area: 2/1/3/4;
@@ -43,7 +43,7 @@ const CreateNewProduct = styled.button`
   };
 `;
 
-const Products = ({ products }) => (
+const AdminProducts = ({ products }) => (
   <Container>
     <Link to="/admin/create-product"><CreateNewProduct> CREATE NEW PRODUCT</CreateNewProduct></Link>
     <ProductTable>
@@ -54,7 +54,7 @@ const Products = ({ products }) => (
         <HeaderCol>DELETE</HeaderCol>
       </HeaderRow>
       {products.map((product) => (
-        <AdminProduct key={product.id} product={product} />
+        <AdminProductRow key={product.id} product={product} />
       ))}
     </ProductTable>
   </Container>
@@ -62,4 +62,4 @@ const Products = ({ products }) => (
 
 const mapStateToProps = ({ products }) => ({ products });
 
-export default connect(mapStateToProps)(Products);
+export default connect(mapStateToProps)(AdminProducts);

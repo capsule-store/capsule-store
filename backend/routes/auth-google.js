@@ -32,7 +32,7 @@ router.get('/', (req, res) => {
 // call back route for google oauth2
 router.get('/callback', async (req, res) => {
   const { code } = req.query;
-  console.log('code',code)
+  console.log('code', code)
   const token = await oauth2Client.getToken(code, (err, token) => {
     /*
     console.log('access token:', token);

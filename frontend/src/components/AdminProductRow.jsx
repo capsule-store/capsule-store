@@ -49,8 +49,9 @@ const DeleteIcon = styled(Icon)`
   background-repeat: no-repeat;
 `;
 
-const AdminProduct = ({ product, brands, categories, deleteProduct }) => {
+const AdminProducts = ({ product, brands, categories, deleteProduct }) => {
   if (!brands.length || !categories.length) return null;
+  
   const brand = brands.find((_brand) => _brand.id === product.brandId).name;
   const category = categories.find(
     (_category) => _category.id === product.categoryId,
@@ -61,9 +62,8 @@ const AdminProduct = ({ product, brands, categories, deleteProduct }) => {
       <ProductName>{product.name}</ProductName>
       <Category>{category}</Category>
       <Brand>{brand}</Brand>
-      {/* onClick={() => deleteProduct(product) */}
       <Delete onClick={() => deleteProduct(product)}>
-        <DeleteIcon/>
+        <DeleteIcon />
       </Delete>  
     </Row>
   );
@@ -78,4 +78,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AdminProduct);
+)(AdminProducts);
