@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
- HashRouter, Route, Switch, Redirect 
+  HashRouter, Route, Switch, Redirect,
 } from 'react-router-dom';
 
 // Local imports
@@ -55,6 +55,8 @@ class _App extends Component {
   }
 
   render() {
+    const { isAdmin } = this.props;
+
     return (
       <Main>
         <HashRouter>
@@ -68,7 +70,9 @@ class _App extends Component {
             <Route path="/logout" component={Logout} />
             <Route path="/signup" component={Register} />
             <Route path="/brands/:id" component={BrandDetail} />
-            <Route exact path="/admin" component={AdminProducts} />
+            <Route exact path="/admin">
+              {!isAdmin ? <Redirect to="/" /> : <AdminProducts />}
+            </Route>
             <Route path="/admin/create-product" component={CreateProduct} />
           </Switch>
           <Brands />
@@ -80,6 +84,7 @@ class _App extends Component {
 
 const mapStateToProps = ({ auth }) => ({
   loggedIn: !!auth.id,
+  isAdmin: auth.isAdmin,
   auth,
 });
 
