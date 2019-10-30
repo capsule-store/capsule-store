@@ -1,8 +1,12 @@
-<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0)">
-<rect width="20" height="20" fill="white"/>
-<circle cx="10" cy="11" r="9" transform="rotate(-45 9.52498 10.0249)" stroke="red" stroke-width="3"/>
-<rect x="13" y="1" width="2" height="18" transform="rotate(-45 11 15)" fill="red"/>
-<rect x="13" y="1" width="2" height="18" transform="rotate(45 11 6)" fill="red"/>
+<rect width="24" height="24" fill="white"/>
+<rect x="5.98975" y="4.01025" width="20" height="3" transform="rotate(45 5.98975 4.01025)" fill="black"/>
+<rect x="3.86816" y="18.1523" width="20" height="3" transform="rotate(-45 3.86816 18.1523)" fill="black"/>
 </g>
+<defs>
+<clipPath id="clip0">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
 </svg>

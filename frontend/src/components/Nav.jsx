@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled, { ThemeProvider } from 'styled-components';
-
+import Icon from './Icon';
 /* Navigator */
 const StyledNav = styled.div`
   grid-area: 1/1/2/4;
@@ -33,12 +33,6 @@ const Home = styled.h3`
   flex-grow: 1;
   align-self: center;
   color: #000;
-`;
-
-const Icon = styled.div`
-  display: block;
-  width: 1.5rem;
-  height: 1.5rem;
 `;
 
 const User = styled.div`

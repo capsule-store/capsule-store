@@ -1,8 +1,30 @@
-# VC Starter Pack
+# SV Starter Pack
 Flex 1907 Grace Shopper project
 
+## Getting Started
+After cloning, run `npm i` to install all dependencies. `.env` file is not included in the repo.
+
+### Database
+Create a `psql` database called `sv_starter_pack_db`.
+
+### Scripts
+To start a development server (nodemon will watch backend, webpack will watch frontend)
+```
+npm run start:dev
+```
+
+To run tests (mocha will watch files)
+```
+npm run test:watch
+```
+
+To bundle (webpack will watch files)
+```
+npm run webpack
+```
+
 ## API Endpoints
-Endpoints we should make available. Not all are ready yet
+Available endpoints.
 
 #### Brands
 `GET` all brands
@@ -72,5 +94,3 @@ PUT /api/cart/:id
 ```
 DELETE /api/cart/:id
 ```
-
-

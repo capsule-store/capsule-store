@@ -2,28 +2,33 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
 
+import styled from 'styled-components';
 import { actions } from '../store';
+import Button from './Button';
+
+const CheckoutBtn = styled(Button)`
+background-color: blue;
+color: #fff;
+`;
 
 class Checkout extends Component {
   constructor() {
     super();
+    this.currency = 'USD';
     this.onToken = this.onToken.bind(this);
   }
 
-  onToken(token, addresses) {
-    console.log('TOKEN', token);
-    console.log('ADDRESSES', addresses);
-    const { closeCart } = this.props;
-    closeCart();
+  onToken(token) {
+    const { amount, closeCart } = this.props;
+    closeCart(amount, this.currency, token.id);
   }
 
   render() {
     const { email, amount } = this.props;
-    console.log('AMOUNT', amount);
     return (
       <StripeCheckout
         amount={amount}
-        currency="USD"
+        currency={this.currency}
         email={email}
         billingAddress
         shippingAddress
@@ -32,8 +37,8 @@ class Checkout extends Component {
       >
         <button type="button" id="checkout-button">
           Checkout with Stripe
-        </button>
-      </StripeCheckout>
+        </StripeCheckout>
+      </CheckoutBtn>
     );
   }
 }
@@ -41,8 +46,8 @@ class Checkout extends Component {
 const mapStateToProps = ({ auth }) => ({ email: auth.email });
 
 const mapDispatchToProps = (dispatch) => ({
-  closeCart: () => {
-    dispatch(actions.closeCart());
+  closeCart: (amount, currency, stripeTokenId) => {
+    dispatch(actions.closeCart(amount, currency, stripeTokenId));
   },
 });
 

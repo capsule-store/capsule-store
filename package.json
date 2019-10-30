@@ -50,6 +50,7 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.19.6",
+    "stripe": "^7.10.0",
     "styled-components": "^4.4.0"
   }
 }
