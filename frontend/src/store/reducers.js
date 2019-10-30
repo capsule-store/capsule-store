@@ -33,7 +33,7 @@ const productsReducer = (state = [], action) => {
     case SET_PRODUCTS:
       return action.products;
     case CREATE_PRODUCT:
-      return [... state, action.product];
+      return [...state, action.product];
     case DELETE_PRODUCT:
       return state.filter((product) => product.id !== action.product.id);
     default:
