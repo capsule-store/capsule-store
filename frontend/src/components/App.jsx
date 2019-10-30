@@ -35,12 +35,6 @@ const Main = styled.div`
 `;
 
 class _App extends Component {
-  componentDidUpdate() {
-    const { loadCart, loggedIn, loadStoreData } = this.props;
-    loadStoreData();
-    loadCart(loggedIn);
-  }
-
   componentDidMount() {
     const {
       loggedIn,
@@ -50,6 +44,12 @@ class _App extends Component {
     } = this.props;
 
     attemptSessionLogin().catch((ex) => console.log(ex));
+    loadStoreData();
+    loadCart(loggedIn);
+  }
+
+  componentDidUpdate() {
+    const { loadCart, loggedIn, loadStoreData } = this.props;
     loadStoreData();
     loadCart(loggedIn);
   }
