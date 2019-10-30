@@ -9,7 +9,7 @@ const Product = conn.define('product', {
   id: {
     primaryKey: true,
     type: UUID,
-    defaultValue: UUIDV4
+    defaultValue: UUIDV4,
   },
 
   name: {
@@ -33,7 +33,8 @@ const Product = conn.define('product', {
 
   image: {
     type: STRING,
-    allowNull: false,
+    // allowNull: false,
+    allowNull: true, // to test create product function. will change this back to false later
     unique: false,
     validate: {
       isURL: true,
@@ -47,7 +48,7 @@ const Product = conn.define('product', {
     validate: {
       notEmpty: true,
     },
-  }
+  },
 });
 
 module.exports = Product;

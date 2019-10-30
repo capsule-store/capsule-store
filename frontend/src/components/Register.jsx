@@ -155,13 +155,12 @@ class _Register extends React.Component {
   }
 }
 
-const mapStateToProps = ({ history }) => ({ history });
 const mapDispatchToProps = (dispatch, { history }) => ({
   register: (user) => dispatch(actions.register(user, history)),
 });
 
 const Register = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(_Register);
 

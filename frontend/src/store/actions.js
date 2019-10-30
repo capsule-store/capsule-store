@@ -6,6 +6,8 @@ import {
   SET_BRANDS,
   SET_CATEGORIES,
   SET_PRODUCTS,
+  DELETE_PRODUCT,
+  CREATE_PRODUCT,
   SET_ORDERS,
   CREATE_ORDER,
   UPDATE_ORDER,
@@ -43,10 +45,18 @@ const attemptSessionLogin = () => async (dispatch) => {
 };
 
 const attemptLogin = (credentials, history) => async (dispatch) => {
-  const { token } = (await axios.post('/api/sessions', credentials)).data;
+  const { token, isAdmin } = (await axios.post(
+    '/api/sessions',
+    credentials,
+  )).data;
   window.localStorage.setItem('token', token);
   await dispatch(attemptSessionLogin());
-  history.push('/');
+
+  if (isAdmin) {
+    history.push('/admin');
+  } else {
+    history.push('/');
+  }
 };
 
 const logout = (history) => async (dispatch) => {
@@ -74,6 +84,17 @@ const fetchCategories = () => async (dispatch) => {
 const fetchProducts = () => async (dispatch) => {
   const products = (await axios.get('/api/products')).data;
   dispatch({ type: SET_PRODUCTS, products });
+};
+
+const deleteProduct = (product) => async (dispatch) => {
+  await axios.delete(`/api/products/${product.id}`);
+  dispatch({ type: DELETE_PRODUCT, product });
+};
+
+const createProduct = (product, history) => async (dispatch) => {
+  await axios.post('/api/products', {product});
+  dispatch({ type: CREATE_PRODUCT, product });
+  history.push('/admin');
 };
 
 const fetchOrders = (userId) => async (dispatch) => {
@@ -142,6 +163,8 @@ export {
   fetchBrands,
   fetchCategories,
   fetchProducts,
+  deleteProduct,
+  createProduct,
   fetchOrders,
   createOrder,
   updateOrder,

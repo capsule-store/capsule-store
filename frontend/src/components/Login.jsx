@@ -31,7 +31,8 @@ class _Login extends Component {
 
   attemptLogin(ev) {
     ev.preventDefault();
-
+    this.setState({ error: [] });
+    
     const credentials = { ...this.state };
     const error = validate(credentials.email, credentials.password);
 
