@@ -14,31 +14,28 @@ color: #fff;
 class Checkout extends Component {
   constructor() {
     super();
+    this.currency = 'USD';
     this.onToken = this.onToken.bind(this);
   }
 
-  onToken(token, addresses) {
-    // console.log('TOKEN', token);
-    // console.log('ADDRESSES', addresses);
-    const { closeCart } = this.props;
-    closeCart();
+  onToken(token) {
+    const { amount, closeCart } = this.props;
+    closeCart(amount, this.currency, token.id);
   }
 
   render() {
     const { email, amount } = this.props;
-    console.log('AMOUNT', amount);
     return (
-      <CheckoutBtn name="checkout-button">
-        <StripeCheckout
-          amount={amount}
-          currency="USD"
-          email={email}
-          billingAddress
-          shippingAddress
-          stripeKey="pk_test_TTnXF5mfNRig5XOw9rmZeeKG00rULHeKEB"
-          token={this.onToken}
-        >
-
+      <StripeCheckout
+        amount={amount}
+        currency={this.currency}
+        email={email}
+        billingAddress
+        shippingAddress
+        stripeKey="pk_test_TTnXF5mfNRig5XOw9rmZeeKG00rULHeKEB"
+        token={this.onToken}
+      >
+        <button type="button" id="checkout-button">
           Checkout with Stripe
         </StripeCheckout>
       </CheckoutBtn>
@@ -49,8 +46,8 @@ class Checkout extends Component {
 const mapStateToProps = ({ auth }) => ({ email: auth.email });
 
 const mapDispatchToProps = (dispatch) => ({
-  closeCart: () => {
-    dispatch(actions.closeCart());
+  closeCart: (amount, currency, stripeTokenId) => {
+    dispatch(actions.closeCart(amount, currency, stripeTokenId));
   },
 });
 
