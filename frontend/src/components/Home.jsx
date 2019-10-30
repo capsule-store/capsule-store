@@ -6,7 +6,6 @@ import { actions } from '../store';
 import Categories from './Categories';
 import Products from './Products';
 
-
 const Main = styled.div`
 grid-area: 2/1/3/4;
 justify-self: stretch;

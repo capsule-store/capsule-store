@@ -43,7 +43,7 @@ text-transform: uppercase;
 letter-spacing: 3px;
 line-height: 48px;
 font-weight: 600;
-font-size: 12px;
+font-size: 16px;
 transition: all 0.3s ease-in-out;
 &:hover{
   background-color: #000;
@@ -87,22 +87,22 @@ class ProductPurchase extends Component {
   }
 
   increment() {
-    this.setState({ quantity: this.state.quantity + 1 });
+    const { quantity } = this.state;
+    this.setState({ quantity: quantity + 1 });
   }
 
   decrement() {
     const { quantity } = this.state;
-    if (quantity > 1) {
-      this.setState({ quantity: this.state.quantity - 1 });
-    } else {
-      this.setState({ quantity: 1 });
+    if (quantity === 1) {
+      return;
     }
+    this.setState({ quantity: quantity - 1 });
   }
 
   handleBuy() {
     const { quantity } = this.state;
     const {
-      product, cart, buyProduct, updateLineItem,
+      cart, product, buyProduct, updateLineItem,
     } = this.props;
 
     // If we already have the item in the cart, just update quantity
@@ -112,6 +112,7 @@ class ProductPurchase extends Component {
     } else {
       buyProduct(product.id, quantity);
     }
+    this.setState({ quantity: 1 });
   }
 
   render() {
@@ -119,17 +120,11 @@ class ProductPurchase extends Component {
     const { product } = this.props;
     return (
       <Container>
-        <TotalPrice>
-          <h4>{`$${padPrice(product.price) * quantity}`}</h4>
-        </TotalPrice>
+        <TotalPrice>{`$${padPrice(product.price * quantity)}`}</TotalPrice>
         <QuantityLabel>QTY</QuantityLabel>
-        <MinusBtn onClick={this.decrement}>
-          <h4>–</h4>
-        </MinusBtn>
+        <MinusBtn onClick={this.decrement}>–</MinusBtn>
         <Quantity>{quantity}</Quantity>
-        <PlusBtn onClick={this.increment}>
-          <h4>+</h4>
-        </PlusBtn>
+        <PlusBtn onClick={this.increment}>+</PlusBtn>
         <AddBtn onClick={this.handleBuy}>ADD TO BAG</AddBtn>
       </Container>
     );

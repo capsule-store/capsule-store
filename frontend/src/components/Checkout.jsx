@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
 
+import styled from 'styled-components';
 import { actions } from '../store';
+import Button from './Button';
+
+const CheckoutBtn = styled(Button)`
+background-color: blue;
+color: #fff;
+`;
 
 class Checkout extends Component {
   constructor() {
@@ -30,8 +37,8 @@ class Checkout extends Component {
       >
         <button type="button" id="checkout-button">
           Checkout with Stripe
-        </button>
-      </StripeCheckout>
+        </StripeCheckout>
+      </CheckoutBtn>
     );
   }
 }

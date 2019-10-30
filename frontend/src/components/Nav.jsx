@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled, { ThemeProvider } from 'styled-components';
-
+import Icon from './Icon';
 /* Navigator */
 const StyledNav = styled.div`
   grid-area: 1/1/2/4;
@@ -33,12 +33,6 @@ const Home = styled.h3`
   flex-grow: 1;
   align-self: center;
   color: #000;
-`;
-
-const Icon = styled.div`
-  display: block;
-  width: 1.5rem;
-  height: 1.5rem;
 `;
 
 const User = styled.div`
@@ -78,7 +72,7 @@ const CartIcon = styled(Icon)`
 `;
 
 const ItemCount = styled.h5`
-  width: 1.5rem;
+  width: 2rem;
   height: 1.5rem;
   line-height: 1.5rem;
 `;
@@ -89,45 +83,51 @@ padding: 0 1rem;
 
 `;
 
-const _Nav = ({ loggedIn, cart }) => (
-  // console.log('CART:', cart)
-  // consolo.log('USER INFO:', loggedIn)
-  <StyledNav>
-    <Left>
-      <NavLink to="/products">
-        <Product />
-      </NavLink>
-      <NavLink to="/search">
-        <Search />
-      </NavLink>
-    </Left>
+const Nav = ({ loggedIn, cart }) => {
+  let itemCount = 0;
+  if (cart) {
+    itemCount = cart.reduce((t, item) => t + item.quantity, 0);
+    console.log('ITEMCOUNT:', itemCount);
+  }
 
-    <NavLink to="/" exact>
-      <Home>Sillicon Valley Starter Pack</Home>
-    </NavLink>
-
-    <Right>
-      <User>
-        {loggedIn ? '' : <NavLink to="/signup"><Btn>Sign Up</Btn></NavLink>}
-        <NavLink to={loggedIn ? '/logout' : '/login'}>
-          {loggedIn ? <Btn>Sign Out</Btn> : <Btn>Sign In</Btn>}
+  return (
+    <StyledNav>
+      <Left>
+        <NavLink to="/products">
+          <Product />
         </NavLink>
-      </User>
-      <NavLink to="/cart">
-        <Cart>
-          <CartIcon />
-          <ItemCount>0</ItemCount>
-        </Cart>
+        <NavLink to="/search">
+          <Search />
+        </NavLink>
+      </Left>
+
+      <NavLink to="/" exact>
+        <Home>Sillicon Valley Starter Pack</Home>
       </NavLink>
-    </Right>
-  </StyledNav>
-);
+
+      <Right>
+        <User>
+          {loggedIn ? '' : <NavLink to="/signup"><Btn>Sign Up</Btn></NavLink>}
+          <NavLink to={loggedIn ? '/logout' : '/login'}>
+            {loggedIn ? <Btn>Sign Out</Btn> : <Btn>Sign In</Btn>}
+          </NavLink>
+        </User>
+        <NavLink to="/cart">
+          <Cart>
+            <CartIcon />
+            <ItemCount>{itemCount}</ItemCount>
+          </Cart>
+        </NavLink>
+      </Right>
+    </StyledNav>
+  );
+};
 
 const mapStateToProps = ({ auth, cart }) => ({
   loggedIn: !!auth.id,
   cart,
 });
 
-const Nav = connect(mapStateToProps)(_Nav);
+const ConnectedNav = connect(mapStateToProps)(Nav);
 
-export default Nav;
+export default ConnectedNav;

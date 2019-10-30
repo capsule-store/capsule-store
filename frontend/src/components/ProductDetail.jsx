@@ -9,12 +9,11 @@ display: grid;
 grid-template-columns: 2fr 1fr 2fr;
 grid-template-rows: 240px auto;
 grid-column-gap: 40px;
-padding: 0 40px;
-margin: 120px 0;
 `;
 
 const Title = styled.div`
 grid-area: 1/1/2/4;
+padding-top: 60px;
 justify-content: stretch;
 text-align: center;
 display: flex;
@@ -41,7 +40,6 @@ const ProductDetail = ({ products, brands, match: { params } }) => {
   }
   const product = products.find((_product) => _product.id === params.id);
   const brand = brands.find((_brand) => _brand.id === product.brandId).name;
-  console.log('BRAND:', brand);
   return (
     <Container>
       <Title>
