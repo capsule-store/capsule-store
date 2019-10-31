@@ -35,7 +35,8 @@ const Main = styled.div`
 `;
 
 class _App extends Component {
-  componentDidMount() {
+  constructor() {
+    super();
     const {
       loggedIn,
       attemptSessionLogin,
@@ -55,7 +56,8 @@ class _App extends Component {
   }
 
   render() {
-    const { isAdmin } = this.props;
+    const { products, brands, isAdmin } = this.props;
+    if (!products.length || !brands.length) return null;
 
     return (
       <Main>
@@ -82,10 +84,12 @@ class _App extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({ auth, products, brands }) => ({
   loggedIn: !!auth.id,
   isAdmin: auth.isAdmin,
   auth,
+  products,
+  brands,
 });
 
 const mapDispatchToProps = (dispatch) => ({
