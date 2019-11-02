@@ -10,6 +10,7 @@ class _CreateProduct extends React.Component {
     this.state = {
       name: '',
       price: '',
+      image: '',
       description: '',
       brandId: '',
       categoryId: '',
@@ -31,15 +32,17 @@ class _CreateProduct extends React.Component {
     ev.preventDefault();
     this.setState({ error: '' });
 
-    const { name, price, description, brandId, categoryId } = this.state;
+    const {
+      name, price, image, description, brandId, categoryId,
+    } = this.state;
     const { createProduct } = this.props;
-    
+
     if (
       name.length
-        * price.length
-        * description.length
-        * brandId.length
-        * categoryId.length
+      * price.length
+      * description.length
+      * brandId.length
+      * categoryId.length
       === 0
     ) {
       this.setState({
@@ -48,8 +51,10 @@ class _CreateProduct extends React.Component {
       return;
     }
 
-    const product = {name, price, description, brandId, categoryId };
-    
+    const product = {
+      name, price, image, description, brandId, categoryId,
+    };
+
     createProduct(product)
       .catch((err) => {
         this.setState({ error: err.response.data.message });
@@ -90,6 +95,16 @@ class _CreateProduct extends React.Component {
               name="price"
               onChange={(ev) => this.handleChange(ev)}
               placeholder="Enter Price"
+              required
+            />
+          </div>
+          <div>
+            <label>Image URL</label>
+            <input
+              type="text"
+              name="image"
+              onChange={(ev) => this.handleChange(ev)}
+              placeholder="Enter Image URL"
               required
             />
           </div>

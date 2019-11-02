@@ -29,10 +29,14 @@ class _Login extends Component {
     this.attemptLogin = this.attemptLogin.bind(this);
   }
 
+  onChange(ev) {
+    this.setState({ [ev.target.name]: ev.target.value });
+  }
+
   attemptLogin(ev) {
     ev.preventDefault();
     this.setState({ error: [] });
-    
+
     const credentials = { ...this.state };
     const error = validate(credentials.email, credentials.password);
 
@@ -45,10 +49,6 @@ class _Login extends Component {
     this.props.attemptLogin(credentials).catch((ex) => {
       this.setState({ error: [ex.response.data.message] });
     });
-  }
-
-  onChange(ev) {
-    this.setState({ [ev.target.name]: ev.target.value });
   }
 
   render() {
@@ -70,7 +70,7 @@ class _Login extends Component {
           <label>Password</label>
           <input type="password" name="password" onChange={onChange} required />
         </div>
-        <button onClick={attemptLogin}>Log in</button>
+        <button type="button" onClick={attemptLogin}>Log in</button>
         <a href="/auth/google">Log in with Google</a>
         <div>
           <a href="#">Forgot password</a>
