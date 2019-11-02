@@ -8,6 +8,7 @@
     "test": "DATABASE_URL=postgres://postgres@localhost/circle_test mocha --recursive './backend/tests/*.test.js'",
     "test:watch": "mocha --recursive --watch './backend/tests/*.test.js'",
     "start:dev": "nodemon backend/server.js --ignore frontend/ & npm run webpack",
+    "start": "nodemon backend/server.js --ignore frontend/ & npm run webpack",
     "postinstall": "npm run webpack"
   },
   "author": "",
