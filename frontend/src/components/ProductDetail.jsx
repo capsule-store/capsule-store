@@ -4,40 +4,38 @@ import styled from 'styled-components';
 import ProductPurchase from './ProductPurchase';
 
 const Container = styled.div`
-grid-area: 2/1/3/4;
-display: grid;
-grid-template-columns: 2fr 1fr 2fr;
-grid-template-rows: 240px auto;
-grid-column-gap: 40px;
+  grid-area: 2/1/3/4;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-rows: 240px auto;
+  grid-column-gap: 40px;
 `;
 
 const Title = styled.div`
-grid-area: 1/1/2/4;
-padding-top: 60px;
-justify-content: stretch;
-text-align: center;
-display: flex;
-flex-direction: column;
+  grid-area: 1/1/2/4;
+  padding-top: 60px;
+  justify-content: stretch;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 `;
 const ProductImage = styled.img`
-grid-area: 2/1/3/2;
-width: 100%;
-object-fit: cover;
-justify-self: end;
+  grid-area: 2/1/3/2;
+  width: 100%;
+  object-fit: cover;
+  justify-self: end;
 `;
 const OrderDetail = styled.div`
-grid-area: 2/2/3/3;
+  grid-area: 2/2/3/3;
 `;
 const Description = styled.div`
-grid-area: 2/3/3/4;
-max-width: 480px;
+  grid-area: 2/3/3/4;
+  max-width: 480px;
 `;
 
 const ProductDetail = ({ products, brands, match: { params } }) => {
   window.scrollTo(0, 0);
-  if (!products.length) {
-    return null;
-  }
+
   const product = products.find((_product) => _product.id === params.id);
   const brand = brands.find((_brand) => _brand.id === product.brandId).name;
   return (

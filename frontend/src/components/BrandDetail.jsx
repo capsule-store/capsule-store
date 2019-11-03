@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ProductCard from './ProductCard';
 
 const BrandDetail = ({ brands, products, match: { params } }) => {
-  if (!brands.length || !products.length) return null;
+  window.scrollTo(0, 0);
 
   const brand = brands.find((b) => b.id === params.id);
   const brandProducts = products.filter(
