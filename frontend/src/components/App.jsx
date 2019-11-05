@@ -28,7 +28,14 @@ class _App extends Component {
   }
 
   render() {
-    const { loggedIn } = this.props;
+    let { loggedIn } = this.props;
+
+    console.log(location.href);
+
+    if (location.href.includes('?token=')) {
+      const token = location.href.split('?token=')[1];
+      loggedIn = (!!token)? true : loggedIn;
+      
     return (
       <div>
         <h1>sv-starter-pack</h1>
@@ -49,9 +56,10 @@ class _App extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({ auth }, {location}) => ({
   loggedIn: !!auth.id,
   auth,
+  location,
 });
 
 const mapDispatchToProps = (dispatch) => ({
