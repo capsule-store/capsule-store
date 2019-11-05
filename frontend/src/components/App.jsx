@@ -35,22 +35,13 @@ const Main = styled.div`
 `;
 
 class _App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     const {
-      loggedIn,
-      attemptSessionLogin,
-      loadStoreData,
-      loadCart,
-    } = this.props;
+      loggedIn, attemptSessionLogin, loadStoreData, loadCart,
+    } = props;
 
     attemptSessionLogin().catch((ex) => console.log(ex));
-    loadStoreData();
-    loadCart(loggedIn);
-  }
-
-  componentDidUpdate() {
-    const { loadCart, loggedIn, loadStoreData } = this.props;
     loadStoreData();
     loadCart(loggedIn);
   }
