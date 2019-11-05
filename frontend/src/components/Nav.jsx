@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled, { ThemeProvider } from 'styled-components';
 import Icon from './Icon';
+
 /* Navigator */
 const StyledNav = styled.div`
   grid-area: 1/1/2/4;
