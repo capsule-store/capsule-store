@@ -41,11 +41,27 @@ const Main = styled.div`
 `;
 
 class _App extends Component {
-  constructor(props) {
-    super(props);
+  componentDidUpdate(prevProps) {
     const {
- loggedIn, attemptSessionLogin, loadStoreData, loadCart 
-} = props;
+      loggedIn, products, loadStoreData, loadCart,
+    } = this.props;
+
+    if (
+      prevProps.products.length !== products.length
+      || prevProps.loggedIn !== loggedIn
+    ) {
+      loadStoreData();
+      loadCart(loggedIn);
+    }
+  }
+
+  componentDidMount() {
+    const {
+      loggedIn,
+      attemptSessionLogin,
+      loadStoreData,
+      loadCart,
+    } = this.props;
 
     attemptSessionLogin().catch((ex) => console.log(ex));
     loadStoreData();
@@ -63,6 +79,7 @@ class _App extends Component {
         <HashRouter>
           <Nav />
           <Switch>
+            <Route exact path="/" component={Home} />
             <Route path="/products/:id" component={ProductDetail} />
             <Route path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
@@ -70,7 +87,6 @@ class _App extends Component {
             <Route path="/signup" component={Register} />
             <Route path="/brands/:id" component={BrandDetail} />
             <Route path="/category" component={Home} />
-            <Route path="/" component={Home} />
 
             <Route exact path="/admin">
               {!isAdmin ? <Redirect to="/" /> : <AdminProducts />}
