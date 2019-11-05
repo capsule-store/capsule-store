@@ -17,7 +17,6 @@ const Products = ({ products, categories, currentCategory }) => {
   const current = categories.find((category) => category.name.toLowerCase() === currentCategory);
   const currentCategoryId = current && current.name !== 'Essentials' ? current.id : null;
   const currentProducts = currentCategoryId ? products.filter((product) => product.categoryId === currentCategoryId) : products;
-  console.log(currentProducts);
   return (
     <Container>
       <h1>2019 Winter</h1>

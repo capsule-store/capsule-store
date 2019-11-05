@@ -68,7 +68,7 @@ class _App extends Component {
             <Route path="/logout" component={Logout} />
             <Route path="/signup" component={Register} />
             <Route path="/brands/:id" component={BrandDetail} />
-            <Route path="/:id?" component={Home} />
+            <Route path="/category/:id" component={Home} />
             <Route path="/" component={Home} />
 
             <Route exact path="/admin">
