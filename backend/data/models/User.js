@@ -83,16 +83,13 @@ User.prototype.validPassword = async function (password) {
 User.findByToken = async function (token) {
   try {
     const { id } = jwt.decode(token, process.env.SECRET);
-    const user = (await this.findByPk(id)).dataValues;
-    // const user = (await this.findByPk(id)).get();
-    if (!user) {
-      const err = new Error('google authorization failed');
-      err.status = 401;
-      throw err;
+    if (id.includes('-')) {
+      return (await this.findByPk(id)).get();
+      // return (await this.findOne({ where: { id } })).get();
     }
-    return user;
+    return (await this.findOne({ where: { googleId: id } })).get();
   } catch (ex) {
-    const err = new Error('google authorization failed');
+    const err = new Error('authorization failed');
     err.status = 401;
     throw err;
   }

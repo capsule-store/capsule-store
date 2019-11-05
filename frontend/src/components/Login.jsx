@@ -1,6 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import styled, { ThemeProvider } from 'styled-components';
 import { actions } from '../store';
+
+const Warning = styled.div`
+color = red;
+`;
+
+const Button = styled.button`
+  color: balck;
+  width: 150px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  background-color: lightgrey;
+  align-self: right;
+  padding: 5px;
+  margin: 5px;
+  text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const Input = styled.div`
+  width: 150px;
+  display: flex;
+  justify-content: space-even;
+`;
 
 /* Input Validation */
 function validate(email, password) {
@@ -58,30 +84,31 @@ class _Login extends Component {
       <form>
         {error
           && error.map((_error, idx) => (
-            <div className="error" key={idx}>
+            <Warning className="error" key={idx}>
               {_error}
-            </div>
+            </Warning>
           ))}
-        <div>
+        <Input>
           <label>Email</label>
           <input name="email" onChange={onChange} required />
-        </div>
-        <div>
+        </Input>
+        <Input>
           <label>Password</label>
           <input type="password" name="password" onChange={onChange} required />
-        </div>
-        <button type="button" onClick={attemptLogin}>Log in</button>
-        <a href="/auth/google">Log in with Google</a>
-        <div>
-          <a href="#">Forgot password</a>
-        </div>
+        </Input>
+        <Button type="button" onClick={attemptLogin}>
+          Log in
+        </Button>
+        <Input>
+          <a href="/auth/google">Log in with Google</a>
+        </Input>
       </form>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch, { history }) => ({
-  attemptLogin: (username) => dispatch(actions.attemptLogin(username, history)),
+  attemptLogin: (credentials) => dispatch(actions.attemptLogin(credentials, history)),
 });
 
 const Login = connect(

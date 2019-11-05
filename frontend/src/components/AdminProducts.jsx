@@ -31,31 +31,35 @@ const HeaderCol = styled.th`
 
 const CreateNewProduct = styled.button`
   color: white;
-  width:200px;
+  width: 200px;
   border: 1px solid green;
   background-color: green;
   border-radius: 20px;
   align-self: right;
   padding: 8px;
   margin: 10px;
-  &:hover{
+  &:hover {
     cursor: pointer;
-  };
+  }
 `;
 
 const AdminProducts = ({ products }) => (
   <Container>
-    <Link to="/admin/create-product"><CreateNewProduct> CREATE NEW PRODUCT</CreateNewProduct></Link>
+    <Link to="/admin/create-product">
+      <CreateNewProduct> CREATE NEW PRODUCT</CreateNewProduct>
+    </Link>
     <ProductTable>
-      <HeaderRow>
-        <HeaderCol>PRODUCT NAME</HeaderCol>
-        <HeaderCol>CATEGORY</HeaderCol>
-        <HeaderCol>BRAND</HeaderCol>
-        <HeaderCol>DELETE</HeaderCol>
-      </HeaderRow>
-      {products.map((product) => (
-        <AdminProductRow key={product.id} product={product} />
-      ))}
+      <tbody>
+        <HeaderRow>
+          <HeaderCol>PRODUCT NAME</HeaderCol>
+          <HeaderCol>CATEGORY</HeaderCol>
+          <HeaderCol>BRAND</HeaderCol>
+          <HeaderCol>DELETE</HeaderCol>
+        </HeaderRow>
+        {products.map((product) => (
+          <AdminProductRow key={product.id} product={product} />
+        ))}
+      </tbody>
     </ProductTable>
   </Container>
 );

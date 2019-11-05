@@ -27,7 +27,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 600000 }, // 10 mins
-    cart: {},
+    cart: [],
   }),
 );
 
@@ -41,11 +41,10 @@ app.use((req, res, next) => {
     return next();
   }
 
-  const { id } = jwt.decode(auth, process.env.SECRET);
-  User.findByPk(id)
+  User.findByToken(auth)
     .then((user) => {
       if (user) {
-        req.user = user.get();
+        req.user = user;
       }
       next();
     })
@@ -82,10 +81,14 @@ app.post('/api/sessions', (req, res, next) => {
 app.get('/api/sessions', (req, res, next) => {
   if (req.user) {
     const {
-      id, firstName, lastName, email, isAdmin,
-    } = req.user;
+ id, firstName, lastName, email, isAdmin 
+} = req.user;
     return res.send({
-      id, firstName, lastName, email, isAdmin,
+      id,
+      firstName,
+      lastName,
+      email,
+      isAdmin,
     });
   }
   return next({ status: 401, message: 'Not logged in' });
