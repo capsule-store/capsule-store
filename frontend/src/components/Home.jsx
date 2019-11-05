@@ -16,14 +16,20 @@ overflow-x: hidden;
 `;
 
 /* Home */
-const _Home = ({ auth, logout }) => (
-  <Main>
-    <Categories />
-    <Products />
-  </Main>
-);
+const Home_comp = ({ auth, logout, location }) => {
+  // const currentCategory = (location.pathname).slice(1).replace('&', ' ').split(' ').filter((item) => item !== '')
+  // .join('');
+  const currentCategory = (location.pathname).slice(1);
 
-const mapStateToProps = ({ auth }) => ({ auth });
+  return (
+    <Main>
+      <Categories />
+      <Products currentCategory={currentCategory} />
+    </Main>
+  );
+};
+
+const mapStateToProps = ({ auth }, { history }) => ({ auth, location: history.location });
 
 const mapDispatchToProps = (dispatch, { history }) => ({
   logout: () => dispatch(actions.logout(history)),
@@ -32,6 +38,6 @@ const mapDispatchToProps = (dispatch, { history }) => ({
 const Home = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(_Home);
+)(Home_comp);
 
 export default Home;
