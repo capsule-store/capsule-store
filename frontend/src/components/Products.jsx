@@ -13,17 +13,23 @@ display: flex;
 flex-wrap: wrap;
 `;
 
-const Products = ({ products }) => (
-  <Container>
-    <h1>2019 Winter</h1>
-    <ProductList>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </ProductList>
-  </Container>
-);
+const Products = ({ products, categories, currentCategory }) => {
+  const current = categories.find((category) => category.name.toLowerCase() === currentCategory);
+  const currentCategoryId = current && current.name !== 'Essentials' ? current.id : null;
+  const currentProducts = currentCategoryId ? products.filter((product) => product.categoryId === currentCategoryId) : products;
+  return (
+    <Container>
+      <h1>2019 Winter</h1>
+      <ProductList>
+        {currentProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </ProductList>
+    </Container>
+  );
+};
 
-const mapStateToProps = ({ products }) => ({ products });
+
+const mapStateToProps = ({ products, categories }) => ({ products, categories });
 
 export default connect(mapStateToProps)(Products);

@@ -12,6 +12,7 @@ const syncAndSeed = async () => {
   await connection.sync({ force: true });
 
   const categoryNames = [
+    'Essentials',
     'Outfit',
     'Accessories',
     'Transportation',
@@ -21,6 +22,7 @@ const syncAndSeed = async () => {
   ];
 
   const [
+    essentials,
     outfit,
     accessories,
     transportation,
