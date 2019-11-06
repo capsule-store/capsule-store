@@ -4,14 +4,16 @@ const express = require('express');
 const jwt = require('jwt-simple');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const { Order, LineItem } = require('../data/models');
+const { Order, LineItem, User } = require('../data/models');
 
 const router = express.Router();
 router.use(express.json());
 
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
+  const { token } = req.headers;
+
   // Returns all line items in cart (active order)
-  const { id } = jwt.decode(req.headers.token, process.env.SECRET);
+  const { id } = await User.findByToken(token);
   Order.findOne({ where: { userId: id, active: true } })
     .then(async (cart) => {
       if (!cart) {
@@ -24,15 +26,17 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
   // Create new lineItem and place in cart (active order)
-  const { id } = jwt.decode(req.headers.token, process.env.SECRET);
+  const { token } = req.headers;
+  const { id } = await User.findByToken(token);
+
   Order.findOne({ where: { userId: id, active: true } })
     .then(async (order) => {
       if (!order) {
         order = await Order.create({ userId: id });
       }
-      LineItem.create({ ...req.body, orderId: order.id }).then((item) => res.send(item));
+      LineItem.create({ ...req.body, orderId: order.id }).then((item) => res.send(item),);
     })
     .catch(next);
 });
@@ -55,8 +59,8 @@ router.delete('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/close', (req, res, next) => {
-  const { id } = jwt.decode(req.headers.token, process.env.SECRET);
+router.post('/close', async (req, res, next) => {
+  const { id } = await User.findByToken(req.headers.token);
   const { amount, currency, stripeTokenId } = req.body;
 
   Order.findOne({ where: { userId: id, active: true } })

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  HashRouter, Route, Switch, Redirect,
+ HashRouter, Route, Switch, Redirect 
 } from 'react-router-dom';
 
 // Local imports
@@ -23,6 +23,12 @@ import BrandDetail from './BrandDetail';
 import AdminProducts from './AdminProducts';
 import CreateProduct from './CreateProduct';
 
+let TOKEN;
+if (location.href.includes('?token=')) {
+  TOKEN = location.href.split('?token=')[1];
+  window.localStorage.setItem('token', TOKEN);
+}
+
 const Main = styled.div`
   width: 100hv;
   display: grid;
@@ -38,8 +44,8 @@ class _App extends Component {
   constructor(props) {
     super(props);
     const {
-      loggedIn, attemptSessionLogin, loadStoreData, loadCart,
-    } = props;
+ loggedIn, attemptSessionLogin, loadStoreData, loadCart 
+} = props;
 
     attemptSessionLogin().catch((ex) => console.log(ex));
     loadStoreData();
@@ -47,7 +53,9 @@ class _App extends Component {
   }
 
   render() {
-    const { products, brands, isAdmin } = this.props;
+    const {
+ products, brands, isAdmin, location 
+} = this.props;
     if (!products.length || !brands.length) return null;
 
     return (
@@ -79,7 +87,6 @@ class _App extends Component {
 const mapStateToProps = ({ auth, products, brands }) => ({
   loggedIn: !!auth.id,
   isAdmin: auth.isAdmin,
-  auth,
   products,
   brands,
 });

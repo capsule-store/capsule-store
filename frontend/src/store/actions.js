@@ -61,6 +61,7 @@ const attemptLogin = (credentials, history) => async (dispatch) => {
 
 const logout = (history) => async (dispatch) => {
   window.localStorage.removeItem('token');
+  // window.localStorage.removeItem('google_token');
   dispatch(deleteAuth());
   history.push('/');
 };
@@ -136,6 +137,16 @@ const updateLineItem = (id, quantity) => async (dispatch) => {
 
 const addLineItem = (productId, quantity) => async (dispatch) => {
   const token = localStorage.getItem('token');
+
+  if (!token) {
+    if (!localStorage.getItem('anonymousUser')) {
+      localStorage.setItem('anonymousUser', []);
+    } else {
+      localStorage.anonymousUser.push({ productId, quantity });
+    }
+    return;
+  }
+
   const created = (await axios.post(
     '/api/cart/',
     { productId, quantity },

@@ -1,5 +1,8 @@
 const dotenv = require('dotenv').config();
 const bcrypt = require('bcrypt');
+const jwt = require('jwt-simple');
+const axios = require('axios');
+const { google } = require('googleapis');
 const connection = require('../connection');
 
 const { Sequelize } = connection;
@@ -57,6 +60,10 @@ const User = connection.define(
       type: BOOLEAN,
       defaultValue: false,
     },
+    googleId: {
+      type: STRING,
+      allowNull: true,
+    },
   },
   {
     hooks: {
@@ -70,7 +77,22 @@ const User = connection.define(
 );
 
 User.prototype.validPassword = async function (password) {
-  return (await bcrypt.compare(password, this.password));
+  return await bcrypt.compare(password, this.password);
+};
+
+User.findByToken = async function (token) {
+  try {
+    const { id } = jwt.decode(token, process.env.SECRET);
+    if (id.includes('-')) {
+      return (await this.findByPk(id)).get();
+      // return (await this.findOne({ where: { id } })).get();
+    }
+    return (await this.findOne({ where: { googleId: id } })).get();
+  } catch (ex) {
+    const err = new Error('authorization failed');
+    err.status = 401;
+    throw err;
+  }
 };
 
 module.exports = User;
