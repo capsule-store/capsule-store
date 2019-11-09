@@ -9,50 +9,49 @@ import Button from './Button';
 import Icon from './Icon';
 
 const Item = styled.li`
-width: 100%;
-display: flex;
-height: 120px;
-border-bottom: 1px solid #000;
-justify-content: space-between;
-align-items: center;
+  width: 100%;
+  display: flex;
+  height: 120px;
+  border-bottom: 1px solid #000;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const ItemName = styled.div`
-display: flex;
-align-items: center;
-width: 40%;
+  display: flex;
+  align-items: center;
+  width: 40%;
 `;
 const ItemQty = styled.div`
-width: 144px;
-align-self:center;
-display:flex;
-
+  width: 144px;
+  align-self: center;
+  display: flex;
 `;
 const Qty = styled.p`
-text-align:center;
-width: 48px;
-flex-grow: 1;
+  text-align: center;
+  width: 48px;
+  flex-grow: 1;
 `;
 const MinusBtn = styled(Button)`
-width:48px;
-background-color: #fff;
+  width: 48px;
+  background-color: #fff;
 `;
 const PlusBtn = styled(Button)`
-width:48px;
-background-color: #fff;
+  width: 48px;
+  background-color: #fff;
 `;
 const Amount = styled.div`
-justify-self:flex-end;
-text-align: right;
-width: 144px;
+  justify-self: flex-end;
+  text-align: right;
+  width: 144px;
 `;
 const DeleteIcon = styled(Icon)`
-background-image: url(../assets/images/icon/delete.svg);
-background-repeat: no-repeat;
-margin-right: 1.5rem;
-&:hover{
-  opacity: 0.5;
-}
+  background-image: url(../assets/images/icon/delete.svg);
+  background-repeat: no-repeat;
+  margin-right: 1.5rem;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 const LineItem = ({
   products, item, updateQuantity, deleteLineItem,
@@ -63,29 +62,28 @@ const LineItem = ({
 
   return (
     <Item>
-
       <ItemName>
         <DeleteIcon onClick={() => deleteLineItem(item.id)} />
         <p>{name}</p>
       </ItemName>
 
-
       <ItemQty>
-        <MinusBtn onClick={() => {
-          if (item.quantity >= 1) { updateQuantity(item.id, item.quantity - 1); }
-        }}
+        <MinusBtn
+          onClick={() => {
+            if (item.quantity >= 1) {
+              updateQuantity(item.id, item.quantity - 1);
+            }
+          }}
         >
-        -
+          -
         </MinusBtn>
         <Qty>{item.quantity}</Qty>
         <PlusBtn onClick={() => updateQuantity(item.id, item.quantity + 1)}>
-        +
+          +
         </PlusBtn>
-
       </ItemQty>
       {/* <div className="itemPrice">{price}</div> */}
-      <Amount>{`$${item.quantity * price}`}</Amount>
-
+      <Amount>{`$${padPrice(item.quantity * price)}`}</Amount>
     </Item>
   );
 };
