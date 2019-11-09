@@ -9,7 +9,7 @@
     "test:watch": "mocha --recursive --watch './backend/tests/*.test.js'",
     "start:dev": "npm run webpack & ./node_modules/.bin/nodemon backend/server.js --ignore frontend/",
     "start": "node backend/server.js",
-    "postinstall": "npm run webpack"
+    "postinstall": "./node_modules/.bin/webpack"
   },
   "engines": {
     "node": "10.16.x"
