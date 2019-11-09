@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
- HashRouter, Route, Switch, Redirect 
+  HashRouter, Route, Switch, Redirect,
 } from 'react-router-dom';
 
 // Local imports
@@ -70,8 +70,8 @@ class _App extends Component {
 
   render() {
     const {
- products, brands, isAdmin, location 
-} = this.props;
+      products, brands, isAdmin, location,
+    } = this.props;
     if (!products.length || !brands.length) return null;
 
     return (
@@ -79,7 +79,6 @@ class _App extends Component {
         <HashRouter>
           <Nav />
           <Switch>
-            <Route exact path="/" component={Home} />
             <Route path="/products/:id" component={ProductDetail} />
             <Route path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
@@ -92,6 +91,7 @@ class _App extends Component {
               {!isAdmin ? <Redirect to="/" /> : <AdminProducts />}
             </Route>
             <Route path="/admin/create-product" component={CreateProduct} />
+            <Route path="/" component={Home} />
           </Switch>
           <Brands />
         </HashRouter>
