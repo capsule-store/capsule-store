@@ -1,8 +1,10 @@
-# SV Starter Pack
-Flex 1907 Grace Shopper project
+# Capsule
+Capsule is an e-commerce store that sells Silicon Valley-related products. This project was completed as part of the [Fullstack Academy](https://www.fullstackacademy.com/) Flex 1907 Grace Shopper project.
 
-## Getting Started
-After cloning, run `npm i` to install all dependencies. `.env` file is not included in the repo.
+The website is deployed on heroku and can be accessed through [this link](https://capsule-store.herokuapp.com/#/).
+
+## Contributing
+After cloning, run `npm ci` to install all dependencies. `.env` file is not included in the repo.
 
 ### Database
 Create a `psql` database called `sv_starter_pack_db`.
